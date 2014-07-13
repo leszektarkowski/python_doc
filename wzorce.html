@@ -8,7 +8,7 @@
     
     <title>Wzorce projektowe &mdash; Zaawansowane programowanie w języku Python</title>
     
-    <link rel="stylesheet" href="_static/style.css" type="text/css" />
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -23,63 +23,18 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Zaawansowane programowanie w języku Python" href="index.html" />
-    <link rel="next" title="Programowanie wielowątkowe" href="watki.html" />
-    <link rel="prev" title="Zaawansowane programowanie w języku Python" href="index.html" />
-  
-
+    <link rel="top" title="Zaawansowane programowanie w języku Python" href="index.html" /> 
   </head>
   <body>
-  <div class="wrap">
-    
-      <div class="tocwrapper">
-        <div class="showtoc">(<span>Show Table Of Contents</span>)</div>
-        <div class="hidetoc">(<span>Hide Table Of Contents</span>)</div>
-        <div class="toc"><ul>
-<li><a class="reference internal" href="#">Wzorce projektowe</a><ul>
-<li><a class="reference internal" href="#podstawy-oop-przypomnienie">Podstawy OOP - przypomnienie</a><ul>
-<li><a class="reference internal" href="#obiekt-interfejs-klasa">Obiekt / Interfejs / Klasa</a></li>
-<li><a class="reference internal" href="#podstawowe-techniki-oop">Podstawowe techniki OOP</a><ul>
-<li><a class="reference internal" href="#dziedziczenie">Dziedziczenie</a></li>
-<li><a class="reference internal" href="#skladanie-obiektow-kompozycja">Składanie obiektów (kompozycja)</a></li>
-<li><a class="reference internal" href="#delegowanie">Delegowanie</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#relacje-miedzy-klasami">Relacje między klasami</a></li>
-<li><a class="reference internal" href="#zasady-oop">Zasady OOP</a><ul>
-<li><a class="reference internal" href="#wytyczne-dobrego-ood-oop">Wytyczne dobrego OOD/OOP</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#s-o-l-i-d-oop">S.O.L.I.D. OOP</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#id1">Wzorce projektowe</a><ul>
-<li><a class="reference internal" href="#atrybuty-wzorca">Atrybuty wzorca</a><ul>
-<li><a class="reference internal" href="#klasyfikacja-wzorcow-wg-gof">Klasyfikacja wzorców wg GOF</a></li>
-<li><a class="reference internal" href="#katalog-wzorcow-projektowych">Katalog wzorców projektowych</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</div>
-        <script>
-          var toc = $( ".toc" );
-          $( ".showtoc span" ).click(function() {
-            $( this ).parent().hide().next().show();
-            toc.slideDown( "fast" );
-          });
-          $( ".hidetoc span" ).click(function() {
-            $( this ).parent().hide().prev().show();
-            toc.slideUp( "fast" );
-          });
-        </script>
-      </div>
-    
-    
-
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="index.html">Zaawansowany Python</a> &raquo;</li> 
+      </ul>
+    </div>  
 
     <div class="document">
       <div class="documentwrapper">
@@ -638,17 +593,68 @@ aspektów struktury systemu</li>
           </div>
         </div>
       </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Wzorce projektowe</a><ul>
+<li><a class="reference internal" href="#podstawy-oop-przypomnienie">Podstawy OOP - przypomnienie</a><ul>
+<li><a class="reference internal" href="#obiekt-interfejs-klasa">Obiekt / Interfejs / Klasa</a></li>
+<li><a class="reference internal" href="#podstawowe-techniki-oop">Podstawowe techniki OOP</a><ul>
+<li><a class="reference internal" href="#dziedziczenie">Dziedziczenie</a></li>
+<li><a class="reference internal" href="#skladanie-obiektow-kompozycja">Składanie obiektów (kompozycja)</a></li>
+<li><a class="reference internal" href="#delegowanie">Delegowanie</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#relacje-miedzy-klasami">Relacje między klasami</a></li>
+<li><a class="reference internal" href="#zasady-oop">Zasady OOP</a><ul>
+<li><a class="reference internal" href="#wytyczne-dobrego-ood-oop">Wytyczne dobrego OOD/OOP</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#s-o-l-i-d-oop">S.O.L.I.D. OOP</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id1">Wzorce projektowe</a><ul>
+<li><a class="reference internal" href="#atrybuty-wzorca">Atrybuty wzorca</a><ul>
+<li><a class="reference internal" href="#klasyfikacja-wzorcow-wg-gof">Klasyfikacja wzorców wg GOF</a></li>
+<li><a class="reference internal" href="#katalog-wzorcow-projektowych">Katalog wzorców projektowych</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
       <div class="clearer"></div>
     </div>
-  
-
-    
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li><a href="index.html">Zaawansowany Python</a> &raquo;</li> 
+      </ul>
+    </div>
     <div class="footer">
         &copy; Copyright 2014, Leszek Tarkowski.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
     </div>
-  </div>
-  
-
   </body>
 </html>

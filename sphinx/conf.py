@@ -22,9 +22,9 @@ exclude_patterns = ['_build', '_old']
 add_module_names = False
 pygments_style = 'sphinx'
 # -- Options for HTML output ---------------------------------------------------
-#html_theme = 'default'
+html_theme = 'default'
 #html_theme = 'bootstrap'
-html_theme = 'infotraining'
+#html_theme = 'infotraining'
 #html_theme = "sphinx_rtd_theme"
 
 # html_theme_options = {
