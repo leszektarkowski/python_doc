@@ -27,6 +27,10 @@ html_theme = 'default'
 #html_theme = 'infotraining'
 #html_theme = "sphinx_rtd_theme"
 
+html_theme_options = {
+	'collapsiblesidebar': True,
+}
+
 # html_theme_options = {
 #     'navbar_title': "Infotraining",
 #     'navbar_site_name': "Index",
