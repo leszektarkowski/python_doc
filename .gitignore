@@ -1,0 +1,24 @@
+#################
+## Sphinx
+#################
+
+*.sublime-workspace
+*.sublime-project
+**/doc/_build/*
+**/.ropeproject/*
+**/build/*
+**/.build/*
+**/.idea/*
+**/_build/*
+*~
+sphinx/.idea*/*
+build/*
+**/CMakeLists.txt.user
+temp/*
+
+**/CMakeFiles/*
+**/CMakeCache.txt
+**/cmake_install.cmake
+**.user
+**/build
+**/*-build

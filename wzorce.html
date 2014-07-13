@@ -1,0 +1,654 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Wzorce projektowe &mdash; Zaawansowane programowanie w języku Python</title>
+    
+    <link rel="stylesheet" href="_static/style.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Zaawansowane programowanie w języku Python" href="index.html" />
+    <link rel="next" title="Programowanie wielowątkowe" href="watki.html" />
+    <link rel="prev" title="Zaawansowane programowanie w języku Python" href="index.html" />
+  
+
+  </head>
+  <body>
+  <div class="wrap">
+    
+      <div class="tocwrapper">
+        <div class="showtoc">(<span>Show Table Of Contents</span>)</div>
+        <div class="hidetoc">(<span>Hide Table Of Contents</span>)</div>
+        <div class="toc"><ul>
+<li><a class="reference internal" href="#">Wzorce projektowe</a><ul>
+<li><a class="reference internal" href="#podstawy-oop-przypomnienie">Podstawy OOP - przypomnienie</a><ul>
+<li><a class="reference internal" href="#obiekt-interfejs-klasa">Obiekt / Interfejs / Klasa</a></li>
+<li><a class="reference internal" href="#podstawowe-techniki-oop">Podstawowe techniki OOP</a><ul>
+<li><a class="reference internal" href="#dziedziczenie">Dziedziczenie</a></li>
+<li><a class="reference internal" href="#skladanie-obiektow-kompozycja">Składanie obiektów (kompozycja)</a></li>
+<li><a class="reference internal" href="#delegowanie">Delegowanie</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#relacje-miedzy-klasami">Relacje między klasami</a></li>
+<li><a class="reference internal" href="#zasady-oop">Zasady OOP</a><ul>
+<li><a class="reference internal" href="#wytyczne-dobrego-ood-oop">Wytyczne dobrego OOD/OOP</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#s-o-l-i-d-oop">S.O.L.I.D. OOP</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id1">Wzorce projektowe</a><ul>
+<li><a class="reference internal" href="#atrybuty-wzorca">Atrybuty wzorca</a><ul>
+<li><a class="reference internal" href="#klasyfikacja-wzorcow-wg-gof">Klasyfikacja wzorców wg GOF</a></li>
+<li><a class="reference internal" href="#katalog-wzorcow-projektowych">Katalog wzorców projektowych</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+        <script>
+          var toc = $( ".toc" );
+          $( ".showtoc span" ).click(function() {
+            $( this ).parent().hide().next().show();
+            toc.slideDown( "fast" );
+          });
+          $( ".hidetoc span" ).click(function() {
+            $( this ).parent().hide().prev().show();
+            toc.slideUp( "fast" );
+          });
+        </script>
+      </div>
+    
+    
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="wzorce-projektowe">
+<h1>Wzorce projektowe<a class="headerlink" href="#wzorce-projektowe" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="podstawy-oop-przypomnienie">
+<h2>Podstawy OOP - przypomnienie<a class="headerlink" href="#podstawy-oop-przypomnienie" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Obiekt / Interfejs / Klasa</li>
+<li>Dziedziczenie a składanie obiektów</li>
+<li>Mechanizm delegowania żądań</li>
+<li>SOLID OOP</li>
+</ul>
+<dl class="docutils">
+<dt>Podstawy OOP</dt>
+<dd><ul class="first last simple">
+<li>Abstrakcja</li>
+<li>Enkapsulacja</li>
+<li>Polimorfizm</li>
+<li>Dziedziczenie</li>
+</ul>
+</dd>
+<dt>Abstrakcja</dt>
+<dd>Każdy obiekt w systemie służy jako model abstrakcyjnego &#8220;wykonawcy&#8221;, który może
+wykonywać pracę, opisywać i zmieniać swój stan oraz komunikować się z innymi
+obiektami w systemie, bez ujawniania, w jaki sposób zaimplementowano dane cechy</dd>
+<dt>Enkapsulacja (ukrywanie implementacji, hermetyzacja)</dt>
+<dd>Zapewnia, że obiekt nie może zmieniać stanu wewnętrznego innych obiektów w
+nieoczekiwany sposób. Tylko wewnętrzne metody obiektu są uprawnione do zmiany
+jego stanu. Każdy typ obiektu prezentuje innym obiektom swój &#8220;interfejs&#8221;, który
+określa dopuszczalne metody współpracy</dd>
+<dt>Polimorfizm</dt>
+<dd>Referencje i kolekcje obiektów mogą dotyczyć obiektów różnego typu, a wywołanie
+metody dla referencji spowoduje zachowanie odpowiednie dla pełnego typu obiektu
+wywoływanego. Jeśli dzieje się to w czasie działania programu, to nazywa się to
+późnym wiązaniem lub wiązaniem dynamicznym</dd>
+<dt>Dziedziczenie</dt>
+<dd>Porządkuje i wspomaga polimorfizm i enkapsulację dzięki umożliwieniu
+definiowania i tworzenia specjalizowanych obiektów na podstawie bardziej
+ogólnych. Dla obiektów specjalizowanych nie trzeba redefiniować całej
+funkcjonalności, lecz tylko tę, której nie ma obiekt ogólniejszy</dd>
+</dl>
+<div class="section" id="obiekt-interfejs-klasa">
+<h3>Obiekt / Interfejs / Klasa<a class="headerlink" href="#obiekt-interfejs-klasa" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>Obiekt</dt>
+<dd><ul class="first last simple">
+<li>Zawiera zarówno dane składowe jak i operujące na nich metody</li>
+<li>Wykonuje operacje po otrzymaniu żądania (lub komunikatu) od klienta (innego obiektu)</li>
+<li>Wewnętrzny stan obiektu jest zaenkapsulowany</li>
+</ul>
+</dd>
+<dt>Interfejs</dt>
+<dd><p class="first">obiektu określa kompletny zbiór żądań, jakie mogą być wysyłane do obiektu</p>
+<ul class="last simple">
+<li>Interfejs obiektu nie mówi nic o implementacji obiektu - różne obiekty mają prawo różnie implementować żądania</li>
+<li>Implementacja obiektu jest zdefiniowana przez jego klasę.</li>
+</ul>
+</dd>
+<dt>Klasa</dt>
+<dd><p class="first">specyfikuje dane składowe obiektu i ich reprezentację oraz definiuje operacje, które obiekt może wykonywać</p>
+<ul class="last simple">
+<li>Obiekty powstają w wyniku tworzenia egzemplarzy klas</li>
+<li>Za pomocą dziedziczenia klas można definiować nowe klasy w kategoriach klas już istniejących</li>
+</ul>
+</dd>
+<dt>Klasa abstrakcyjna</dt>
+<dd><p class="first">klasa, której głównym celem jest zdefiniowanie  wspólnego interfejsu dla jej podklas (klas pochodnych)</p>
+<ul class="last simple">
+<li>Operacje, które klasa abstrakcyjna deklaruje, ale których nie implementuje, nazywa się operacjami abstrakcyjnymi</li>
+<li>Klasy, które nie są abstrakcyjne, nazywamy klasami konkretnymi</li>
+</ul>
+</dd>
+<dt>Polimorfizm</dt>
+<dd><ul class="first last simple">
+<li>Wykazywanie różnych form działania podczas wywoływania metody w zależności od tego jakiego typu obiekt jest wskazywany przez wskaźnik lub referencję (pomijając typ wskaźnika lub referencji)</li>
+<li>Umożliwia zastępowanie w czasie wykonywania programu jednych obiektów drugimi, jeśli mają identyczny interfejs</li>
+<li>Skojarzenie żądania z obiektem i z jedną z jego operacji podczas wykonywania programu nazywa się wiązaniem dynamicznym</li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="podstawowe-techniki-oop">
+<h3>Podstawowe techniki OOP<a class="headerlink" href="#podstawowe-techniki-oop" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Dziedziczenie</li>
+<li>Składanie</li>
+<li>Delegowanie</li>
+</ul>
+<div class="section" id="dziedziczenie">
+<h4>Dziedziczenie<a class="headerlink" href="#dziedziczenie" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt>Dziedziczenie - rodzaje</dt>
+<dd><ul class="first last">
+<li><p class="first">Dziedziczenie implementacji</p>
+<blockquote>
+<div><ul class="simple">
+<li>Definiuje implementację obiektu w kategoriach implementacji innego obiektu</li>
+<li>Jest to mechanizm do współdzielenia kodu i reprezentacji</li>
+<li>Dziedziczenie implementacji można aproksymować dziedziczeniem prywatnym</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Dziedziczenie interfejsu</p>
+<blockquote>
+<div><ul class="simple">
+<li>Określa, kiedy jeden obiekt może być używany zamiast drugiego</li>
+<li>Standardowym sposobem dziedziczenia interfejsu w C++ jest publiczne dziedziczenie po klasie, która ma (czysto) wirtualne funkcje składowe</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</dd>
+<dt>Programowanie nakierowane na interfejsy</dt>
+<dd><p class="first">Odwoływanie się do obiektów wyłącznie przy pomocy interfejsu zdefiniowanego przez klasę abstrakcyjną redukuje zależności implementacyjne w projekcie.
+Ma dwie zalety:</p>
+<blockquote class="last">
+<div><ul class="simple">
+<li>Klienci pozostają nieświadomi specyficznego typu używanych przez siebie obiektów, o ile tylko te obiekty zachowują oczekiwany przez klientów interfejs</li>
+<li>Klienci pozostają nieświadomi klas implementujących te obiekty. Znają tylko klasę abstrakcyjną definiującą ten interfejs</li>
+</ul>
+</div></blockquote>
+</dd>
+</dl>
+<p><strong>Wady dziedziczenia klas</strong></p>
+<ul class="simple">
+<li>Narusza enkapsulację - ujawnia klasie pochodnej szczegóły implementacji jej klas bazowych</li>
+<li>Zależności implementacyjne mogą powodować problemy przy próbie ponownego użycia klasy pochodnej</li>
+</ul>
+</div>
+<div class="section" id="skladanie-obiektow-kompozycja">
+<h4>Składanie obiektów (kompozycja)<a class="headerlink" href="#skladanie-obiektow-kompozycja" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt>Składanie obiektów (kompozycja)</dt>
+<dd>Utworzenie nowego typu obiektu poprzez złożenie innych już istniejących typów obiektów
+* Jest definiowane dynamicznie podczas wykonywania programu za pośrednictwem obiektów, które pozyskują odwołania (referencje lub wskaźniki) do innych obiektów
+* Nie prowadzi do naruszenia hermetyzacji, ponieważ dostęp do obiektów jest możliwy jedynie poprzez ich interfejsy.</dd>
+</dl>
+<p><strong>Składanie obiektów - zalety</strong></p>
+<ul class="simple">
+<li>Preferowanie składania obiektów zamiast dziedziczenia klas ułatwia podtrzymywanie hermetyzacji klas i pomaga ukierunkować klasy na pojedyncze zadania (SRP)</li>
+<li>Klasy i ich hierarchie pozostają niewielkie</li>
+</ul>
+</div>
+<div class="section" id="delegowanie">
+<h4>Delegowanie<a class="headerlink" href="#delegowanie" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt>Delegowanie żądań</dt>
+<dd><ul class="first last simple">
+<li>Bardziej uniwersalny od dziedziczenia sposób rozszerzania zachowania klasy</li>
+<li>Dwa obiekty są zaangażowane w obsługę żądania - obiekt przyjmujący żądanie przekazuje operacje swojemu delegatowi</li>
+</ul>
+</dd>
+<dt>Delegowanie</dt>
+<dd><ul class="first last simple">
+<li>Zaleta - umożliwia składanie zachowań w czasie wykonywania programu - obiekt przyjmujący żądanie może zmieniać swoje zachowanie</li>
+<li>Wada - dynamiczne, wysoce sparametryzowane oprogramowanie jest trudniej zrozumieć niż oprogramowanie bardziej statyczne</li>
+</ul>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="relacje-miedzy-klasami">
+<h3>Relacje między klasami<a class="headerlink" href="#relacje-miedzy-klasami" title="Permalink to this headline">¶</a></h3>
+<p><strong>Asocjacja / Agregacja / Kompozycja</strong></p>
+<blockquote>
+<div><ul>
+<li><p class="first">Asocjacja (znajomość)</p>
+<blockquote>
+<div><ul class="simple">
+<li>Jeden obiekt wie o drugim obiekcie</li>
+<li>Zaznajomione obiekty mogą żądać od siebie nawzajem wykonywania swoich operacji</li>
+<li>Luźne powiązanie między obiektami</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Agregacja</p>
+<blockquote>
+<div><ul class="simple">
+<li>Jeden obiekt jest właścicielem drugiego lub jest za niego odpowiedzialny</li>
+<li>Agregowany obiekt może &nbsp;(ale nie musi) być współdzielony</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Kompozycja</p>
+<blockquote>
+<div><ul class="simple">
+<li>Jeden obiekt jest właścicielem drugiego</li>
+<li>Wymaga, by obiekt zagregowany miał taki sam czas życia jak jego właściciel</li>
+<li>Istnienie obiektu podrzędnego poza właścicielem nie ma sensu</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="zasady-oop">
+<h3>Zasady OOP<a class="headerlink" href="#zasady-oop" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">Dobre projekty zorientowane obiektowo:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Powinny nadawać się do wielokrotnego użytku</li>
+<li>Być proste do rozbudowy</li>
+<li>Być łatwe w serwisowaniu i modyfikacji</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<div class="section" id="wytyczne-dobrego-ood-oop">
+<h4>Wytyczne dobrego OOD/OOP<a class="headerlink" href="#wytyczne-dobrego-ood-oop" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Programuj pod kątem interfejsu, a nie implementacji</li>
+<li>Preferuj składanie obiektów, a nie dziedziczenie klas</li>
+<li>Poddawaj hermetyzacji to co się zmienia</li>
+<li>Preferuj luźne powiązania między obiektami, które ze sobą współpracują</li>
+<li>Klasy powinny być otwarte na rozszerzanie, a zamknięte na modyfikację</li>
+<li>Przypisuj każdej klasie jeden zakres odpowiedzialności</li>
+</ul>
+</div>
+</div>
+<div class="section" id="s-o-l-i-d-oop">
+<h3>S.O.L.I.D. OOP<a class="headerlink" href="#s-o-l-i-d-oop" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Single Responsibility Principle</li>
+<li>Open/Closed Principle</li>
+<li>Liskov Substitution Principle</li>
+<li>Interface Segregation Principle</li>
+<li>Dependency Inversion Principle</li>
+</ul>
+<dl class="docutils">
+<dt>Zasada pojedynczej odpowiedzialności</dt>
+<dd><ul class="first last simple">
+<li>Zasada pojedynczej odpowiedzialności (SRP) - każdy obiekt w kodzie
+powinien mieć tylko jedną odpowiedzialność, a wszystkie usługi tego
+obiektu powinny koncentrować się na jej realizacji</li>
+<li>Jeśli dla każdego obiektu w systemie istnieje tylko jeden powód do jego
+modyfikacji, oznacza to, że zasada pojedynczej odpowiedzialności została
+zaimplementowana prawidłowo.</li>
+</ul>
+</dd>
+<dt>Zasada otwarte/zamknięte</dt>
+<dd><ul class="first last simple">
+<li>Zasada otwarte-zamknięte (Open/Close Principle) - klasy powinny być
+otwarte na rozbudowę i zamknięte na modyfikacje.</li>
+<li>Jeśli dysponujemy klasą o określonym zachowaniu, które działa prawidłowo,
+należy uniemożliwić wprowadzenie modyfikacji w jej działającym kodzie</li>
+<li>W przypadku konieczności rozbudowy kodu, należy stworzyć klasy pochodne,
+w których można przesłonić wybrane metody i dostosować ich działanie do
+bieżących potrzeb</li>
+<li>Choć nie można modyfikować kodu klasy (zasada zamknięte), to jednak jest
+ona otwarta na rozbudowę (zasada otwarte).</li>
+</ul>
+</dd>
+<dt>Zasada otwarte/zamknięte</dt>
+<dd><ul class="first last simple">
+<li>Naruszenie OCP</li>
+<li>Poprawione rozwiązanie</li>
+</ul>
+</dd>
+<dt>Zasada podstawiania Liskov</dt>
+<dd><ul class="first last">
+<li><p class="first">Zasada podstawiania Liskov (<em>Liskov Substitution Principle</em>) - musi istnieć
+możliwość podstawiania typów pochodnych w miejsce ich typów bazowych.</p>
+</li>
+<li><p class="first">LCP dotyczy prawidłowo zaprojektowanego dziedziczenia</p>
+<blockquote>
+<div><ul class="simple">
+<li>Tworząc klasę pochodną, musimy być w stanie użyć jej zamiast klasy
+bazowej</li>
+<li>Jeśli nie ma takiej możliwości, to dziedziczenie zostało
+nieprawidłowo użyte</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Oprócz dziedziczenia istnieje kilka technik używania zachowań
+zdefiniowanych w innych klasach:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Delegowanie - wykonanie zadania można delegować do innej klasy,
+jeśli nie chcemy zmieniać sposobu jego realizacji, a jego
+implementacja nie należy do odpowiedzialności danego obiektu.</li>
+<li>Kompozycja - zebranie niezbędnych zachowań zdefiniowanych w jednej
+lub kilku klasach, a także w całych rodzinach klas. Wszystkie
+obiekty należące do kompozycji całkowicie należą do obiektu, który
+ich używa i nie mogą istnieć poza nim.</li>
+<li>Agregacja - używana, kiedy chcemy skorzystać z zachowań
+zdefiniowanych w innych klasach, bez ograniczania czasu życia tych
+zachowań.</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</dd>
+<dt>Zasada segregacji interfejsów</dt>
+<dd><ul class="first last">
+<li><p class="first">Zasada segregacji interfejsów (Interface Segregation Principle) -klient
+nie powinien być zmuszany do zależności od metod, których nie używa.</p>
+</li>
+<li><p class="first">Jeśli klient zależy od klasy zawierającej metodę, której ten klient nie
+używa, ale której używają pozostałe klasy klienckie, to zmiany tych klas
+będą miały wpływ na naszą klasę</p>
+</li>
+<li><p class="first">Aby uniknąć tego rodzaju związków, należy podzielić interfejsy</p>
+</li>
+<li><p class="first">Najlepszym sposobem zapewnienia zgodności z zasadą ISP jest zastosowanie
+techniki dziedziczenia wielokrotnego</p>
+<blockquote>
+<div><ul class="simple">
+<li>Mimo że obiekty klienckie dwóch klas bazowych mogą korzystać z tego
+samego interfejsu, żadna z tych klas nie jest zależna od tego
+interfejsu</li>
+<li>Oznacza to, że obiekty kliencie korzystają z tego samego obiektu za
+pośrednictwem różnych interfejsów</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</dd>
+<dt>Zasada odwracania zależności (<em>Dependency Inversion Principle</em>)</dt>
+<dd><ul class="first last">
+<li><p class="first">Moduły wysokopoziomowe nie powinny zależeć od modułów niskopoziomowych.
+Obie grupy modułów powinny zależeć od abstrakcji</p>
+</li>
+<li><p class="first">Abstrakcje nie powinny zależeć od szczegółowych rozwiązań. To szczegółowe
+rozwiązania powinny zależeć od abstrakcji.</p>
+</li>
+<li><p class="first">Tradycyjnie programowanie proceduralne prowadzi do powstawania struktur
+złożoności, w których ogólna strategia jest uzależniona od szczegółowych
+rozwiązań w zakresie implementacji</p>
+<blockquote>
+<div><ul class="simple">
+<li>Istnienie takich zależności jest o tyle niekorzystne, że czyni
+strategię wrażliwą na zmiany szczegółów</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Programowanie obiektowe odwraca tę strukturę zależności w taki sposób,
+aby zarówno szczegóły, jak i strategie zależały od abstrakcji</p>
+<blockquote>
+<div><ul class="simple">
+<li>W modelu obiektowym interfejsy usług są często przypisane do swoich klientów</li>
+<li>Odwracanie zależności jest swoistym certyfikatem dobrego projektu obiektowego</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="id1">
+<h2>Wzorce projektowe<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<blockquote class="epigraph">
+<div>Wzorzec opisuje problem występujący wielokrotnie w danym środowisku,
+pokazując podstawowe rozwiązanie tego problemu dane w taki sposób, aby można
+wielokrotnie użyć tego rozwiązania do wszystkich wystąpień danego problemu, bez
+konieczności ponownego wykonywania tych samych czynności projektowych</div></blockquote>
+<p>&nbsp; &nbsp; &#8211; Christopher Alexander &nbsp;&#8220;A Pattern Language&#8221;, 1977</p>
+<dl class="docutils">
+<dt>Wzorce projektowe - zalety</dt>
+<dd><ul class="first last simple">
+<li>Znakomicie sprawdziły się w wielu rzeczywistych aplikacjach systemów
+zorientowanych obiektowo</li>
+<li>Wskazują sposoby tworzenia całych systemów posiadających cechy
+charakterystyczne dobrych projektów zorientowanych obiektowo</li>
+<li>Nie udostępniają gotowego kodu, a jedynie ogólne sposoby rozwiązywania
+problemów pojawiających się w fazie projektowania</li>
+<li>Wzorce zwykle odnoszą się do sytuacji, w których w danym oprogramowaniu
+muszą zostać dokonane określone zmiany - umożliwiają hermetyzację
+elementów wykazujących się częstą zmiennością</li>
+<li>Większość wzorców umożliwia modyfikowanie pewnych fragmentów systemu
+całkowicie niezależnie od pozostałych elementów systemu</li>
+<li>Wzorce zapewniają rodzaj wspólnego, jednolitego języka, który może
+maksymalizować efektywność komunikacji pomiędzy poszczególnymi członkami
+zespołu</li>
+</ul>
+</dd>
+</dl>
+<p><strong>Wzorzec projektowy</strong></p>
+<blockquote>
+<div><ul>
+<li><p class="first">Wzorzec dostarcza abstrakcyjnego opisu problemu projektowego i tego jak
+ogólny układ elementów (klas i obiektów) rozwiązuje ten problem.</p>
+</li>
+<li><p class="first">Wzorzec projektowy ma cztery zasadnicze elementy:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Nazwa wzorca - skrót, którego można użyć do zwięzłego określenia
+problemu projektowego, jego rozwiązania i konsekwencji. Umożliwia
+projektowanie na wyższym poziomie abstrakcji.</li>
+<li>Problem - określa, kiedy stosować dany wzorzec.</li>
+<li>Rozwiązanie - opis elementów składających się na rozwiązanie
+zdefiniowanego problemu, ich związki, zobowiązania i współpraca.
+Nie opisuje konkretnego projektu lub implementacji.</li>
+<li>Konsekwencje - zalety oraz wady zastosowania wzorca.</li>
+</ol>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+<div class="section" id="atrybuty-wzorca">
+<h3>Atrybuty wzorca<a class="headerlink" href="#atrybuty-wzorca" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>&nbsp;Opis wzorców projektowych</dt>
+<dd><ul class="first last">
+<li><p class="first">Nazwa wzorca i jego kategoria</p>
+<blockquote>
+<div><ul class="simple">
+<li>Odzwierciedla problem, rozwiązanie i konsekwencje danego wzorca</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Kontekst/Problem</p>
+<blockquote>
+<div><ul class="simple">
+<li>Kontekst - powtarzająca się sytuacja, w której można zastosować wzorzec</li>
+<li>Problem - cel, który chcemy osiągnąć w tym kontekście</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Rozwiązanie - Struktura/Uczestnicy/Współpraca</p>
+<blockquote>
+<div><ul class="simple">
+<li>Opisuje uniwersalne rozwiązanie problemu - elementy tworzące projekt, ich relacje, odpowiedzialności oraz współpracę</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Konsekwencje</p>
+<blockquote>
+<div><ul class="simple">
+<li>Rezultaty zastosowania wzorca - rachunek korzyści i strat  stosowania wzorca</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Implementacja</p>
+<blockquote>
+<div><ul class="simple">
+<li>Przykład implementacji wzorca</li>
+<li>Pułapki/wskazówki/techniki implementacyjne wzorca</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Wzorce pokrewne</p>
+<blockquote>
+<div><ul class="simple">
+<li>Lista wzorców projektowych, które są związane z opisywanym wzorcem</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</dd>
+</dl>
+<div class="section" id="klasyfikacja-wzorcow-wg-gof">
+<h4>Klasyfikacja wzorców wg GOF<a class="headerlink" href="#klasyfikacja-wzorcow-wg-gof" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt>Kreacyjne (<em>Creational</em>)</dt>
+<dd>Dotyczą procesu tworzenia obiektu</dd>
+<dt>Strukturalne (<em>Structural</em>)</dt>
+<dd>Dotyczą struktury klas lub obiektów</dd>
+<dt>Czynnościowe (<em>Behavioral</em>)</dt>
+<dd>Charakteryzują sposób, w jaki klasy lub obiekty oddziałują między sobą i dzielą odpowiedzialności</dd>
+</dl>
+<p>Projektowanie pod kątem zmian</p>
+<ul class="simple">
+<li>Projekt, w którym nie bierze się pod uwagę możliwości dokonywania zmian,
+może wymagać w przyszłości całkowitego przeprojektowania</li>
+<li>Zmiany mogą wiązać się z koniecznością przedefiniowywania klas i ich
+powtórną implementację, modyfikację klientów i ponowne testowanie</li>
+<li>Wzorce projektowe gwarantują, że system może się zmieniać w określony
+sposób - każdy wzorzec projektowy dopuszcza niezależne zmiany pewnych
+aspektów struktury systemu</li>
+</ul>
+</div>
+<div class="section" id="katalog-wzorcow-projektowych">
+<h4>Katalog wzorców projektowych<a class="headerlink" href="#katalog-wzorcow-projektowych" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p class="first">Tworzenie obiektów przez jawne podanie klasy</p>
+<blockquote>
+<div><ul class="simple">
+<li>Factory Method</li>
+<li>Abstract Method</li>
+<li>Prototype</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Zależność od specyficznych operacji</p>
+<blockquote>
+<div><ul class="simple">
+<li>Command</li>
+<li>Chain of Responsibility</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Zależność od platformy sprzętowej lub programowej</p>
+<blockquote>
+<div><ul class="simple">
+<li>Abstract Factory</li>
+<li>Bridge</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Zależność od reprezentacji obiektów lub ich implementacji</p>
+<blockquote>
+<div><ul class="simple">
+<li>Abstract Factory</li>
+<li>Bridge</li>
+<li>Memento</li>
+<li>Proxy</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Zależność od algorytmu</p>
+<blockquote>
+<div><ul class="simple">
+<li>Builder</li>
+<li>Iterator</li>
+<li>Template Method</li>
+<li>Strategy</li>
+<li>Visitor</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Ścisłe powiązanie</p>
+<blockquote>
+<div><ul class="simple">
+<li>Abstract Factory</li>
+<li>Facade</li>
+<li>Chain of Responsibility</li>
+<li>Mediator</li>
+<li>Bridge</li>
+<li>Observer</li>
+<li>Command</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Rozszerzanie funkcjonalności klas</p>
+<blockquote>
+<div><ul class="simple">
+<li>Decorator</li>
+<li>Composite</li>
+<li>Strategy</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  
+
+    
+    <div class="footer">
+        &copy; Copyright 2014, Leszek Tarkowski.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </div>
+  
+
+  </body>
+</html>
