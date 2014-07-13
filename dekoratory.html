@@ -1,0 +1,316 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Dekoratory &mdash; Zaawansowane programowanie w języku Python</title>
+    
+    <link rel="stylesheet" href="_static/style.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Zaawansowane programowanie w języku Python" href="index.html" />
+    <link rel="next" title="Metaklasy" href="metaklasy.html" />
+    <link rel="prev" title="Klasy i obiekty" href="klasy.html" />
+  
+
+  </head>
+  <body>
+  <div class="wrap">
+    
+      <div class="tocwrapper">
+        <div class="showtoc">(<span>Show Table Of Contents</span>)</div>
+        <div class="hidetoc">(<span>Hide Table Of Contents</span>)</div>
+        <div class="toc"><ul>
+<li><a class="reference internal" href="#">Dekoratory</a><ul>
+<li><a class="reference internal" href="#po-co-nam-dekoratory">Po co nam dekoratory</a><ul>
+<li><a class="reference internal" href="#domkniecie-closure">Domknięcie (<em>closure</em>)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#co-to-sa-dekoratory">Co to są dekoratory</a><ul>
+<li><a class="reference internal" href="#prosty-dekorator">Prosty dekorator</a><ul>
+<li><a class="reference internal" href="#problem">Problem</a></li>
+<li><a class="reference internal" href="#rozwiazanie">Rozwiązanie</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#dekoratory-parametryzowane">Dekoratory parametryzowane</a></li>
+<li><a class="reference internal" href="#wiele-dekoratorow">Wiele dekoratorów</a></li>
+<li><a class="reference internal" href="#dekoratory-klas">Dekoratory klas</a></li>
+<li><a class="reference internal" href="#klasy-jako-dekoratory">Klasy jako dekoratory</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        <script>
+          var toc = $( ".toc" );
+          $( ".showtoc span" ).click(function() {
+            $( this ).parent().hide().next().show();
+            toc.slideDown( "fast" );
+          });
+          $( ".hidetoc span" ).click(function() {
+            $( this ).parent().hide().prev().show();
+            toc.slideUp( "fast" );
+          });
+        </script>
+      </div>
+    
+    
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="dekoratory">
+<h1>Dekoratory<a class="headerlink" href="#dekoratory" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="po-co-nam-dekoratory">
+<h2>Po co nam dekoratory<a class="headerlink" href="#po-co-nam-dekoratory" title="Permalink to this headline">¶</a></h2>
+<p>Dektoratory są często spotykaną w języku Python techniką programistyczną.
+Ich zalety to:</p>
+<ol class="arabic simple">
+<li>Redukcja ilości kodu</li>
+<li>Kontrola funkcji:</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>danych wejściowych</li>
+<li>wywołania</li>
+<li>wartości zwracanych</li>
+</ul>
+</div></blockquote>
+<div class="section" id="domkniecie-closure">
+<h3>Domknięcie (<em>closure</em>)<a class="headerlink" href="#domkniecie-closure" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>Domknięcie</dt>
+<dd>w metodach realizacji języków programowania jest to obiekt
+<strong>wiążący funkcję oraz środowisko</strong>, w jakim ta funkcja ma działać.
+Środowisko przechowuje wszystkie obiekty wykorzystywane przez funkcję,
+niedostępne w globalnym zakresie widoczności. Realizacja domknięcia jest
+zdeterminowana przez język, jak również przez kompilator.</dd>
+</dl>
+<p>Domknięcia występują głównie w językach funkcyjnych, w których funkcje mogą
+zwracać inne funkcje, wykorzystujące zmienne utworzone lokalnie.</p>
+<p><em>definicja z wikipedii</em></p>
+<dl class="docutils">
+<dt>W praktyce</dt>
+<dd>Domknięcia są użyteczne jako generatory funkcji:</dd>
+</dl>
+<ul class="simple">
+<li>adapter pattern (wspólny interfejs)</li>
+<li>opóźnienie wykonania funkcji</li>
+</ul>
+<p><strong>Przykład</strong></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">makeInc</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="k">def</span> <span class="nf">inc</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
+     <span class="c"># x jest &quot;zamknięte&quot; w definicji</span>
+     <span class="k">return</span> <span class="n">y</span> <span class="o">+</span> <span class="n">x</span>
+<span class="k">return</span> <span class="n">inc</span>
+
+<span class="n">inc5</span> <span class="o">=</span> <span class="n">makeInc</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">inc10</span> <span class="o">=</span> <span class="n">makeInc</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="n">inc5</span> <span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="c"># returns 10</span>
+<span class="n">inc10</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="c"># returns 15</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="co-to-sa-dekoratory">
+<h2>Co to są dekoratory<a class="headerlink" href="#co-to-sa-dekoratory" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>Dekorator</dt>
+<dd>wzorzec projektowy, pozwalający na nadanie nowej funkcjonanalności
+dynamicznie, w trakcie działania programu</dd>
+<dt>W języku Python</dt>
+<dd>jest to metoda modyfikacji obiektu wywoływalnego (funkcji, metod klasy,
+klas), za pomocą domknięć.</dd>
+</dl>
+<div class="section" id="prosty-dekorator">
+<h3>Prosty dekorator<a class="headerlink" href="#prosty-dekorator" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">shouter</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">():</span>
+        <span class="k">print</span> <span class="s">&quot;Before&quot;</span><span class="p">,</span> <span class="n">func</span><span class="o">.</span><span class="n">__name__</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">()</span>
+        <span class="k">print</span> <span class="s">&quot;After&quot;</span><span class="p">,</span> <span class="n">func</span><span class="o">.</span><span class="n">__name__</span>
+        <span class="k">return</span> <span class="n">result</span>
+    <span class="k">return</span> <span class="n">wrapper</span>
+</pre></div>
+</div>
+<p><strong>Użycie</strong></p>
+<p>Można tak zdefiniowanej funkcji użyć do &#8220;nadpisania&#8221; istniejącej już funkcji
+(tak naprawdę do zmiany tego, na co wskazuje zmienna)</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">hellome</span><span class="p">():</span>
+    <span class="k">print</span> <span class="s">&quot;Leszek&quot;</span>
+
+<span class="n">hellome</span> <span class="o">=</span> <span class="n">shouter</span><span class="p">(</span><span class="n">hellome</span><span class="p">)</span>
+<span class="n">hellome</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Prostsze (dostępne od Pythona 2.4) jest użycie specjalnej składni:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="nd">@shouter</span>
+<span class="k">def</span> <span class="nf">hellome</span><span class="p">():</span>
+    <span class="k">print</span> <span class="s">&quot;Leszek&quot;</span>
+
+<span class="n">hellome</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="section" id="problem">
+<h4>Problem<a class="headerlink" href="#problem" title="Permalink to this headline">¶</a></h4>
+<p>Co z funkcjami wymagającymi argumentów:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="nd">@shouter</span>
+<span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+   <span class="n">reutrn</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+
+<span class="n">add</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+<span class="ne">TypeError</span><span class="p">:</span> <span class="n">wrapper</span><span class="p">()</span> <span class="n">takes</span> <span class="n">no</span> <span class="n">arguments</span> <span class="p">(</span><span class="mi">2</span> <span class="n">given</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="rozwiazanie">
+<h4>Rozwiązanie<a class="headerlink" href="#rozwiazanie" title="Permalink to this headline">¶</a></h4>
+<p>Musimy użyć parametrów zmiennych:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">shouter2</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s">&quot;Before&quot;</span><span class="p">,</span> <span class="n">func</span><span class="o">.</span><span class="n">__name__</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">print</span> <span class="s">&quot;After&quot;</span><span class="p">,</span> <span class="n">func</span><span class="o">.</span><span class="n">__name__</span>
+        <span class="k">return</span> <span class="n">result</span>
+    <span class="n">wrapper</span><span class="o">.</span><span class="n">__name__</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="n">__name__</span>
+    <span class="n">wrapper</span><span class="o">.</span><span class="n">__doc__</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="n">__doc__</span>
+    <span class="k">return</span> <span class="n">wrapper</span>
+</pre></div>
+</div>
+<p><strong>Udoskonalanie pomysłu</strong></p>
+<p>Pakiet <tt class="docutils literal"><span class="pre">functools</span></tt> zawiera kilka ciekawych funkcji pomocniczych:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">functools</span>
+
+<span class="k">def</span> <span class="nf">decor</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="nd">@functools.wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s">&quot;Before&quot;</span><span class="p">,</span> <span class="n">func</span><span class="o">.</span><span class="n">__name__</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">print</span> <span class="s">&quot;After&quot;</span><span class="p">,</span> <span class="n">func</span><span class="o">.</span><span class="n">__name__</span>
+        <span class="k">return</span> <span class="n">result</span>
+    <span class="k">return</span> <span class="n">wrapper</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="dekoratory-parametryzowane">
+<h2>Dekoratory parametryzowane<a class="headerlink" href="#dekoratory-parametryzowane" title="Permalink to this headline">¶</a></h2>
+<p>Jak to zostało zrobione? Aby otrzymać parametryzowany dekorator, musimy go
+&#8220;owinąć&#8221; w kolejną funkcję (domknięcie)</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">tag</span><span class="p">(</span><span class="n">tagname</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">decor</span><span class="p">(</span><span class="n">fun</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="n">out</span> <span class="o">=</span> <span class="s">&quot;&lt;{0}&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tagname</span><span class="p">)</span>
+            <span class="n">out</span> <span class="o">+=</span> <span class="n">fun</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="n">out</span> <span class="o">+=</span> <span class="s">&quot;&lt;/{0}&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tagname</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">out</span>
+        <span class="k">return</span> <span class="n">wrapper</span>
+    <span class="k">return</span> <span class="n">decor</span>
+
+<span class="nd">@tag</span><span class="p">(</span><span class="s">&quot;b&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">output</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">data</span>
+</pre></div>
+</div>
+<p>Co jest po prostu odpowiednikiem:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">fun</span> <span class="o">=</span> <span class="n">tag</span><span class="p">(</span><span class="n">b</span><span class="p">)(</span><span class="n">fun</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="wiele-dekoratorow">
+<h2>Wiele dekoratorów<a class="headerlink" href="#wiele-dekoratorow" title="Permalink to this headline">¶</a></h2>
+<p>Funkcję można owijać w wiele dekoratorów, należy pamiętać że kolejność jest istotna.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="nd">@shouter</span>
+<span class="nd">@tag</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">my_func</span><span class="p">():</span>
+   <span class="k">pass</span>
+</pre></div>
+</div>
+<p>co odpowiada:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">my_func</span> <span class="o">=</span> <span class="n">shouter</span><span class="p">(</span><span class="n">tag</span><span class="p">(</span><span class="n">b</span><span class="p">)(</span><span class="n">my_func</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="dekoratory-klas">
+<h2>Dekoratory klas<a class="headerlink" href="#dekoratory-klas" title="Permalink to this headline">¶</a></h2>
+<p>Od Pythona 2.6 można używać dekoratorów klas,
+uzyskuje się działanie podobne jak przy dziedziczeniu.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">addID</span><span class="p">(</span><span class="n">original_class</span><span class="p">):</span>
+    <span class="n">orig_init</span> <span class="o">=</span> <span class="n">original_class</span><span class="o">.</span><span class="n">__init__</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kws</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s">&quot;addID init&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__id</span> <span class="o">=</span> <span class="mi">123</span>
+        <span class="n">orig_init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kws</span><span class="p">)</span>
+
+    <span class="n">original_class</span><span class="o">.</span><span class="n">__init__</span> <span class="o">=</span> <span class="n">__init__</span>
+    <span class="k">return</span> <span class="n">original_class</span>
+
+<span class="nd">@addID</span>
+<span class="k">class</span> <span class="nc">Foo</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">print</span> <span class="s">&quot;Foo class init&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="klasy-jako-dekoratory">
+<h2>Klasy jako dekoratory<a class="headerlink" href="#klasy-jako-dekoratory" title="Permalink to this headline">¶</a></h2>
+<p>Bardzo ciekawym zastosowaniem jest użycie klasy jako dekoratora.
+Wystarczy zdefinować w klasie metodę specjalną <tt class="docutils literal"><span class="pre">__call__</span></tt>.
+Instancja klasy (uzyskana przecież za pomocą operatora ()) staje się wtedy obiektem, który można wywołać.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">shout</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s">&quot;inside decorator&#39;s __init__()&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">f</span> <span class="o">=</span> <span class="n">f</span>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s">&quot;before call&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">f</span><span class="p">()</span>
+        <span class="k">print</span> <span class="s">&quot;after call&quot;</span>
+
+<span class="nd">@shout</span>
+<span class="k">def</span> <span class="nf">aFunction</span><span class="p">():</span>
+    <span class="k">print</span> <span class="s">&quot;inside aFunction()&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  
+
+    
+    <div class="footer">
+        &copy; Copyright 2014, Leszek Tarkowski.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </div>
+  
+
+  </body>
+</html>

@@ -24,7 +24,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="Zaawansowane programowanie w języku Python" href="#" />
-    <link rel="next" title="Wzorce projektowe" href="wzorce.html" />
+    <link rel="next" title="Funkcje w języku Python" href="funkcje.html" />
   
 
   </head>
@@ -63,19 +63,109 @@
 <h1>Zaawansowane programowanie w języku Python<a class="headerlink" href="#zaawansowane-programowanie-w-jezyku-python" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="wzorce.html">Wzorce projektowe</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="wzorce.html#podstawy-oop-przypomnienie">Podstawy OOP - przypomnienie</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="wzorce.html#obiekt-interfejs-klasa">Obiekt / Interfejs / Klasa</a></li>
-<li class="toctree-l3"><a class="reference internal" href="wzorce.html#podstawowe-techniki-oop">Podstawowe techniki OOP</a></li>
-<li class="toctree-l3"><a class="reference internal" href="wzorce.html#relacje-miedzy-klasami">Relacje między klasami</a></li>
-<li class="toctree-l3"><a class="reference internal" href="wzorce.html#zasady-oop">Zasady OOP</a></li>
-<li class="toctree-l3"><a class="reference internal" href="wzorce.html#s-o-l-i-d-oop">S.O.L.I.D. OOP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="funkcje.html">Funkcje w języku Python</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="funkcje.html#obiekty-w-pythonie">Obiekty w Pythonie</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="funkcje.html#dynamiczne-typowanie">Dynamiczne typowanie</a></li>
+<li class="toctree-l3"><a class="reference internal" href="funkcje.html#tozsamosc-typ-i-wartosc">Tożsamość, typ i wartość</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="wzorce.html#id1">Wzorce projektowe</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="wzorce.html#atrybuty-wzorca">Atrybuty wzorca</a></li>
+<li class="toctree-l2"><a class="reference internal" href="funkcje.html#funkcje-w-pythonie">Funkcje w Pythonie</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="funkcje.html#funkcje-jako-obiekty">Funkcje jako obiekty</a></li>
+<li class="toctree-l3"><a class="reference internal" href="funkcje.html#wywolywanie-funkcji">Wywoływanie funkcji</a></li>
+<li class="toctree-l3"><a class="reference internal" href="funkcje.html#atrybuty-funkcji">Atrybuty funkcji</a></li>
+<li class="toctree-l3"><a class="reference internal" href="funkcje.html#zagniezdzanie-funkcji">Zagnieżdżanie funkcji</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="funkcje.html#parametry-kontra-argumenty">Parametry kontra argumenty</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="funkcje.html#parametry-funkcji">Parametry funkcji</a></li>
+<li class="toctree-l3"><a class="reference internal" href="funkcje.html#parametry-normalne">Parametry normalne</a></li>
+<li class="toctree-l3"><a class="reference internal" href="funkcje.html#pulapki-domyslnego-atrybutu">Pułapki domyślnego atrybutu</a></li>
+<li class="toctree-l3"><a class="reference internal" href="funkcje.html#parametry-zmienne">Parametry zmienne</a></li>
+<li class="toctree-l3"><a class="reference internal" href="funkcje.html#parametry-zmienne-nazwane">Parametry zmienne nazwane</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="funkcje.html#zmienne-lokalne-i-globalne">Zmienne lokalne i globalne</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="funkcje.html#locals-i-globals">Locals i globals</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="klasy.html">Klasy i obiekty</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="klasy.html#klasy-przypomnienie">Klasy - przypomnienie</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="klasy.html#definiowanie-klasy">Definiowanie klasy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="klasy.html#method-resolution-order-mro">Method Resolution Order (MRO)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="klasy.html#skladowe-prywatne">Składowe prywatne</a></li>
+<li class="toctree-l2"><a class="reference internal" href="klasy.html#skladowe-statyczne">Składowe statyczne</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="klasy.html#staticmethod-vs-classmethod">staticmethod vs. classmethod</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="klasy.html#wlasciwosci-properties">Właściwości - <em>Properties</em></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="klasy.html#atrybuty-tylko-do-odczytu">Atrybuty tylko do odczytu</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="klasy.html#atrybuty-specjalne">Atrybuty specjalne</a></li>
+<li class="toctree-l2"><a class="reference internal" href="klasy.html#metody-specjalne">Metody specjalne</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="klasy.html#metody-specjalne-dostep-do-atrybutow">Metody specjalne - Dostęp do atrybutów</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="klasy.html#deskryptory">Deskryptory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="klasy.html#sloty">Sloty</a></li>
+<li class="toctree-l2"><a class="reference internal" href="klasy.html#wywolywanie-instancji-call">Wywoływanie instancji - <tt class="docutils literal"><span class="pre">__call__</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="klasy.html#dziedziczenie">Dziedziczenie</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="klasy.html#wielokrotne-dziedziczenie">Wielokrotne dziedziczenie</a></li>
+<li class="toctree-l3"><a class="reference internal" href="klasy.html#super"><tt class="docutils literal"><span class="pre">super</span></tt></a></li>
+<li class="toctree-l3"><a class="reference internal" href="klasy.html#dziedziczenie-po-typach-wbudowanych">Dziedziczenie po typach wbudowanych</a></li>
+<li class="toctree-l3"><a class="reference internal" href="klasy.html#dziedziczenie-po-typach-niezmiennych">Dziedziczenie po typach niezmiennych</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dekoratory.html">Dekoratory</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dekoratory.html#po-co-nam-dekoratory">Po co nam dekoratory</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="dekoratory.html#domkniecie-closure">Domknięcie (<em>closure</em>)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="dekoratory.html#co-to-sa-dekoratory">Co to są dekoratory</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="dekoratory.html#prosty-dekorator">Prosty dekorator</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="dekoratory.html#dekoratory-parametryzowane">Dekoratory parametryzowane</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dekoratory.html#wiele-dekoratorow">Wiele dekoratorów</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dekoratory.html#dekoratory-klas">Dekoratory klas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dekoratory.html#klasy-jako-dekoratory">Klasy jako dekoratory</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="metaklasy.html">Metaklasy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="metaklasy.html#wprowadzenie">Wprowadzenie</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metaklasy.html#klasy-jako-obiekty">Klasy jako obiekty</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metaklasy.html#dynamiczne-tworzenie-klas">Dynamiczne tworzenie klas</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="metaklasy.html#dziedziczenie-z-uzyciem-type">Dziedziczenie z użyciem <tt class="docutils literal"><span class="pre">type</span></tt></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metaklasy.html#metody-klasy">Metody klasy</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="metaklasy.html#id1">Metaklasy</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="metaklasy.html#przyklad-metaklasy-metafunkcji">Przykład metaklasy (metafunkcji)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="metaklasy.html#przyklad-metaklasy-klasa">Przykład metaklasy (klasa)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="metaklasy.html#metoda-specjalna-new">Metoda specjalna <tt class="docutils literal"><span class="pre">__new__</span></tt></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="metaklasy.html#szablon-metaklasy">Szablon metaklasy</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="metaklasy.html#call-metaklasy"><tt class="docutils literal"><span class="pre">__call__</span></tt> metaklasy</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="metaklasy.html#zastosowanie-metaklas">Zastosowanie metaklas</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="TDD.html">Testowanie kodu</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="TDD.html#testy-jednostkowe">Testy jednostkowe</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="TDD.html#doctest"><tt class="docutils literal"><span class="pre">doctest</span></tt></a></li>
+<li class="toctree-l3"><a class="reference internal" href="TDD.html#unittest"><tt class="docutils literal"><span class="pre">unittest</span></tt></a></li>
+<li class="toctree-l3"><a class="reference internal" href="TDD.html#pytest"><tt class="docutils literal"><span class="pre">pytest</span></tt></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="TDD.html#test-double">Test double</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="watki.html">Programowanie wielowątkowe</a><ul>
@@ -94,38 +184,6 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="watki.html#modul-concurrent">Moduł <tt class="docutils literal"><span class="pre">concurrent</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="watki.html#modul-multiprocessing">Moduł <tt class="docutils literal"><span class="pre">multiprocessing</span></tt></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="TDD.html">Testowanie kodu</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="TDD.html#testy-jednostkowe">Testy jednostkowe</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="TDD.html#doctest"><tt class="docutils literal"><span class="pre">doctest</span></tt></a></li>
-<li class="toctree-l3"><a class="reference internal" href="TDD.html#unittest"><tt class="docutils literal"><span class="pre">unittest</span></tt></a></li>
-<li class="toctree-l3"><a class="reference internal" href="TDD.html#pytest"><tt class="docutils literal"><span class="pre">pytest</span></tt></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="TDD.html#test-double">Test double</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="narzedzia.html">Narzędzia</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dokumentacja.html">Tworzenie dokumentacji</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tips_n_tricks.html">Python - tips and tricks</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="tips_n_tricks.html#iteracje">Iteracje</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="tips_n_tricks.html#naduzywanie-funkcji-range">Nadużywanie funkcji <tt class="docutils literal"><span class="pre">range</span></tt></a></li>
-<li class="toctree-l3"><a class="reference internal" href="tips_n_tricks.html#wlasciwe-uzycie-wyrazen-listowych">Właściwe użycie wyrażeń listowych</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="tips_n_tricks.html#wydajnosc">Wydajność</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="tips_n_tricks.html#sprawdzanie-list-w-czasie-o-1">Sprawdzanie list w czasie O(1)</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="tips_n_tricks.html#konkatenacja-ciagow">Konkatenacja ciągów</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tips_n_tricks.html#zakres-zmiennych">Zakres zmiennych</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="tips_n_tricks.html#petla-for">Pętla <tt class="docutils literal"><span class="pre">for</span></tt></a></li>
-<li class="toctree-l3"><a class="reference internal" href="tips_n_tricks.html#zmienne-globalne">Zmienne globalne</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="tips_n_tricks.html#sloty">Sloty</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tips_n_tricks.html#strategie">Strategie</a></li>
 </ul>
 </li>
 </ul>

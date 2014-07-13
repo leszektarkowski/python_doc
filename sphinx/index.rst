@@ -9,9 +9,15 @@ Zaawansowane programowanie w języku Python
 .. toctree::
     :maxdepth: 3
 
-    wzorce
-    watki
+
+    funkcje
+    klasy
+    dekoratory
+    metaklasy
     TDD
-    narzedzia
-    dokumentacja
-    tips_n_tricks
+    watki
+
+.. wzorce
+.. narzedzia
+.. dokumentacja
+.. tips_n_tricks
