@@ -22,14 +22,17 @@ exclude_patterns = ['_build', '_old']
 add_module_names = False
 pygments_style = 'sphinx'
 # -- Options for HTML output ---------------------------------------------------
-html_theme = 'default'
+#html_theme = 'default'
 #html_theme = 'bootstrap'
 #html_theme = 'infotraining'
-#html_theme = "sphinx_rtd_theme"
 
-html_theme_options = {
-	'collapsiblesidebar': True,
-}
+import sphinx_rtd_theme
+html_theme = "sphinx_rtd_theme"
+html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
+
+# html_theme_options = {
+# 	'collapsiblesidebar': True,
+# }
 
 # html_theme_options = {
 #     'navbar_title': "Infotraining",
@@ -52,7 +55,7 @@ html_theme_options = {
 #     #'bootswatch_theme': "yeti",
 #     'bootstrap_version': "3",
 # }
-html_theme_path = ["./theme"]
+# html_theme_path = ["./theme"]
 
 html_title = u'Zaawansowane programowanie w języku Python'
 html_short_title = u'Zaawansowany Python'
