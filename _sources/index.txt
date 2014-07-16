@@ -16,6 +16,8 @@ Zaawansowane programowanie w języku Python
     metaklasy
     TDD
     watki
+    wzorce
+    2vs3
 
 .. wzorce
 .. narzedzia

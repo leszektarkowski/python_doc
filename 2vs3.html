@@ -28,7 +28,8 @@
   
 
   
-    <link rel="top" title="Zaawansowane programowanie w języku Python" href="index.html"/> 
+    <link rel="top" title="Zaawansowane programowanie w języku Python" href="index.html"/>
+        <link rel="prev" title="Wzorce projektowe" href="wzorce.html"/> 
 
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
@@ -55,7 +56,7 @@
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
         
         
-            <ul>
+            <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="funkcje.html">Funkcje w języku Python</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="funkcje.html#obiekty-w-pythonie">Obiekty w Pythonie</a></li>
 <li class="toctree-l2"><a class="reference internal" href="funkcje.html#funkcje-w-pythonie">Funkcje w Pythonie</a></li>
@@ -110,6 +111,25 @@
 <li class="toctree-l2"><a class="reference internal" href="watki.html#modul-multiprocessing">Moduł <tt class="docutils literal"><span class="pre">multiprocessing</span></tt></a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="wzorce.html">Wzorce projektowe</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="wzorce.html#podstawy-oop-przypomnienie">Podstawy OOP - przypomnienie</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wzorce.html#id1">Wzorce projektowe</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Porównanie Pythona 2 i 3</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#funkcja-print">Funkcja <tt class="docutils literal"><span class="pre">print</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dzielenie">Dzielenie</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#wsparcie-dla-unicode">Wsparcie dla Unicode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#xrange"><tt class="docutils literal"><span class="pre">xrange</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rozpakowywanie">Rozpakowywanie</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#wyjatki">Wyjątki</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#funkcja-i-metdoda-next">Funkcja i metdoda <tt class="docutils literal"><span class="pre">next</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#wyciekanie-zmiennych-z-petli-for">Wyciekanie zmiennych z pętli <tt class="docutils literal"><span class="pre">for</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#porownywanie-typow">Porównywanie typów</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#zwracanie-obiektow-iterowalnych-zamiast-list">Zwracanie obiektów iterowalnych zamiast list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#yield-from"><tt class="docutils literal"><span class="pre">yield</span> <span class="pre">from</span></tt></a></li>
+</ul>
+</li>
 </ul>
 
         
@@ -147,441 +167,295 @@
 <div class="section" id="funkcja-print">
 <h2>Funkcja <tt class="docutils literal"><span class="pre">print</span></tt><a class="headerlink" href="#funkcja-print" title="Permalink to this headline">¶</a></h2>
 <p>Zastąpiono słowo kluczowe funkcją:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">#Python 2</span>
-
-<span class="k">print</span> <span class="s">&#39;Python&#39;</span><span class="p">,</span> <span class="n">python_version</span><span class="p">()</span>
-<span class="k">print</span> <span class="s">&#39;Hello, World!&#39;</span>
-<span class="k">print</span><span class="p">(</span><span class="s">&#39;Hello, World!&#39;</span><span class="p">)</span>
-<span class="k">print</span> <span class="s">&quot;text&quot;</span><span class="p">,</span> <span class="p">;</span> <span class="k">print</span> <span class="s">&#39;print more text on the same line&#39;</span>
+<p><strong>Python 2</strong></p>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="s">&#39;Python&#39;</span><span class="p">,</span> <span class="n">python_version</span><span class="p">()</span>
+<span class="go">Python 2.7.6</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="s">&#39;Hello, World!&#39;</span>
+<span class="go">Hello, World!</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s">&#39;Hello, World!&#39;</span><span class="p">)</span>
+<span class="go">Hello, World!</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="s">&quot;text&quot;</span><span class="p">,</span> <span class="p">;</span> <span class="k">print</span> <span class="s">&#39;print more text on the same line&#39;</span>
+<span class="go">text print more text on the same line</span>
 </pre></div>
 </div>
-<div class="highlight-bash"><div class="highlight"><pre>Python 2.7.6
-Hello, World!
-Hello, World!
-text print more text on the same line
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">#Python 3</span>
-
-<span class="k">print</span><span class="p">(</span><span class="s">&#39;Python&#39;</span><span class="p">,</span> <span class="n">python_version</span><span class="p">())</span>
-<span class="k">print</span><span class="p">(</span><span class="s">&#39;Hello, World!&#39;</span><span class="p">)</span>
-
-<span class="k">print</span><span class="p">(</span><span class="s">&quot;some text,&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s">&#39; print more text on the same line&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-bash"><div class="highlight"><pre>Python 3.4.1
-Hello, World!
-some text, print more text on the same line
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">print</span> <span class="s">&#39;Hello, World!&#39;</span>
-</pre></div>
-</div>
-<div class="highlight-bash"><div class="highlight"><pre>File <span class="s2">&quot;&quot;</span>, line 1
-    print <span class="s1">&#39;Hello, World!&#39;</span>
-                            ^
-SyntaxError: invalid syntax
+<p><strong>Python 3</strong></p>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s">&#39;Python&#39;</span><span class="p">,</span> <span class="n">python_version</span><span class="p">())</span>
+<span class="go">Python 3.4.1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s">&#39;Hello, World!&#39;</span><span class="p">)</span>
+<span class="go">Hello, World!</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s">&quot;some text,&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+<span class="go">some text, &gt;&gt;&gt; print(&#39; print more text on the same line&#39;)</span>
+<span class="go">print more text on the same line</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="s">&#39;Hello, World!&#39;</span>
+<span class="go">File &quot;&quot;, line 1</span>
+<span class="go">    print &#39;Hello, World!&#39;</span>
+<span class="go">                            ^</span>
+<span class="go">SyntaxError: invalid syntax</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="dzielenie">
 <h2>Dzielenie<a class="headerlink" href="#dzielenie" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">#Python 2</span>
-
-<span class="k">print</span> <span class="s">&#39;Python&#39;</span><span class="p">,</span> <span class="n">python_version</span><span class="p">()</span>
-<span class="k">print</span> <span class="s">&#39;3 / 2 =&#39;</span><span class="p">,</span> <span class="mi">3</span> <span class="o">/</span> <span class="mi">2</span>
-<span class="k">print</span> <span class="s">&#39;3 // 2 =&#39;</span><span class="p">,</span> <span class="mi">3</span> <span class="o">//</span> <span class="mi">2</span>
-<span class="k">print</span> <span class="s">&#39;3 / 2.0 =&#39;</span><span class="p">,</span> <span class="mi">3</span> <span class="o">/</span> <span class="mf">2.0</span>
-<span class="k">print</span> <span class="s">&#39;3 // 2.0 =&#39;</span><span class="p">,</span> <span class="mi">3</span> <span class="o">//</span> <span class="mf">2.0</span>
+<p><strong>Python 2</strong></p>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="s">&#39;Python&#39;</span><span class="p">,</span> <span class="n">python_version</span><span class="p">()</span>
+<span class="go">Python 2.7.6</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="s">&#39;3 / 2 =&#39;</span><span class="p">,</span> <span class="mi">3</span> <span class="o">/</span> <span class="mi">2</span>
+<span class="go">3 / 2 = 1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="s">&#39;3 // 2 =&#39;</span><span class="p">,</span> <span class="mi">3</span> <span class="o">//</span> <span class="mi">2</span>
+<span class="go">3 // 2 = 1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="s">&#39;3 / 2.0 =&#39;</span><span class="p">,</span> <span class="mi">3</span> <span class="o">/</span> <span class="mf">2.0</span>
+<span class="go">3 / 2.0 = 1.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="s">&#39;3 // 2.0 =&#39;</span><span class="p">,</span> <span class="mi">3</span> <span class="o">//</span> <span class="mf">2.0</span>
+<span class="go">3 // 2.0 = 1.0</span>
 </pre></div>
 </div>
-<div class="highlight-bash"><div class="highlight"><pre>Python 2.7.6
-3 / <span class="nv">2</span> <span class="o">=</span> 1
-3 // <span class="nv">2</span> <span class="o">=</span> 1
-3 / 2.0 <span class="o">=</span> 1.5
-3 // 2.0 <span class="o">=</span> 1.0
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">#Python 3</span>
-
-<span class="k">print</span><span class="p">(</span><span class="s">&#39;Python&#39;</span><span class="p">,</span> <span class="n">python_version</span><span class="p">())</span>
-<span class="k">print</span><span class="p">(</span><span class="s">&#39;3 / 2 =&#39;</span><span class="p">,</span> <span class="mi">3</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s">&#39;3 // 2 =&#39;</span><span class="p">,</span> <span class="mi">3</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s">&#39;3 / 2.0 =&#39;</span><span class="p">,</span> <span class="mi">3</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s">&#39;3 // 2.0 =&#39;</span><span class="p">,</span> <span class="mi">3</span> <span class="o">//</span> <span class="mf">2.0</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-bash"><div class="highlight"><pre>Python 3.4.1
-3 / <span class="nv">2</span> <span class="o">=</span> 1.5
-3 // <span class="nv">2</span> <span class="o">=</span> 1
-3 / 2.0 <span class="o">=</span> 1.5
-3 // 2.0 <span class="o">=</span> 1.0
+<p><strong>Python 3</strong></p>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s">&#39;Python&#39;</span><span class="p">,</span> <span class="n">python_version</span><span class="p">())</span>
+<span class="go">Python 3.4.1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s">&#39;3 / 2 =&#39;</span><span class="p">,</span> <span class="mi">3</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">3 / 2 = 1.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s">&#39;3 // 2 =&#39;</span><span class="p">,</span> <span class="mi">3</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">3 // 2 = 1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s">&#39;3 / 2.0 =&#39;</span><span class="p">,</span> <span class="mi">3</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">)</span>
+<span class="go">3 / 2.0 = 1.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s">&#39;3 // 2.0 =&#39;</span><span class="p">,</span> <span class="mi">3</span> <span class="o">//</span> <span class="mf">2.0</span><span class="p">)</span>
+<span class="go">3 // 2.0 = 1.0</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="wsparcie-dla-unicode">
 <h2>Wsparcie dla Unicode<a class="headerlink" href="#wsparcie-dla-unicode" title="Permalink to this headline">¶</a></h2>
-<p>Python 2 has ASCII str() types, separate unicode(), but no byte type.</p>
-<p>Now, in Python 3, we finally have Unicode (utf-8) strings, and 2 byte classes: byte and bytearrays.</p>
-<p>Python 2</p>
-<p>print &#8216;Python&#8217;, python_version()</p>
-<p>Python 2.7.6</p>
-<p>print type(unicode(&#8216;this is like a python3 str type&#8217;))</p>
-<p>&lt;type &#8216;unicode&#8217;&gt;</p>
-<p>print type(b&#8217;byte type does not exist&#8217;)</p>
-<p>&lt;type &#8216;str&#8217;&gt;</p>
-<p>print &#8216;they are really&#8217; + b&#8217; the same&#8217;</p>
-<p>they are really the same</p>
-<p>print type(bytearray(b&#8217;bytearray oddly does exist though&#8217;))</p>
-<p>&lt;type &#8216;bytearray&#8217;&gt;</p>
-<p>Python 3</p>
-<p>print(&#8216;Python&#8217;, python_version())
-print(&#8216;strings are now utf-8 u03BCnicou0394é!&#8217;)</p>
-<p>Python 3.4.1
-strings are now utf-8 μnicoΔé!</p>
-<p>print(&#8216;Python&#8217;, python_version(), end=&#8221;&#8221;)
-print(&#8216; has&#8217;, type(b&#8217; bytes for storing data&#8217;))</p>
-<p>Python 3.4.1 has &lt;class &#8216;bytes&#8217;&gt;</p>
-<p>print(&#8216;and Python&#8217;, python_version(), end=&#8221;&#8221;)
-print(&#8216; also has&#8217;, type(bytearray(b&#8217;bytearrays&#8217;)))</p>
-<p>and Python 3.4.1 also has &lt;class &#8216;bytearray&#8217;&gt;</p>
-<p>&#8216;note that we cannot add a string&#8217; + b&#8217;bytes for data&#8217;</p>
-<p>&#8212;-&gt; 1 &#8216;note that we cannot add a string&#8217; + b&#8217;bytes for data&#8217;</p>
-<p>TypeError: Can&#8217;t convert &#8216;bytes&#8217; object to str implicitly</p>
-<p>xrange
-[back to top]</p>
-<p>The usage of xrange() is very popular in Python 2.x for creating an iterable object, e.g., in a for-loop or list/set-dictionary-comprehension.The behavior was quite similar to a generator (i.e., &#8220;lazy evaluation&#8221;), but here the xrange-iterable is not exhaustible - meaning, you could iterate over it infinitely.</p>
-<p>Thanks to its &#8220;lazy-evaluation&#8221;, the advantage of the regular range() is that xrange() is generally faster if you have to iterate over it only once (e.g., in a for-loop). However, in contrast to 1-time iterations, it is not recommended if you repeat the iteration multiple times, since the generation happens every time from scratch!</p>
-<p>In Python 3, the range() was implemented like the xrange() function so that a dedicated xrange() function does not exist anymore (xrange() raises a NameError in Python 3).</p>
-<p>import timeit</p>
-<p>n = 10000
-def test_range(n):</p>
-<blockquote>
-<div><dl class="docutils">
-<dt>for i in range(n):</dt>
-<dd>pass</dd>
-</dl>
-</div></blockquote>
-<dl class="docutils">
-<dt>def test_xrange(n):</dt>
-<dd><dl class="first last docutils">
-<dt>for i in xrange(n):</dt>
-<dd>pass</dd>
-</dl>
-</dd>
-</dl>
-<p>Python 2</p>
-<p>print &#8216;Python&#8217;, python_version()</p>
-<p>print &#8216;ntiming range()&#8217;
-%timeit test_range(n)</p>
-<p>print &#8216;nntiming xrange()&#8217;
-%timeit test_xrange(n)</p>
-<p>Python 2.7.6</p>
-<p>timing range()
-1000 loops, best of 3: 433 µs per loop</p>
-<p>timing xrange()
-1000 loops, best of 3: 350 µs per loop</p>
-<p>Python 3</p>
-<p>print(&#8216;Python&#8217;, python_version())</p>
-<p>print(&#8216;ntiming range()&#8217;)
-%timeit test_range(n)</p>
-<p>Python 3.4.1</p>
-<p>timing range()
-1000 loops, best of 3: 520 µs per loop</p>
-<p>print(xrange(10))</p>
-<p>&#8212;-&gt; 1 print(xrange(10))</p>
-<p>NameError: name &#8216;xrange&#8217; is not defined</p>
-<p>The __contains__ method for range objects in Python 3</p>
-<p>Another thing worth mentioning is that range got a &#8220;new&#8221; __contains__ method in Python 3.x (thanks to Yuchen Ying, who pointed this out). The __contains__ method can speedup &#8220;look-ups&#8221; in Python 3.x range significantly for integer and Boolean types.</p>
-<p>x = 10000000</p>
-<p>def val_in_range(x, val):
-return val in range(x)</p>
-<dl class="docutils">
-<dt>def val_in_xrange(x, val):</dt>
-<dd>return val in xrange(x)</dd>
-</dl>
-<p>print(&#8216;Python&#8217;, python_version())
-assert(val_in_range(x, x/2) == True)
-assert(val_in_range(x, x//2) == True)
-%timeit val_in_range(x, x/2)
-%timeit val_in_range(x, x//2)</p>
-<p>Python 3.4.1
-1 loops, best of 3: 742 ms per loop
-1000000 loops, best of 3: 1.19 µs per loop</p>
-<p>Based on the timeit results above, you see that the execution for the &#8220;look up&#8221; was about 60,000 faster when it was of an integer type rather than a float. However, since Python 2.x&#8217;s range or xrange doesn&#8217;t have a __contains__ method, the &#8220;look-up speed&#8221; wouldn&#8217;t be that much different for integers or floats:</p>
-<p>print &#8216;Python&#8217;, python_version()
-assert(val_in_xrange(x, x/2.0) == True)
-assert(val_in_xrange(x, x/2) == True)
-assert(val_in_range(x, x/2) == True)
-assert(val_in_range(x, x//2) == True)
-%timeit val_in_xrange(x, x/2.0)
-%timeit val_in_xrange(x, x/2)
-%timeit val_in_range(x, x/2.0)
-%timeit val_in_range(x, x/2)</p>
-<p>Python 2.7.7
-1 loops, best of 3: 285 ms per loop
-1 loops, best of 3: 179 ms per loop
-1 loops, best of 3: 658 ms per loop
-1 loops, best of 3: 556 ms per loop</p>
-<p>Below the &#8220;proofs&#8221; that the __contain__ method wasn&#8217;t added to Python 2.x yet:</p>
-<p>print(&#8216;Python&#8217;, python_version())
-range.__contains__</p>
-<p>Python 3.4.1
-&lt;slot wrapper &#8216;__contains__&#8217; of &#8216;range&#8217; objects&gt;</p>
-<p>print &#8216;Python&#8217;, python_version()
-range.__contains__</p>
-<div class="section" id="python-2-7-7">
-<h3>Python 2.7.7<a class="headerlink" href="#python-2-7-7" title="Permalink to this headline">¶</a></h3>
-<dl class="docutils">
-<dt>AttributeError                            Traceback (most recent call last)</dt>
-<dd><dl class="first last docutils">
-<dt>in ()</dt>
-<dd>1 print &#8216;Python&#8217;, python_version()</dd>
-</dl>
-</dd>
-</dl>
-<p>&#8212;-&gt; 2 range.__contains__</p>
-<p>AttributeError: &#8216;builtin_function_or_method&#8217; object has no attribute &#8216;__contains__&#8217;</p>
-<p>print &#8216;Python&#8217;, python_version()
-xrange.__contains__</p>
-</div>
-<div class="section" id="id1">
-<h3>Python 2.7.7<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
-<dl class="docutils">
-<dt>AttributeError                            Traceback (most recent call last)</dt>
-<dd><dl class="first last docutils">
-<dt>in ()</dt>
-<dd>1 print &#8216;Python&#8217;, python_version()</dd>
-</dl>
-</dd>
-</dl>
-<p>&#8212;-&gt; 2 xrange.__contains__</p>
-<p>AttributeError: type object &#8216;xrange&#8217; has no attribute &#8216;__contains__&#8217;</p>
-<p>Note about the speed differences in Python 2 and 3</p>
-<p>Some people pointed out the speed difference between Python 3&#8217;s range() and Python2&#8217;s xrange(). Since they are implemented the same way one would expect the same speed. However the difference here just comes from the fact that Python 3 generally tends to run slower than Python 2.</p>
-<dl class="docutils">
-<dt>def test_while():</dt>
-<dd><p class="first">i = 0
-while i &lt; 20000:</p>
-<blockquote>
-<div>i += 1</div></blockquote>
-<p class="last">return</p>
-</dd>
-</dl>
-<p>print(&#8216;Python&#8217;, python_version())
-%timeit test_while()</p>
-<p>Python 3.4.1
-100 loops, best of 3: 2.68 ms per loop</p>
-<p>print &#8216;Python&#8217;, python_version()
-%timeit test_while()</p>
-<p>Python 2.7.6
-1000 loops, best of 3: 1.72 ms per loop</p>
-<p>Raising exceptions
-[back to top]</p>
-<p>Where Python 2 accepts both notations, the &#8216;old&#8217; and the &#8216;new&#8217; syntax, Python 3 chokes (and raises a SyntaxError in turn) if we don&#8217;t enclose the exception argument in parentheses:</p>
-<p>Python 2</p>
-<p>print &#8216;Python&#8217;, python_version()</p>
-<p>Python 2.7.6</p>
-<p>raise IOError, &#8220;file error&#8221;</p>
-<p>&#8212;-&gt; 1 raise IOError, &#8220;file error&#8221;</p>
-<p>IOError: file error</p>
-<p>raise IOError(&#8220;file error&#8221;)</p>
-<p>&#8212;-&gt; 1 raise IOError(&#8220;file error&#8221;)</p>
-<p>IOError: file error</p>
-<p>Python 3</p>
-<p>print(&#8216;Python&#8217;, python_version())</p>
-<p>Python 3.4.1</p>
-<p>raise IOError, &#8220;file error&#8221;</p>
-<p>File &#8220;&#8221;, line 1
-raise IOError, &#8220;file error&#8221;</p>
-<blockquote>
-<div>^</div></blockquote>
-<p>SyntaxError: invalid syntax</p>
-<p>The proper way to raise an exception in Python 3:</p>
-<p>print(&#8216;Python&#8217;, python_version())
-raise IOError(&#8220;file error&#8221;)</p>
-<p>Python 3.4.1</p>
-<blockquote>
-<div>1 print(&#8216;Python&#8217;, python_version())</div></blockquote>
-<p>&#8212;-&gt; 2 raise IOError(&#8220;file error&#8221;)</p>
-<p>OSError: file error</p>
-<p>Handling exceptions
-[back to top]</p>
-<p>Also the handling of exceptions has slightly changed in Python 3. In Python 3 we have to use the &#8220;as&#8221; keyword now</p>
-<p>Python 2</p>
-<p>print &#8216;Python&#8217;, python_version()
-try:</p>
-<blockquote>
-<div>let_us_cause_a_NameError</div></blockquote>
-<dl class="docutils">
-<dt>except NameError, err:</dt>
-<dd>print err, &#8216;&#8211;&gt; our error message&#8217;</dd>
-</dl>
-<p>Python 2.7.6
-name &#8216;let_us_cause_a_NameError&#8217; is not defined &#8211;&gt; our error message</p>
-<p>Python 3</p>
-<p>print(&#8216;Python&#8217;, python_version())
-try:</p>
-<blockquote>
-<div>let_us_cause_a_NameError</div></blockquote>
-<dl class="docutils">
-<dt>except NameError as err:</dt>
-<dd>print(err, &#8216;&#8211;&gt; our error message&#8217;)</dd>
-</dl>
-<p>Python 3.4.1
-name &#8216;let_us_cause_a_NameError&#8217; is not defined &#8211;&gt; our error message</p>
-<p>The next() function and .next() method
-[back to top]</p>
-<p>Since next() (.next()) is such a commonly used function (method), this is another syntax change (or rather change in implementation) that is worth mentioning: where you can use both the function and method syntax in Python 2.7.5, the next() function is all that remains in Python 3 (calling the .next() method raises an AttributeError).</p>
-<p>Python 2</p>
-<p>print &#8216;Python&#8217;, python_version()</p>
-<p>my_generator = (letter for letter in &#8216;abcdefg&#8217;)</p>
-<p>next(my_generator)
-my_generator.next()</p>
-<p>Python 2.7.6
-&#8216;b&#8217;</p>
-<p>Python 3</p>
-<p>print(&#8216;Python&#8217;, python_version())</p>
-<p>my_generator = (letter for letter in &#8216;abcdefg&#8217;)</p>
-<p>next(my_generator)</p>
-<p>Python 3.4.1
-&#8216;a&#8217;</p>
-<p>my_generator.next()</p>
-<p>&#8212;-&gt; 1 my_generator.next()</p>
-<p>AttributeError: &#8216;generator&#8217; object has no attribute &#8216;next&#8217;</p>
-<p>For-loop variables and the global namespace leak
-[back to top]</p>
-<p>Good news is: In Python 3.x for-loop variables don&#8217;t leak into the global namespace anymore!</p>
-<p>This goes back to a change that was made in Python 3.x and is described in What’s New In Python 3.0 as follows:</p>
-<p>&#8220;List comprehensions no longer support the syntactic form [... for var in item1, item2, ...]. Use [... for var in (item1, item2, ...)] instead. Also note that list comprehensions have different semantics: they are closer to syntactic sugar for a generator expression inside a list() constructor, and in particular the loop control variables are no longer leaked into the surrounding scope.&#8221;</p>
-<p>Python 2</p>
-<p>print &#8216;Python&#8217;, python_version()</p>
-<p>i = 1
-print &#8216;before: i =&#8217;, i</p>
-<p>print &#8216;comprehension: &#8216;, [i for i in range(5)]</p>
-<p>print &#8216;after: i =&#8217;, i</p>
-<p>Python 2.7.6
-before: i = 1
-comprehension:  [0, 1, 2, 3, 4]
-after: i = 4</p>
-<p>Python 3</p>
-<p>print(&#8216;Python&#8217;, python_version())</p>
-<p>i = 1
-print(&#8216;before: i =&#8217;, i)</p>
-<p>print(&#8216;comprehension:&#8217;, [i for i in range(5)])</p>
-<p>print(&#8216;after: i =&#8217;, i)</p>
-<p>Python 3.4.1
-before: i = 1
-comprehension: [0, 1, 2, 3, 4]
-after: i = 1</p>
-<p>Comparing unorderable types
-[back to top]</p>
-<p>Another nice change in Python 3 is that a TypeError is raised as warning if we try to compare unorderable types.</p>
-<p>Python 2</p>
-<p>print &#8216;Python&#8217;, python_version()
-print &#8220;[1, 2] &gt; &#8216;foo&#8217; = &#8221;, [1, 2] &gt; &#8216;foo&#8217;
-print &#8220;(1, 2) &gt; &#8216;foo&#8217; = &#8221;, (1, 2) &gt; &#8216;foo&#8217;
-print &#8220;[1, 2] &gt; (1, 2) = &#8221;, [1, 2] &gt; (1, 2)</p>
-<p>Python 2.7.6
-[1, 2] &gt; &#8216;foo&#8217; =  False
-(1, 2) &gt; &#8216;foo&#8217; =  True
-[1, 2] &gt; (1, 2) =  False</p>
-<p>Python 3</p>
-<p>print(&#8216;Python&#8217;, python_version())
-print(&#8220;[1, 2] &gt; &#8216;foo&#8217; = &#8221;, [1, 2] &gt; &#8216;foo&#8217;)
-print(&#8220;(1, 2) &gt; &#8216;foo&#8217; = &#8221;, (1, 2) &gt; &#8216;foo&#8217;)
-print(&#8220;[1, 2] &gt; (1, 2) = &#8221;, [1, 2] &gt; (1, 2))</p>
-<p>Python 3.4.1</p>
-<blockquote>
-<div>1 print(&#8216;Python&#8217;, python_version())</div></blockquote>
-<dl class="docutils">
-<dt>&#8212;-&gt; 2 print(&#8220;[1, 2] &gt; &#8216;foo&#8217; = &#8221;, [1, 2] &gt; &#8216;foo&#8217;)</dt>
-<dd>3 print(&#8220;(1, 2) &gt; &#8216;foo&#8217; = &#8221;, (1, 2) &gt; &#8216;foo&#8217;)
-4 print(&#8220;[1, 2] &gt; (1, 2) = &#8221;, [1, 2] &gt; (1, 2))</dd>
-</dl>
-<p>TypeError: unorderable types: list() &gt; str()</p>
-<p>Parsing user inputs via input()
-[back to top]</p>
-<p>Fortunately, the input() function was fixed in Python 3 so that it always stores the user inputs as str objects. In order to avoid the dangerous behavior in Python 2 to read in other types than strings, we have to use raw_input() instead.</p>
-<p>Python 2</p>
-<p>Python 2.7.6
-[GCC 4.0.1 (Apple Inc. build 5493)] on darwin
-Type &#8220;help&#8221;, &#8220;copyright&#8221;, &#8220;credits&#8221; or &#8220;license&#8221; for more information.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">my_input</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">&#39;enter a number: &#39;</span><span class="p">)</span>
+<p><strong>Python 2</strong></p>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="s">&#39;Python&#39;</span><span class="p">,</span> <span class="n">python_version</span><span class="p">()</span>
+<span class="go">Python 2.7.6</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="nb">type</span><span class="p">(</span><span class="nb">unicode</span><span class="p">(</span><span class="s">&#39;this is like a python3 str type&#39;</span><span class="p">))</span>
+<span class="go">&lt;type &#39;unicode&#39;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="nb">type</span><span class="p">(</span><span class="n">b</span><span class="s">&#39;byte type does not exist&#39;</span><span class="p">)</span>
+<span class="go">&lt;type &#39;str&#39;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="s">&#39;they are really&#39;</span> <span class="o">+</span> <span class="n">b</span><span class="s">&#39; the same&#39;</span>
+<span class="go">they are really the same</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="nb">type</span><span class="p">(</span><span class="nb">bytearray</span><span class="p">(</span><span class="n">b</span><span class="s">&#39;bytearray oddly does exist though&#39;</span><span class="p">))</span>
+<span class="go">&lt;type &#39;bytearray&#39;&gt;</span>
 </pre></div>
 </div>
-<p>enter a number: 123</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">my_input</span><span class="p">)</span>
-<span class="go">&lt;type &#39;int&#39;&gt;</span>
+<p><strong>Python 3</strong></p>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s">&#39;Python&#39;</span><span class="p">,</span> <span class="n">python_version</span><span class="p">())</span>
+<span class="go">Python 3.4.1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s">&#39;strings are now utf-8 </span><span class="se">\u03BC</span><span class="s">nico</span><span class="se">\u0394</span><span class="s">é!&#39;</span><span class="p">)</span>
+<span class="go">strings are now utf-8 μnicoΔé!</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s">&#39;Python3 has&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">b</span><span class="s">&#39; bytes for storing data&#39;</span><span class="p">))</span>
+<span class="go">Python 3 has &lt;class &#39;bytes&#39;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s">&#39;Python3 also has&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="nb">bytearray</span><span class="p">(</span><span class="n">b</span><span class="s">&#39;bytearrays&#39;</span><span class="p">)))</span>
+<span class="go">Python 3 also has &lt;class &#39;bytearray&#39;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="s">&#39;note that we cannot add a string&#39;</span> <span class="o">+</span> <span class="n">b</span><span class="s">&#39;bytes for data&#39;</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="c">...</span>
+<span class="gr">TypeError</span>: <span class="n">Can&#39;t convert &#39;bytes&#39; object to str implicitly</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">my_input</span> <span class="o">=</span> <span class="nb">raw_input</span><span class="p">(</span><span class="s">&#39;enter a number: &#39;</span><span class="p">)</span>
+</div>
+<div class="section" id="xrange">
+<h2><tt class="docutils literal"><span class="pre">xrange</span></tt><a class="headerlink" href="#xrange" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">timeit</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="k">def</span> <span class="nf">test_range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+<span class="k">def</span> <span class="nf">test_xrange</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">pass</span>
 </pre></div>
 </div>
-<p>enter a number: 123</p>
-<p>type(my_input)
-&lt;type &#8216;str&#8217;&gt;</p>
-<p>Python 3</p>
-<p>Python 3.4.1
-[GCC 4.2.1 (Apple Inc. build 5577)] on darwin
-Type &#8220;help&#8221;, &#8220;copyright&#8221;, &#8220;credits&#8221; or &#8220;license&#8221; for more information.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">my_input</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">&#39;enter a number: &#39;</span><span class="p">)</span>
+<p><strong>Python 2</strong></p>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="o">%</span><span class="n">timeit</span> <span class="n">test_range</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="go">1000 loops, best of 3: 433 µs per loop</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="o">%</span><span class="n">timeit</span> <span class="n">test_xrange</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="go">1000 loops, best of 3: 350 µs per loop</span>
 </pre></div>
 </div>
-<p>enter a number: 123</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">my_input</span><span class="p">)</span>
-<span class="go">&lt;class &#39;str&#39;&gt;</span>
+<p><strong>Python 3</strong></p>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="o">%</span><span class="n">timeit</span> <span class="n">test_range</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="go">1000 loops, best of 3: 520 µs per loop</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">xrange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">xrange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="c">...</span>
+<span class="gr">NameError</span>: <span class="n">name &#39;xrange&#39; is not defined</span>
 </pre></div>
 </div>
-<p>Returning iterable objects instead of lists
-[back to top]</p>
-<p>As we have already seen in the xrange section, some functions and methods return iterable objects in Python 3 now - instead of lists in Python 2.</p>
-<p>Since we usually iterate over those only once anyway, I think this change makes a lot of sense to save memory. However, it is also possible - in contrast to generators - to iterate over those multiple times if needed, it is aonly not so efficient.</p>
-<p>And for those cases where we really need the list-objects, we can simply convert the iterable object into a list via the list() function.</p>
-<p>Python 2</p>
-<p>print &#8216;Python&#8217;, python_version()</p>
-<p>print range(3)
-print type(range(3))</p>
-<p>Python 2.7.6
-[0, 1, 2]
-&lt;type &#8216;list&#8217;&gt;</p>
-<p>Python 3</p>
-<p>print(&#8216;Python&#8217;, python_version())</p>
-<p>print(range(3))
-print(type(range(3)))
-print(list(range(3)))</p>
-<p>Python 3.4.1
-range(0, 3)
-&lt;class &#8216;range&#8217;&gt;
-[0, 1, 2]</p>
-<p>Some more commonly used functions and methods that don&#8217;t return lists anymore in Python 3:</p>
-<blockquote>
-<div><p>zip()</p>
-<p>map()</p>
-<p>filter()</p>
-<p>dictionary&#8217;s .keys() method</p>
-<p>dictionary&#8217;s .values() method</p>
-<p>dictionary&#8217;s .items() method</p>
-</div></blockquote>
-<p>More articles about Python 2 and Python 3
-[back to top]</p>
-<p>Here is a list of some good articles concerning Python 2 and 3 that I would recommend as a follow-up.</p>
-<p>// Porting to Python 3</p>
-<blockquote>
-<div>Should I use Python 2 or Python 3 for my development activity?
-What’s New In Python 3.0
-Porting to Python 3
-Porting Python 2 Code to Python 3
-How keep Python 3 moving forward</div></blockquote>
-<p>// Pro and anti Python 3</p>
-<blockquote>
-<div>10 awesome features of Python that you can&#8217;t use because you refuse to upgrade to Python 3
-Everything you did not want to know about Unicode in Python 3
-Python 3 is killing Python
-Python 3 can revive Python
-Python 3 is fine</div></blockquote>
-<p>© 2013-present Sebastian Raschka <a href="#id2"><span class="problematic" id="id3">|</span></a>&#64;rasbt email rss</p>
+<p>Za to <tt class="docutils literal"><span class="pre">range</span></tt> w Pythonie 3 ma nową metodę <tt class="docutils literal"><span class="pre">__contains__</span></tt>.</p>
+</div>
+<div class="section" id="rozpakowywanie">
+<h2>Rozpakowywanie<a class="headerlink" href="#rozpakowywanie" title="Permalink to this headline">¶</a></h2>
+<p><strong>Python 2</strong></p>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+<p><strong>Python 3</strong></p>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="o">*</span><span class="n">rest</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rest</span>
+<span class="go">[2, 3, 4, 5, 6, 7, 8, 9]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="wyjatki">
+<h2>Wyjątki<a class="headerlink" href="#wyjatki" title="Permalink to this headline">¶</a></h2>
+<p><strong>Python 2</strong></p>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">raise</span> <span class="ne">IOError</span><span class="p">,</span> <span class="s">&quot;file error&quot;</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="c">...</span>
+<span class="gr">IOError</span>: <span class="n">file error</span>
+</pre></div>
+</div>
+<p><strong>Python 3</strong></p>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">raise</span> <span class="ne">IOError</span><span class="p">,</span> <span class="s">&quot;file error&quot;</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>
+    <span class="k">raise</span> <span class="ne">IOError</span><span class="p">,</span> <span class="s">&quot;file error&quot;</span>
+                 <span class="o">^</span>
+<span class="gr">SyntaxError</span>: <span class="n">invalid syntax</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="s">&quot;file error&quot;</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="c">...</span>
+<span class="gr">OSError</span>: <span class="n">file error</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+<p>W Pythonie 3 musimy używać as w sekcji except:</p>
+<p><strong>Python 2</strong></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">print</span> <span class="s">&#39;Python&#39;</span><span class="p">,</span> <span class="n">python_version</span><span class="p">()</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">let_us_cause_a_NameError</span>
+<span class="k">except</span> <span class="ne">NameError</span><span class="p">,</span> <span class="n">err</span><span class="p">:</span>
+    <span class="k">print</span> <span class="n">err</span><span class="p">,</span> <span class="s">&#39;--&gt; our error message&#39;</span>
+</pre></div>
+</div>
+<p><strong>Python 3</strong></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">print</span><span class="p">(</span><span class="s">&#39;Python&#39;</span><span class="p">,</span> <span class="n">python_version</span><span class="p">())</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">let_us_cause_a_NameError</span>
+<span class="k">except</span> <span class="ne">NameError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">err</span><span class="p">,</span> <span class="s">&#39;--&gt; our error message&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="funkcja-i-metdoda-next">
+<h2>Funkcja i metdoda <tt class="docutils literal"><span class="pre">next</span></tt><a class="headerlink" href="#funkcja-i-metdoda-next" title="Permalink to this headline">¶</a></h2>
+<p><strong>Python 2</strong></p>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">my_generator</span> <span class="o">=</span> <span class="p">(</span><span class="n">letter</span> <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="s">&#39;abcdefg&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">next</span><span class="p">(</span><span class="n">my_generator</span><span class="p">)</span>
+<span class="go">&#39;a&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">my_generator</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+<span class="go">&#39;b&#39;</span>
+</pre></div>
+</div>
+<p><strong>Python 3</strong></p>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">my_generator</span> <span class="o">=</span> <span class="p">(</span><span class="n">letter</span> <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="s">&#39;abcdefg&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">next</span><span class="p">(</span><span class="n">my_generator</span><span class="p">)</span>
+<span class="go">&#39;a&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">my_generator</span><span class="o">.</span><span class="n">__next__</span><span class="p">()</span>
+<span class="go">&#39;b&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="wyciekanie-zmiennych-z-petli-for">
+<h2>Wyciekanie zmiennych z pętli <tt class="docutils literal"><span class="pre">for</span></tt><a class="headerlink" href="#wyciekanie-zmiennych-z-petli-for" title="Permalink to this headline">¶</a></h2>
+<p><strong>Python 2</strong></p>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)]</span>
+<span class="go">[0, 1, 2, 3, 4]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">i</span>
+<span class="go">4</span>
+</pre></div>
+</div>
+<p><strong>Python 3</strong></p>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)]</span>
+<span class="go">[0, 1, 2, 3, 4]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">i</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="porownywanie-typow">
+<h2>Porównywanie typów<a class="headerlink" href="#porownywanie-typow" title="Permalink to this headline">¶</a></h2>
+<p><strong>Python 2</strong></p>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">&gt;</span> <span class="s">&#39;foo&#39;</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<p><strong>Python 3</strong></p>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">&gt;</span> <span class="s">&#39;foo&#39;</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="c">...</span>
+<span class="gr">TypeError</span>: <span class="n">unorderable types: list() &gt; str()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="zwracanie-obiektow-iterowalnych-zamiast-list">
+<h2>Zwracanie obiektów iterowalnych zamiast list<a class="headerlink" href="#zwracanie-obiektow-iterowalnych-zamiast-list" title="Permalink to this headline">¶</a></h2>
+<p><strong>Python 2</strong></p>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">[0, 1, 2]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="go">&lt;type &#39;list&#39;&gt;</span>
+</pre></div>
+</div>
+<p><strong>Python 3</strong></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">range(0, 3)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="go">&lt;class &#39;range&#39;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="go">[0, 1, 2]</span>
+</pre></div>
+</div>
+<p>Pozostałe funkcje które nie zwracają więcej list:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="nb">zip</span><span class="p">()</span>
+<span class="nb">map</span><span class="p">()</span>
+<span class="nb">filter</span><span class="p">()</span>
+<span class="nb">dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+<span class="nb">dict</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+<span class="nb">dict</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="yield-from">
+<h2><tt class="docutils literal"><span class="pre">yield</span> <span class="pre">from</span></tt><a class="headerlink" href="#yield-from" title="Permalink to this headline">¶</a></h2>
+<p><strong>Python 2</strong></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">gen</span><span class="p">():</span>
+    <span class="k">yield</span> <span class="n">i</span>
+</pre></div>
+</div>
+<p><strong>Python 3</strong></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">yield from</span> <span class="n">gen</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Generatory mogą zwracać wartość!</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">a</span><span class="p">():</span>
+    <span class="k">yield</span> <span class="mi">1</span>
+    <span class="k">yield</span> <span class="mi">2</span>
+    <span class="k">yield</span> <span class="mi">3</span>
+    <span class="k">return</span> <span class="mi">7</span>
+
+<span class="k">def</span> <span class="nf">b</span><span class="p">():</span>
+    <span class="nb">next</span> <span class="o">=</span> <span class="k">yield from</span> <span class="n">a</span><span class="p">()</span>
+    <span class="k">yield</span> <span class="nb">next</span>
+    <span class="k">yield</span> <span class="nb">next</span> <span class="o">+</span> <span class="mi">1</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">b</span><span class="p">()))</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
+</pre></div>
 </div>
 </div>
 </div>
@@ -589,6 +463,13 @@ Python 3 is fine</div></blockquote>
 
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="wzorce.html" class="btn btn-neutral" title="Wzorce projektowe"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>
