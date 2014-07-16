@@ -30,9 +30,28 @@ html_theme = 'default'
 #html_theme = "sphinx_rtd_theme"
 #html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 
-# html_theme_options = {
-# 	'collapsiblesidebar': True,
-# }
+import alabaster
+
+html_theme_path = [alabaster.get_path()]
+extensions = ['alabaster']
+html_theme = 'alabaster'
+html_sidebars = {
+   '**': [
+       'about.html', 'navigation.html', 'searchbox.html',
+   ]
+}
+
+html_static_path = ['_static']
+
+html_theme_options = {
+   'logo': 'logo_small.png',
+   'github_user': 'czterybity',
+   'github_repo': 'python_doc',
+}
+
+#html_theme_options = {
+#	'collapsiblesidebar': True,
+#}
 
 # html_theme_options = {
 #     'navbar_title': "Infotraining",

@@ -8,7 +8,7 @@
     
     <title>Wzorce projektowe &mdash; Zaawansowane programowanie w języku Python</title>
     
-    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -25,7 +25,11 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="Zaawansowane programowanie w języku Python" href="index.html" />
     <link rel="next" title="Porównanie Pythona 2 i 3" href="2vs3.html" />
-    <link rel="prev" title="Programowanie wielowątkowe" href="watki.html" /> 
+    <link rel="prev" title="Programowanie wielowątkowe" href="watki.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
   </head>
   <body>
     <div class="related">
@@ -603,43 +607,50 @@ aspektów struktury systemu</li>
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">Wzorce projektowe</a><ul>
-<li><a class="reference internal" href="#podstawy-oop-przypomnienie">Podstawy OOP - przypomnienie</a><ul>
-<li><a class="reference internal" href="#obiekt-interfejs-klasa">Obiekt / Interfejs / Klasa</a></li>
-<li><a class="reference internal" href="#podstawowe-techniki-oop">Podstawowe techniki OOP</a><ul>
-<li><a class="reference internal" href="#dziedziczenie">Dziedziczenie</a></li>
-<li><a class="reference internal" href="#skladanie-obiektow-kompozycja">Składanie obiektów (kompozycja)</a></li>
-<li><a class="reference internal" href="#delegowanie">Delegowanie</a></li>
+<p class="logo">
+  <a href="index.html">
+    <img class="logo" src="_static/logo_small.png" alt="Logo"/>
+    
+  </a>
+</p>
+
+
+
+
+
+<p>
+<iframe src="http://ghbtns.com/github-btn.html?user=czterybity&repo=python_doc&type=watch&count=true&size=large"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="funkcje.html">Funkcje w języku Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="klasy.html">Klasy i obiekty</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dekoratory.html">Dekoratory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metaklasy.html">Metaklasy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TDD.html">Testowanie kodu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="watki.html">Programowanie wielowątkowe</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Wzorce projektowe</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#podstawy-oop-przypomnienie">Podstawy OOP - przypomnienie</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#obiekt-interfejs-klasa">Obiekt / Interfejs / Klasa</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#podstawowe-techniki-oop">Podstawowe techniki OOP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#relacje-miedzy-klasami">Relacje między klasami</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#zasady-oop">Zasady OOP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#s-o-l-i-d-oop">S.O.L.I.D. OOP</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#relacje-miedzy-klasami">Relacje między klasami</a></li>
-<li><a class="reference internal" href="#zasady-oop">Zasady OOP</a><ul>
-<li><a class="reference internal" href="#wytyczne-dobrego-ood-oop">Wytyczne dobrego OOD/OOP</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#s-o-l-i-d-oop">S.O.L.I.D. OOP</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#id1">Wzorce projektowe</a><ul>
-<li><a class="reference internal" href="#atrybuty-wzorca">Atrybuty wzorca</a><ul>
-<li><a class="reference internal" href="#klasyfikacja-wzorcow-wg-gof">Klasyfikacja wzorców wg GOF</a></li>
-<li><a class="reference internal" href="#katalog-wzorcow-projektowych">Katalog wzorców projektowych</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id1">Wzorce projektowe</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#atrybuty-wzorca">Atrybuty wzorca</a></li>
 </ul>
 </li>
 </ul>
 </li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="2vs3.html">Porównanie Pythona 2 i 3</a></li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="watki.html"
-                        title="previous chapter">Programowanie wielowątkowe</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="2vs3.html"
-                        title="next chapter">Porównanie Pythona 2 i 3</a></p>
+
 <div id="searchbox" style="display: none">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
@@ -657,24 +668,17 @@ aspektów struktury systemu</li>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="2vs3.html" title="Porównanie Pythona 2 i 3"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="watki.html" title="Programowanie wielowątkowe"
-             >previous</a> |</li>
-        <li><a href="index.html">Zaawansowany Python</a> &raquo;</li> 
-      </ul>
-    </div>
     <div class="footer">
-        &copy; Copyright 2014, Leszek Tarkowski.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+      &copy;2014, Leszek Tarkowski.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.0</a>
+      
     </div>
+
+    
+
+    
   </body>
 </html>

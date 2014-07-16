@@ -8,7 +8,7 @@
     
     <title>Metaklasy &mdash; Zaawansowane programowanie w języku Python</title>
     
-    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -25,7 +25,11 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="Zaawansowane programowanie w języku Python" href="index.html" />
     <link rel="next" title="Testowanie kodu" href="TDD.html" />
-    <link rel="prev" title="Dekoratory" href="dekoratory.html" /> 
+    <link rel="prev" title="Dekoratory" href="dekoratory.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
   </head>
   <body>
     <div class="related">
@@ -270,37 +274,56 @@ Jest ona wywoływana dla gotowego obiektu klasy, wtedy gdy używamy &#8220;wywo�
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">Metaklasy</a><ul>
-<li><a class="reference internal" href="#wprowadzenie">Wprowadzenie</a></li>
-<li><a class="reference internal" href="#klasy-jako-obiekty">Klasy jako obiekty</a></li>
-<li><a class="reference internal" href="#dynamiczne-tworzenie-klas">Dynamiczne tworzenie klas</a><ul>
-<li><a class="reference internal" href="#dziedziczenie-z-uzyciem-type">Dziedziczenie z użyciem <tt class="docutils literal"><span class="pre">type</span></tt></a></li>
-<li><a class="reference internal" href="#metody-klasy">Metody klasy</a></li>
+<p class="logo">
+  <a href="index.html">
+    <img class="logo" src="_static/logo_small.png" alt="Logo"/>
+    
+  </a>
+</p>
+
+
+
+
+
+<p>
+<iframe src="http://ghbtns.com/github-btn.html?user=czterybity&repo=python_doc&type=watch&count=true&size=large"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="funkcje.html">Funkcje w języku Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="klasy.html">Klasy i obiekty</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dekoratory.html">Dekoratory</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Metaklasy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#wprowadzenie">Wprowadzenie</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#klasy-jako-obiekty">Klasy jako obiekty</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dynamiczne-tworzenie-klas">Dynamiczne tworzenie klas</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dziedziczenie-z-uzyciem-type">Dziedziczenie z użyciem <tt class="docutils literal"><span class="pre">type</span></tt></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#metody-klasy">Metody klasy</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id1">Metaklasy</a><ul>
-<li><a class="reference internal" href="#przyklad-metaklasy-metafunkcji">Przykład metaklasy (metafunkcji)</a></li>
-<li><a class="reference internal" href="#przyklad-metaklasy-klasa">Przykład metaklasy (klasa)</a></li>
-<li><a class="reference internal" href="#metoda-specjalna-new">Metoda specjalna <tt class="docutils literal"><span class="pre">__new__</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id1">Metaklasy</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#przyklad-metaklasy-metafunkcji">Przykład metaklasy (metafunkcji)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#przyklad-metaklasy-klasa">Przykład metaklasy (klasa)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#metoda-specjalna-new">Metoda specjalna <tt class="docutils literal"><span class="pre">__new__</span></tt></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#szablon-metaklasy">Szablon metaklasy</a><ul>
-<li><a class="reference internal" href="#call-metaklasy"><tt class="docutils literal"><span class="pre">__call__</span></tt> metaklasy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#szablon-metaklasy">Szablon metaklasy</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#call-metaklasy"><tt class="docutils literal"><span class="pre">__call__</span></tt> metaklasy</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#zastosowanie-metaklas">Zastosowanie metaklas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#zastosowanie-metaklas">Zastosowanie metaklas</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="TDD.html">Testowanie kodu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="watki.html">Programowanie wielowątkowe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wzorce.html">Wzorce projektowe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2vs3.html">Porównanie Pythona 2 i 3</a></li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="dekoratory.html"
-                        title="previous chapter">Dekoratory</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="TDD.html"
-                        title="next chapter">Testowanie kodu</a></p>
+
 <div id="searchbox" style="display: none">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
@@ -318,24 +341,17 @@ Jest ona wywoływana dla gotowego obiektu klasy, wtedy gdy używamy &#8220;wywo�
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="TDD.html" title="Testowanie kodu"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="dekoratory.html" title="Dekoratory"
-             >previous</a> |</li>
-        <li><a href="index.html">Zaawansowany Python</a> &raquo;</li> 
-      </ul>
-    </div>
     <div class="footer">
-        &copy; Copyright 2014, Leszek Tarkowski.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+      &copy;2014, Leszek Tarkowski.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.0</a>
+      
     </div>
+
+    
+
+    
   </body>
 </html>
