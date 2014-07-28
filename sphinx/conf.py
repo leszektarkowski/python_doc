@@ -7,7 +7,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Zaawansowane programowanie w języku Python'
+project = u'Programowanie w języku Python'
 copyright = u'2014, Leszek Tarkowski'
 
 # The short X.Y version.
@@ -76,8 +76,8 @@ html_theme_options = {
 # }
 # html_theme_path = ["./theme"]
 
-html_title = u'Zaawansowane programowanie w języku Python'
-html_short_title = u'Zaawansowany Python'
+html_title = u'Programowanie w języku Python'
+html_short_title = u'Python'
 #html_logo = None
 #html_favicon = None
 # html_static_path = ['_static']
@@ -88,7 +88,7 @@ html_show_sourcelink = False
 #html_show_sphinx = True
 #html_show_copyright = True
 #html_use_opensearch = ''
-htmlhelp_basename = 'python_TDD'
+htmlhelp_basename = 'python'
 
 # -- Options for LaTeX output --------------------------------------------------
 latex_elements = {
@@ -133,8 +133,8 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-    ('index', 'adv_python_2014.tex',
-     u'Zaawansowane programowanie w języku Python'
+    ('index', 'python_2014.tex',
+     u'Programowanie w języku Python'
      u'Leszek Tarkowski', 'manual', True),
 ]
 
