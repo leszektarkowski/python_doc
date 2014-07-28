@@ -1,0 +1,435 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Testowanie kodu &mdash; Zaawansowane programowanie w języku Python</title>
+    
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Zaawansowane programowanie w języku Python" href="../index.html" />
+    <link rel="up" title="&lt;no title&gt;" href="adv.html" />
+    <link rel="next" title="Programowanie wielowątkowe" href="watki.html" />
+    <link rel="prev" title="Metaklasy" href="metaklasy.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="watki.html" title="Programowanie wielowątkowe"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="metaklasy.html" title="Metaklasy"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Zaawansowany Python</a> &raquo;</li>
+          <li><a href="adv.html" accesskey="U">&lt;no title&gt;</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="testowanie-kodu">
+<h1>Testowanie kodu<a class="headerlink" href="#testowanie-kodu" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="testy-jednostkowe">
+<h2>Testy jednostkowe<a class="headerlink" href="#testy-jednostkowe" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>Testy jednostkowe</dt>
+<dd>Służą do sprawdzania zachowania się fragmentu kodu (klasy bądź funkcji).</dd>
+<dt>Testy automatyczne</dt>
+<dd>Napisane przez programistę, uruchamiane są automatycznie.
+Raportują o statusie wykonania.</dd>
+</dl>
+<p>Test zwykle składa się z czterech części:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Arrange: Set up the object to be tested &amp; collaborators.</li>
+<li>Act: Exercise functionality on the object.</li>
+<li>Assert: Make claims about the object &amp; its collaborators</li>
+<li>Cleanup: Release resources, restore to original state</li>
+</ul>
+</div></blockquote>
+<p>Istnieje kilka stylów pracy z wykorzystaniem testów jednostkowych:</p>
+<ul class="simple">
+<li>Test First</li>
+<li>Test Last</li>
+<li>Test Driven</li>
+</ul>
+<div class="section" id="doctest">
+<h3><tt class="docutils literal"><span class="pre">doctest</span></tt><a class="headerlink" href="#doctest" title="Permalink to this headline">¶</a></h3>
+<p>Jest to najprostsze rozwiązanie, moduł znajduje się w bibliotece standardowej.
+Wystarczy zamieścić w <em>docstring</em> fragmenty z sesji interaktywnej</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">tested_fun</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;creates n x n semi-matrix</span>
+
+<span class="sd">    &gt;&gt;&gt; tested_fun(3)</span>
+<span class="sd">    [[], [1], [1, 1]]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">a</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">a</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">a</span>
+</pre></div>
+</div>
+<p>Wystarczy teraz wywołać:</p>
+<div class="highlight-bash"><div class="highlight"><pre>python3 -m doctest test1.py
+</pre></div>
+</div>
+<p>Ewentualnie można wywołać test z poziomu modułu:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">doctest</span>
+    <span class="n">doctest</span><span class="o">.</span><span class="n">testmod</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Zalety:</p>
+<blockquote>
+<div><ul class="simple">
+<li>bardzo proste tworzenie testów</li>
+<li>łatwe wyłapywanie &#8220;regresji&#8221; w kodzie</li>
+</ul>
+</div></blockquote>
+<p>Wady:</p>
+<blockquote>
+<div><ul class="simple">
+<li>problematyczna obsługa typów innych niż stałe ciągi znaków</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="unittest">
+<h3><tt class="docutils literal"><span class="pre">unittest</span></tt><a class="headerlink" href="#unittest" title="Permalink to this headline">¶</a></h3>
+<p>Biblioteka bazująca na JUnit/xUnit. Standard - nie tylko w języku Python.</p>
+<p>Biblioteka <tt class="xref py py-mod docutils literal"><span class="pre">unittest</span></tt> została zainspirowana przez JUnit, dzięki czemu ma podobne zachowanie do bibliotek używanych przez inne języki prgramowania.
+Wspiera automatyzację testów, tworzenie kodu wspólnego dla testów i grupowanie testów w kolekcjach.</p>
+<p><tt class="xref py py-mod docutils literal"><span class="pre">unittest</span></tt> wspiera najważniejsze koncepcje tworzenia testów:</p>
+<dl class="docutils">
+<dt>test fixture</dt>
+<dd>reprezentuje część kodu odpowiedzialną za przygotowanie jednego lub większej liczby testów.
+Umożliwia też definiowanie akcji odpowiedzialnej za &#8220;sprzątanie&#8221;.</dd>
+<dt>test case</dt>
+<dd>Pojedyncza jednostka testu. Sprawdza odpowiedź na zadane parametry.
+<tt class="xref py py-mod docutils literal"><span class="pre">unittest</span></tt> dostarcza klasy bazowej - <tt class="xref py py-class docutils literal"><span class="pre">TestCase</span></tt>, której można użyć do tworzenia zestawu testów (<em>test suite</em>).</dd>
+<dt>test suite</dt>
+<dd>Jest zbiorem testów, służy do zebrania razem powiązanych ze sobą testów.</dd>
+<dt>test runner</dt>
+<dd>Element systemu odpowiedzialny za wykonywanie testów i zwracanie wyników użytkownikowi.</dd>
+</dl>
+<ul class="simple">
+<li>Tworzymy klasę testującą:</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">unittest</span>
+
+<span class="k">def</span> <span class="nf">euler</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+                 <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">5</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">MatrixCase</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">factor</span> <span class="o">=</span> <span class="mi">2</span>
+
+    <span class="k">def</span> <span class="nf">testNumber</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">euler</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="o">==</span> <span class="mi">23</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">unittest</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Możemy testować wyjątki</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">unittest</span>
+
+<span class="k">def</span> <span class="nf">euler</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+                 <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">5</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">MatrixCase</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">factor</span> <span class="o">=</span> <span class="mi">2</span>
+
+    <span class="k">def</span> <span class="nf">testInvalidType</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="n">euler</span><span class="p">,</span> <span class="s">&#39;ala&#39;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">unittest</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Klasa <tt class="docutils literal"><span class="pre">TestCase</span></tt> wspiera szereg metod służących do testowania, takich jak:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="48%" />
+<col width="34%" />
+<col width="18%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Method</th>
+<th class="head">Checks that</th>
+<th class="head">New in</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><tt class="xref py py-meth docutils literal"><span class="pre">assertEqual(a,</span> <span class="pre">b)</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">a</span> <span class="pre">==</span> <span class="pre">b</span></tt></td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-meth docutils literal"><span class="pre">assertNotEqual(a,</span> <span class="pre">b)</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">a</span> <span class="pre">!=</span> <span class="pre">b</span></tt></td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-meth docutils literal"><span class="pre">assertTrue(x)</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">bool(x)</span> <span class="pre">is</span> <span class="pre">True</span></tt></td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-meth docutils literal"><span class="pre">assertFalse(x)</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">bool(x)</span> <span class="pre">is</span> <span class="pre">False</span></tt></td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-meth docutils literal"><span class="pre">assertIs(a,</span> <span class="pre">b)</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">a</span> <span class="pre">is</span> <span class="pre">b</span></tt></td>
+<td>3.1</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-meth docutils literal"><span class="pre">assertIsNot(a,</span> <span class="pre">b)</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">a</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">b</span></tt></td>
+<td>3.1</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-meth docutils literal"><span class="pre">assertIsNone(x)</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">x</span> <span class="pre">is</span> <span class="pre">None</span></tt></td>
+<td>3.1</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-meth docutils literal"><span class="pre">assertIsNotNone(x)</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">x</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">None</span></tt></td>
+<td>3.1</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-meth docutils literal"><span class="pre">assertIn(a,</span> <span class="pre">b)</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">a</span> <span class="pre">in</span> <span class="pre">b</span></tt></td>
+<td>3.1</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-meth docutils literal"><span class="pre">assertNotIn(a,</span> <span class="pre">b)</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">a</span> <span class="pre">not</span> <span class="pre">in</span> <span class="pre">b</span></tt></td>
+<td>3.1</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-meth docutils literal"><span class="pre">assertIsInstance(a,</span> <span class="pre">b)</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">isinstance(a,</span> <span class="pre">b)</span></tt></td>
+<td>3.2</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-meth docutils literal"><span class="pre">assertNotIsInstance(a,</span> <span class="pre">b)</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">not</span> <span class="pre">isinstance(a,</span> <span class="pre">b)</span></tt></td>
+<td>3.2</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pytest">
+<h3><tt class="docutils literal"><span class="pre">pytest</span></tt><a class="headerlink" href="#pytest" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>Pytest</dt>
+<dd>biblioteka używana przez np. PyPy. Umożliwia przeprowadzenie</dd>
+</dl>
+<ul class="simple">
+<li>testów jednostkowych</li>
+<li>testów funkcjonalnych</li>
+<li>testów integracyjnych</li>
+</ul>
+<p>Najpierw instalacja:</p>
+<div class="highlight-bash"><div class="highlight"><pre>pip install -U pytest
+</pre></div>
+</div>
+<div class="section" id="przyklad-pytest">
+<h4>Przykład <tt class="docutils literal"><span class="pre">pytest</span></tt><a class="headerlink" href="#przyklad-pytest" title="Permalink to this headline">¶</a></h4>
+<p>Plik <tt class="docutils literal"><span class="pre">test.py</span></tt></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span>
+
+<span class="k">def</span> <span class="nf">test_answer</span><span class="p">():</span>
+    <span class="k">assert</span> <span class="n">func</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">==</span> <span class="mi">5</span>
+</pre></div>
+</div>
+<p>Uruchommy testy:</p>
+<div class="highlight-bash"><div class="highlight"><pre>py.test test.py
+</pre></div>
+</div>
+<div class="highlight-c"><div class="highlight"><pre><span class="o">=====================================</span>
+<span class="n">_____________________________________</span>
+
+    <span class="n">def</span> <span class="n">test_answer</span><span class="p">()</span><span class="o">:</span>
+<span class="o">&gt;</span>       <span class="n">assert</span> <span class="n">func</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">==</span> <span class="mi">5</span>
+<span class="n">E</span>       <span class="n">assert</span> <span class="mi">4</span> <span class="o">==</span> <span class="mi">5</span>
+<span class="n">E</span>        <span class="o">+</span>  <span class="n">where</span> <span class="mi">4</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="n">test</span><span class="p">.</span><span class="n">py</span><span class="o">:</span><span class="mi">5</span><span class="o">:</span> <span class="n">AssertionError</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id1">
+<h4>Przykład <tt class="docutils literal"><span class="pre">pytest</span></tt><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">test_listcmp</span><span class="p">():</span>
+    <span class="n">l1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">]</span>
+    <span class="n">l2</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">l1</span> <span class="o">==</span> <span class="n">l2</span>
+</pre></div>
+</div>
+<p>Rezultat:</p>
+<div class="highlight-C"><div class="highlight"><pre>_________________________________________________
+
+    def test_listcmp():
+        l1 = [0,1,2,3,4,5,6,8,9,10]
+        l2 = range(10)
+&gt;       assert l1 == l2
+E       assert [0, 1, 2, 3, 4, 5, ...] == [0, 1,
+E         At index 7 diff: 8 != 7
+
+test.py:10: AssertionError
+=================================================
+</pre></div>
+</div>
+</div>
+<div class="section" id="parametryzacja-testu">
+<h4>Parametryzacja testu<a class="headerlink" href="#parametryzacja-testu" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">pytest</span>
+
+<span class="nd">@pytest.mark.parametrize</span><span class="p">(</span><span class="s">&quot;num&quot;</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+<span class="k">def</span> <span class="nf">test_func</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">num</span> <span class="o">&lt;</span> <span class="mi">9</span>
+</pre></div>
+</div>
+<div class="highlight-C"><div class="highlight"><pre>_________________________________________________
+
+num = 9
+
+    @pytest.mark.parametrize(&quot;num&quot;, range(10))
+    def test_func(num):
+&gt;       assert num &lt; 9
+E       assert 9 &lt; 9
+
+test.py:21: AssertionError
+=================================================
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="test-double">
+<h2>Test double<a class="headerlink" href="#test-double" title="Permalink to this headline">¶</a></h2>
+<p>Podobnie jak kaskader (<em>stunt double</em>) podstawiana jest zamiast istniejących klas</p>
+<p>klasa używająca <em>test double</em> nie wie że nie używa prawdziwej klasy.</p>
+<p>Pozwala śledzić zachowanie klasy niezależnie od środowiska.</p>
+<p>Można dokonać podziału typowych klas <em>test double</em>:</p>
+<ul class="simple">
+<li>dummy object - to obiekt używany gdy interfejs wymaga argumentu.</li>
+<li>test stub - zwraca z góry określoną odpowiedź na zapytanie. Nie zawiera żadnej logiki.</li>
+<li>test spy - pozwala na późniejsze zapytania odnośnie tego co się działo.</li>
+<li>mock object - podobny do Stub, ale dodatkowo zawiera pewne weryfikacje.</li>
+<li>fake object - rzeczywista implementacja, ale prostsza od obiektu który podstawia.</li>
+</ul>
+<p><a class="reference external" href="http://xunitpatterns.com">http://xunitpatterns.com</a>
+<a class="reference external" href="https://en.wikipedia.org/wiki/Test_Double">https://en.wikipedia.org/wiki/Test_Double</a></p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../index.html">
+    <img class="logo" src="../_static/logo_small.png" alt="Logo"/>
+    
+  </a>
+</p>
+
+
+
+
+
+<p>
+<iframe src="http://ghbtns.com/github-btn.html?user=czterybity&repo=python_doc&type=watch&count=true&size=large"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../basic/wprowadzenie.html">Wprowadzenie do programowania w języku Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basic/programowanie_funkcyjne.html">Elementy programowania funkcyjnego</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basic/programowanie_obiektowe.html">Funkcje, klasy, obiekty i moduły</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basic/biblioteka_standardowa.html">Biblioteka standardowa</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basic/lxml.html">Biblioteka lxml</a></li>
+<li class="toctree-l1"><a class="reference internal" href="funkcje.html">Funkcje w języku Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="klasy.html">Klasy i obiekty</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dekoratory.html">Dekoratory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metaklasy.html">Metaklasy</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Testowanie kodu</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#testy-jednostkowe">Testy jednostkowe</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#doctest"><tt class="docutils literal"><span class="pre">doctest</span></tt></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#unittest"><tt class="docutils literal"><span class="pre">unittest</span></tt></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pytest"><tt class="docutils literal"><span class="pre">pytest</span></tt></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#test-double">Test double</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="watki.html">Programowanie wielowątkowe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wzorce.html">Wzorce projektowe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2vs3.html">Porównanie Pythona 2 i 3</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, Leszek Tarkowski.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.0</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

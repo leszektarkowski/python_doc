@@ -1,0 +1,1153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Biblioteka standardowa &mdash; Zaawansowane programowanie w języku Python</title>
+    
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Zaawansowane programowanie w języku Python" href="../index.html" />
+    <link rel="up" title="&lt;no title&gt;" href="basic.html" />
+    <link rel="next" title="Biblioteka lxml" href="lxml.html" />
+    <link rel="prev" title="Funkcje, klasy, obiekty i moduły" href="programowanie_obiektowe.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="lxml.html" title="Biblioteka lxml"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="programowanie_obiektowe.html" title="Funkcje, klasy, obiekty i moduły"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Zaawansowany Python</a> &raquo;</li>
+          <li><a href="basic.html" accesskey="U">&lt;no title&gt;</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="biblioteka-standardowa">
+<h1>Biblioteka standardowa<a class="headerlink" href="#biblioteka-standardowa" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="operacje-plikowe">
+<h2>Operacje plikowe<a class="headerlink" href="#operacje-plikowe" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="otwieranie-plikow">
+<span id="index-0"></span><h3>Otwieranie plików<a class="headerlink" href="#otwieranie-plikow" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="open">
+<tt class="descname">open</tt><big>(</big><em>path</em><span class="optional">[</span>, <em>mode</em><span class="optional">[</span>, <em>buffersize</em><span class="optional">]</span><span class="optional">]</span><big>)</big><a class="headerlink" href="#open" title="Permalink to this definition">¶</a></dt>
+<dd><p>otwieranie pliku zarówno do odczytu, jak i zapisywania</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">path</span></tt> – łańcuch znaków określający ścieżkę, wskazujący na dany plik</li>
+<li><tt class="docutils literal"><span class="pre">mode</span></tt> – tryb otwarcia pliku</li>
+<li><tt class="docutils literal"><span class="pre">buffersize</span></tt> – argument opcjonalny, określa, jaki tryb buforowania powinien być stosowany, kiedy uzyskuje się dostęp do pliku</li>
+</ul>
+</dd></dl>
+
+<div class="highlight-python"><div class="highlight"><pre><span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">inPath</span><span class="p">,</span> <span class="s">&#39;rU&#39;</span><span class="p">)</span>
+<span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">outPath</span><span class="p">,</span> <span class="s">&#39;wb&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="tryby-plikow">
+<h4>Tryby plików<a class="headerlink" href="#tryby-plikow" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">r</span></tt></dt>
+<dd>Otwiera istniejący plik do odczytu</dd>
+<dt><tt class="docutils literal"><span class="pre">w</span></tt></dt>
+<dd>Otwiera plik do zapisu. Jeśli plik już istnieje, jego zawartość jest kasowana. Jeśli plik jeszcze nie istnieje, tworzony jest nowy.</dd>
+<dt><tt class="docutils literal"><span class="pre">a</span></tt></dt>
+<dd>Otwiera istniejący plik do uaktualnienia, zachowując istniejącą część bez zmian i dodając do niej nową treść.</dd>
+<dt><tt class="docutils literal"><span class="pre">r+</span></tt></dt>
+<dd>Otwiera plik zarówno do odczytu, jak i zapisu. Istniejąca treść pozostaje bez zmian.</dd>
+<dt><tt class="docutils literal"><span class="pre">w+</span></tt></dt>
+<dd>Otwiera plik zarówno do zapisu, jak i odczytu. Istniejąca treść jest kasowana.</dd>
+<dt><tt class="docutils literal"><span class="pre">a+</span></tt></dt>
+<dd>Otwiera plik zarówno do odczytu, jak i zapisu. Istniejąca treść pozostaje bez zmian, a nowa treść jest dodawana do istniejącej.</dd>
+<dt><tt class="docutils literal"><span class="pre">b</span></tt></dt>
+<dd>Stosowany w dodatku do jednego z ww. trybów odczytu, zapisu lub dodawania. Otwiera plik w trybie binarnym.</dd>
+<dt><tt class="docutils literal"><span class="pre">U</span></tt></dt>
+<dd>Stosowany w dodatku do jednego z ww. trybów odczytu, zapisu lub dodawania. Stosuje uniwersalny translator nowych wierszy do otwieranego pliku.</dd>
+</dl>
+</div>
+<div class="section" id="tryb-buforowania">
+<h4>Tryb buforowania<a class="headerlink" href="#tryb-buforowania" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">0</span></tt></dt>
+<dd>Plik nie powinien być buforowany</dd>
+<dt><tt class="docutils literal"><span class="pre">1</span></tt></dt>
+<dd>Buforowanie wierszy (line-buffering)</dd>
+<dt>inna liczba dodatnia</dt>
+<dd>Wskazuje konkretny rozmiar bufora, który ma być wykorzystywany w dostępie</dd>
+<dt>brak argumentu lub liczba ujemna</dt>
+<dd>Wykorzystywany jest domyślny rozmiar bufora systemu</dd>
+</dl>
+</div>
+<div class="section" id="otwieranie-i-zamykanie-plikow">
+<h4>Otwieranie i zamykanie plików<a class="headerlink" href="#otwieranie-i-zamykanie-plikow" title="Permalink to this headline">¶</a></h4>
+<dl class="function">
+<dt id="close">
+<tt class="descname">close</tt><big>(</big><big>)</big><a class="headerlink" href="#close" title="Permalink to this definition">¶</a></dt>
+<dd><p>metoda zamykająca plik</p>
+</dd></dl>
+
+<p>Przykład:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">inPath</span> <span class="o">=</span> <span class="s">&quot;input.txt&quot;</span>
+<span class="n">outPath</span> <span class="o">=</span> <span class="s">&quot;output.txt&quot;</span>
+
+<span class="c">#  Otwarcie pliku do odczytu</span>
+<span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">inPath</span><span class="p">,</span> <span class="s">&#39;rU&#39;</span><span class="p">)</span>
+<span class="k">if</span> <span class="nb">file</span><span class="p">:</span>
+    <span class="c">#  Tutaj następuje odczytywanie zawartości pliku</span>
+    <span class="nb">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span> <span class="s">&quot;Przy otwieraniu pliku nastąpił błąd.&quot;</span> <span class="p">)</span>
+
+<span class="c"># Otwarcie pliku do zapisu</span>
+<span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">outPath</span><span class="p">,</span> <span class="s">&#39;wb&#39;</span><span class="p">)</span>
+<span class="k">if</span> <span class="nb">file</span><span class="p">:</span>
+    <span class="c"># Tutaj następuje zapisywanie czegoś do pliku</span>
+    <span class="nb">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span> <span class="s">&quot;Przy otwieraniu pliku nastąpił błąd.&quot;</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>Od Pythona w wersji 2.5 można używać wyrażenia <tt class="docutils literal"><span class="pre">with</span></tt>, tzw. menedżera kontekstu.
+Gwarantuje on poprawne zamknięcie pliku nawet w sytuacji wystąpienia wyjątku.</p>
+<p>Przykład:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;input.txt&quot;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="c"># Operacje na obiekcie pliku</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+<span class="c"># zamknięcie pliku</span>
+</pre></div>
+</div>
+<p>Menedżer kontekstu odpowiada następującej obsłudze wyjątków:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">try</span><span class="p">:</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;input.txt&quot;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="k">finally</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Wyrażenie <tt class="docutils literal"><span class="pre">with</span></tt> upraszcza pisanie kodu odpornego na wyjątki.</p>
+</div>
+</div>
+<div class="section" id="odczyt">
+<h3>Odczyt<a class="headerlink" href="#odczyt" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="odczytywanie-calej-zawartosci-pliku">
+<span id="index-1"></span><h4>Odczytywanie całej zawartości pliku<a class="headerlink" href="#odczytywanie-calej-zawartosci-pliku" title="Permalink to this headline">¶</a></h4>
+<dl class="function">
+<dt id="read">
+<tt class="descname">read</tt><big>(</big><big>)</big><a class="headerlink" href="#read" title="Permalink to this definition">¶</a></dt>
+<dd><p>wczytuje pełną zawartość pliku aż do napotkania znacznika EOF, a następnie zwraca zawartość pliku w formie łańcucha znaków.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="readlines">
+<tt class="descname">readlines</tt><big>(</big><big>)</big><a class="headerlink" href="#readlines" title="Permalink to this definition">¶</a></dt>
+<dd><p>wczytuje całą zawartość pliku, oddzielając każdy wiersz jako osobny łańcuch znaków, aż do napotkania znacznika EOF i zwraca listę łańcuchów znaków reprezentujących pojedyncze wiersze.</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<tt class="descname">read</tt><big>(</big><em>bytes</em><big>)</big></dt>
+<dd><p>wczytuje określoną liczbę bajtów z pliku i zwraca je w postaci łańcucha znaków. Jeśli pierwszy odczytany znak jest znacznikiem EOF, zwracany jest null.</p>
+</dd></dl>
+
+<p>Przykład:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">filePath</span> <span class="o">=</span> <span class="s">&quot;input.txt&quot;</span>
+
+<span class="c"># Wczytanie całego pliku do bufora</span>
+<span class="nb">buffer</span> <span class="o">=</span> <span class="s">&quot;Bufor całego pliku:</span><span class="se">\n</span><span class="s">&quot;</span>
+<span class="nb">buffer</span> <span class="o">+=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filePath</span><span class="p">,</span> <span class="s">&#39;rU&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span> <span class="nb">buffer</span> <span class="p">)</span>
+
+<span class="c"># Wczytanie wierszy do bufora</span>
+<span class="nb">buffer</span> <span class="o">=</span> <span class="s">&quot;Bufor wszystkich wierszy z pliku:</span><span class="se">\n</span><span class="s">&quot;</span>
+<span class="n">inList</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filePath</span><span class="p">,</span> <span class="s">&#39;rU&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span> <span class="n">inList</span> <span class="p">)</span>
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">inList</span><span class="p">:</span>
+    <span class="nb">buffer</span> <span class="o">+=</span> <span class="n">line</span>
+<span class="k">print</span><span class="p">(</span> <span class="nb">buffer</span> <span class="p">)</span>
+
+<span class="c"># Wczytanie bajtów do bufora</span>
+<span class="nb">buffer</span> <span class="o">=</span> <span class="s">&quot;Bufor odczytu:</span><span class="se">\n</span><span class="s">&quot;</span>
+<span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filePath</span><span class="p">,</span> <span class="s">&#39;rU&#39;</span><span class="p">)</span>
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="nb">bytes</span> <span class="o">=</span> <span class="nb">file</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">bytes</span><span class="p">:</span>
+        <span class="nb">buffer</span> <span class="o">+=</span> <span class="nb">bytes</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">break</span>
+<span class="k">print</span><span class="p">(</span> <span class="nb">buffer</span> <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>Bufor całego pliku:
+Wiersz 1
+Wiersz 2
+Wiersz 3
+Wiersz 4
+[&#39;Wiersz 1\n&#39;, &#39;Wiersz 2\n&#39;, &#39;Wiersz 3\n&#39;, &#39;Wiersz 4\n&#39;]
+Bufor wszystkich wierszy z pliku:
+Wiersz 1
+Wiersz 2
+Wiersz 3
+Wiersz 4
+Bufor odczytu:
+Wiersz 1
+Wiersz 2
+Wiersz 3
+Wiersz 4
+</pre></div>
+</div>
+</div>
+<div class="section" id="dostep-do-kazdego-slowa-w-pliku">
+<h4>Dostęp do każdego słowa w pliku<a class="headerlink" href="#dostep-do-kazdego-slowa-w-pliku" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt>Słowa mogą być przetwarzane pojedynczo poprzez:</dt>
+<dd><ul class="first last simple">
+<li>otwarcie pliku</li>
+<li>wczytanie każdego wiersza do łańcucha znaków</li>
+<li>podzielenie łańcuchów na znaki za pomocą funkcji <tt class="docutils literal"><span class="pre">split()</span></tt></li>
+</ul>
+</dd>
+</dl>
+<p>Przykład:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">filePath</span> <span class="o">=</span> <span class="s">&quot;input.txt&quot;</span>
+<span class="n">wordList</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">wordCount</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="c"># Wczytanie wierszy do pliku</span>
+<span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filePath</span><span class="p">,</span> <span class="s">&#39;rU&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">file</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">():</span>
+        <span class="n">wordList</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+        <span class="n">wordCount</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="k">print</span><span class="p">(</span> <span class="n">wordList</span> <span class="p">)</span>
+<span class="k">print</span><span class="p">(</span> <span class="s">&quot;Całkowita liczba słów {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">wordCount</span><span class="p">)</span> <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>[&#39;Wiersz&#39;, &#39;1&#39;, &#39;Wiersz&#39;, &#39;2&#39;, &#39;Wiersz&#39;, &#39;3&#39;, &#39;Wiersz&#39;, &#39;4&#39;]
+Całkowita liczba słów = 8
+</pre></div>
+</div>
+</div>
+<div class="section" id="ustalenie-liczby-wierszy-w-pliku">
+<h4>Ustalenie liczby wierszy w pliku<a class="headerlink" href="#ustalenie-liczby-wierszy-w-pliku" title="Permalink to this headline">¶</a></h4>
+<dl class="function">
+<dt>
+<tt class="descname">readlines</tt><big>(</big><big>)</big></dt>
+<dd><p>generowanie listy wierszy. Dla dużych plików używanie readlines() może być niepraktyczne ze względu na ilość pamięci i czas niezbędny do przetwarzania.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="len">
+<tt class="descname">len</tt><big>(</big><big>)</big><a class="headerlink" href="#len" title="Permalink to this definition">¶</a></dt>
+<dd><p>ustalenie liczby wierszy w liście.</p>
+</dd></dl>
+
+<p>Przykład:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">filePath</span> <span class="o">=</span> <span class="s">&quot;input.txt&quot;</span>
+<span class="n">lineCount</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">filePath</span><span class="p">,</span> <span class="s">&#39;rU&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">readlines</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span> <span class="s">&quot;Liczba wierszy w {} wynosi {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filePath</span><span class="p">,</span> <span class="n">lineCount</span><span class="p">)</span> <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>Liczba wierszy w pliku input.txt wynosi 4
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="zapisywanie-do-pliku">
+<h3>Zapisywanie do pliku<a class="headerlink" href="#zapisywanie-do-pliku" title="Permalink to this headline">¶</a></h3>
+<p>Metody zapisywania danych do pliku:</p>
+<dl class="function">
+<dt id="write">
+<tt class="descname">write</tt><big>(</big><em>string</em><big>)</big><a class="headerlink" href="#write" title="Permalink to this definition">¶</a></dt>
+<dd><p>zapisuje argument string do pliku w miejscu, w którym aktualnie znajduje się wskaźnik pliku</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="writelines">
+<tt class="descname">writelines</tt><big>(</big><em>sequence</em><big>)</big><a class="headerlink" href="#writelines" title="Permalink to this definition">¶</a></dt>
+<dd><p>funkcja zazwyczaj przyjmuje listę łańcuchów znaków sequence i zapisuje te łańcuchy do pliku</p>
+</dd></dl>
+
+<p>Można również przekierować funkcję <tt class="docutils literal"><span class="pre">print</span></tt> do pliku za pomocą argumentu <tt class="docutils literal"><span class="pre">file</span></tt></p>
+<p>Przykład:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">wordList</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;Czerwony&quot;</span><span class="p">,</span> <span class="s">&quot;Niebieski&quot;</span><span class="p">,</span> <span class="s">&quot;Zielony&quot;</span><span class="p">]</span>
+<span class="n">filePath</span> <span class="o">=</span> <span class="s">&quot;output.txt&quot;</span>
+<span class="c"># Zapisanie listy do pliku</span>
+<span class="n">fileOut</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filePath</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span>
+<span class="n">fileOut</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="n">wordList</span><span class="p">)</span>
+
+<span class="c"># Zapisanie łańcucha znaków do pliku</span>
+<span class="n">fileOut</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n\n</span><span class="s">Sformatowany tekst:</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+
+<span class="c"># Zapisanie listy do pliku</span>
+<span class="n">fileOut</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filePath</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span>
+<span class="n">fileOut</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="n">wordList</span><span class="p">)</span>
+
+<span class="c"># Zapisanie łańcucha znaków do pliku</span>
+<span class="n">fileOut</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n\n</span><span class="s">Sformatowany tekst:</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+
+<span class="c"># Drukowanie bezpośrednio do pliku</span>
+<span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">wordList</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\t</span><span class="s">Kontrola koloru: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">word</span><span class="p">),</span> <span class="nb">file</span><span class="o">=</span><span class="n">fileOut</span><span class="p">)</span>
+<span class="n">fileOut</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>CzerwonyNiebieskiZielony
+Sformatowany tekst:
+    Kontrola koloru: Czerwony
+    Kontrola koloru: Niebieski
+    Kontrola koloru: Zielony
+</pre></div>
+</div>
+</div>
+<div class="section" id="przechodzenie-drzewa-katalogow">
+<h3>Przechodzenie drzewa katalogów<a class="headerlink" href="#przechodzenie-drzewa-katalogow" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="os.walk">
+<tt class="descclassname">os.</tt><tt class="descname">walk</tt><big>(</big><em>path</em><big>)</big><a class="headerlink" href="#os.walk" title="Permalink to this definition">¶</a></dt>
+<dd><p>przechodzi drzewo katalogów i tworzy dla każdego z nich krotkę składającą się ze: ścieżki katalogu, listy nazw katalogów oraz listy nazw plików.</p>
+</dd></dl>
+
+<p>Po utworzeniu krotek mogą być one pojedynczo przetwarzane jako elementy listy z użyciem indeksów</p>
+<blockquote>
+<div><ul class="simple">
+<li>0 – dostęp do reprezentowanej bezpośrednio ścieżki katalogu</li>
+<li>1 – dostęp do listy podkatalogów</li>
+<li>2 – dostęp do plików zawartych w katalogu</li>
+</ul>
+</div></blockquote>
+<p>Przykład:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">os</span>
+<span class="n">path</span> <span class="o">=</span> <span class="s">&quot;/books/python&quot;</span>
+
+<span class="k">def</span> <span class="nf">printFiles</span><span class="p">(</span><span class="n">dirList</span><span class="p">,</span> <span class="n">spaceCount</span><span class="p">):</span>
+    <span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="n">dirList</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span> <span class="s">&quot;/&quot;</span><span class="o">.</span><span class="n">rjust</span><span class="p">(</span><span class="n">spaceCount</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="nb">file</span> <span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">printDirectory</span><span class="p">(</span><span class="n">dirEntry</span><span class="p">):</span>
+    <span class="k">print</span> <span class="n">dirEntry</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s">&quot;/&quot;</span>
+    <span class="n">printFiles</span><span class="p">(</span><span class="n">dirEntry</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="nb">len</span><span class="p">(</span><span class="n">dirEntry</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+
+<span class="n">tree</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">directory</span> <span class="ow">in</span> <span class="n">tree</span><span class="p">:</span>
+    <span class="n">printDirectory</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>/books/python/
+             /Python Proposal.doc
+        /Python_Phrasebook_TOC.doc
+        /python_schedule.xls
+        /template.doc
+        /TOC_Notes.doc
+/books/python/CH2/
+                 /CH2.doc
+/books/python/CH2/code/
+              /comp_str.py
+              /end_str.py
+              /eval_str.py
+              /format_str.py
+              /join_str.py
+/books/python/CH3/
+            /CH3.doc
+</pre></div>
+</div>
+</div>
+<div class="section" id="zmiana-nazwy-pliku">
+<h3>Zmiana nazwy pliku<a class="headerlink" href="#zmiana-nazwy-pliku" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="os.remove">
+<tt class="descclassname">os.</tt><tt class="descname">remove</tt><big>(</big><em>file</em><big>)</big><a class="headerlink" href="#os.remove" title="Permalink to this definition">¶</a></dt>
+<dd><p>wykrycie, czy plik o danej nazwie już istnieje, a następnie ewentualne usunięcie</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="os.rename">
+<tt class="descclassname">os.</tt><tt class="descname">rename</tt><big>(</big><em>oldFile</em>, <em>newFile</em><big>)</big><a class="headerlink" href="#os.rename" title="Permalink to this definition">¶</a></dt>
+<dd><p>zmiana nazwy pliku</p>
+</dd></dl>
+
+<div class="highlight-python"><div class="highlight"><pre><span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">newFileName</span><span class="p">)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">oldFileName</span><span class="p">,</span> <span class="n">newFileName</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Przykład:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">os</span>
+<span class="n">oldFileName</span> <span class="o">=</span> <span class="s">&quot;/books/python/CH4/code/output.txt&quot;</span>
+<span class="n">newFileName</span> <span class="o">=</span> <span class="s">&quot;/books/python/CH4/code/output.old&quot;</span>
+
+<span class="c"># Nowy listing</span>
+<span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s">&quot;/books/python/CH4/code/&quot;</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">file</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&quot;output&quot;</span><span class="p">):</span>
+       <span class="k">print</span><span class="p">(</span> <span class="nb">file</span> <span class="p">)</span>
+<span class="c"># Usunięcie pliku, jeśli nowa nazwa już istnieje</span>
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">access</span><span class="p">(</span><span class="n">newFileName</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">X_OK</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span> <span class="s">&quot;Usuwanie &quot;</span> <span class="o">+</span> <span class="n">newFileName</span> <span class="p">)</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">newFileName</span><span class="p">)</span>
+<span class="c"># Zmiana nazwy pliku</span>
+<span class="n">os</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">oldFileName</span><span class="p">,</span> <span class="n">newFileName</span><span class="p">)</span>
+<span class="c"># Stary listing</span>
+<span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s">&quot;/books/python/CH4/code/&quot;</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">file</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&quot;output&quot;</span><span class="p">):</span>
+       <span class="k">print</span><span class="p">(</span> <span class="nb">file</span> <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">output</span><span class="o">.</span><span class="n">old</span>
+<span class="n">output</span><span class="o">.</span><span class="n">txt</span>
+<span class="n">Usuwanie</span> <span class="o">/</span><span class="n">books</span><span class="o">/</span><span class="n">python</span><span class="o">/</span><span class="n">CH4</span><span class="o">/</span><span class="n">code</span><span class="o">/</span><span class="n">output</span><span class="o">.</span><span class="n">old</span>
+<span class="n">output</span><span class="o">.</span><span class="n">old</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="rekurencyjne-kasowanie-plikow-i-podkatalogow">
+<h3>Rekurencyjne kasowanie plików i podkatalogów<a class="headerlink" href="#rekurencyjne-kasowanie-plikow-i-podkatalogow" title="Permalink to this headline">¶</a></h3>
+<p>Funkcja <tt class="docutils literal"><span class="pre">os.walk(path)</span></tt> automatycznie tworzy listę krotek, reprezentujących katalogi, które mają być usunięte.
+Aby rekurencyjnie skasować drzewo, należy przejść przez listę katalogów i usunąć każdy plik zawarty w liście plików (trzeci element krotki).
+Najpierw należy usunąć pliki, a następnie same katalogi w odwrotnej kolejności, rozpoczynając od najgłębiej zagnieżdżonych.</p>
+<p>Przykład:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">os</span>
+<span class="n">emptyDirs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">path</span> <span class="o">=</span> <span class="s">&quot;/trash/deleted_files&quot;</span>
+
+<span class="k">def</span> <span class="nf">deleteFiles</span><span class="p">(</span><span class="n">dirList</span><span class="p">,</span> <span class="n">dirPath</span><span class="p">):</span>
+    <span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="n">dirList</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span> <span class="s">&quot;Usuwanie &quot;</span> <span class="o">+</span> <span class="nb">file</span> <span class="p">)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">dirPath</span> <span class="o">+</span> <span class="s">&quot;/&quot;</span> <span class="o">+</span> <span class="nb">file</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">removeDirectory</span><span class="p">(</span><span class="n">dirEntry</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span> <span class="s">&quot;Usuwanie plików z &quot;</span> <span class="o">+</span> <span class="n">dirEntry</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">)</span>
+    <span class="n">deleteFiles</span><span class="p">(</span><span class="n">dirEntry</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">dirEntry</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">emptyDirs</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">dirEntry</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="c"># Sporządzenie listy wpisów w drzewie katalogów</span>
+<span class="n">tree</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">directory</span> <span class="ow">in</span> <span class="n">tree</span><span class="p">:</span>
+    <span class="n">removeDirectory</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span>
+<span class="c"># Usunięcie pustych katalogów</span>
+<span class="k">for</span> <span class="nb">dir</span> <span class="ow">in</span> <span class="n">emptyDirs</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span> <span class="s">&quot;Usuwanie &quot;</span> <span class="o">+</span> <span class="nb">dir</span> <span class="p">)</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">rmdir</span><span class="p">(</span><span class="nb">dir</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>Usuwanie plików z /trash/deleted_files
+Usuwanie 102.ini
+Usuwanie 103.ini
+Usuwanie 104.ini
+Usuwanie 105.ini
+Usuwanie 106.ini
+Usuwanie plików z /trash/deleted_files\Test
+Usuwanie 111.ini
+Usuwanie 114.ini
+Usuwanie 115.ini
+Usuwanie plików z /trash/deleted_files\Test\Test2
+Usuwanie 112.ini
+Usuwanie 113.ini
+Usuwanie plików z /trash/deleted_files\Test\Test2
+Usuwanie plików z /trash/deleted_files\Test
+Usuwanie plików z /trash/deleted_files
+</pre></div>
+</div>
+</div>
+<div class="section" id="wyszukiwanie-plikow-w-oparciu-o-rozszerzenie">
+<h3>Wyszukiwanie plików w oparciu o rozszerzenie<a class="headerlink" href="#wyszukiwanie-plikow-w-oparciu-o-rozszerzenie" title="Permalink to this headline">¶</a></h3>
+<p>Tworzymy listę rozszerzeń plików poprzez podzielenie łańcucha znaków wzorca za pomocą funkcji <tt class="docutils literal"><span class="pre">split()</span></tt>.
+Sprawdzamy, czy rozszerzenie pliku odpowiada rozszerzeniu znajdującemu się na liście używając funkcji <tt class="docutils literal"><span class="pre">endswith(string)</span></tt> na nazwie pliku.</p>
+<p>Przykład:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">os</span>
+<span class="n">path</span> <span class="o">=</span> <span class="s">&quot;/books/python&quot;</span>
+<span class="n">pattern</span> <span class="o">=</span> <span class="s">&quot;*.py;*.doc&quot;</span>
+
+<span class="c"># Wydrukowanie plików, które odpowiadają wybranym rozszerzeniom</span>
+<span class="k">def</span> <span class="nf">printFiles</span><span class="p">(</span><span class="n">dirList</span><span class="p">,</span> <span class="n">spaceCount</span><span class="p">,</span> <span class="n">typeList</span><span class="p">):</span>
+    <span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="n">dirList</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">ext</span> <span class="ow">in</span> <span class="n">typeList</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">file</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">ext</span><span class="p">):</span>
+                <span class="k">print</span><span class="p">(</span> <span class="s">&quot;/&quot;</span><span class="o">.</span><span class="n">rjust</span><span class="p">(</span><span class="n">spaceCount</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="nb">file</span> <span class="p">)</span>
+                <span class="k">break</span>
+
+<span class="c"># Wydrukowanie każdego podkatalogu</span>
+<span class="k">def</span> <span class="nf">printDirectory</span><span class="p">(</span><span class="n">dirEntry</span><span class="p">,</span> <span class="n">typeList</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span> <span class="n">dirEntry</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s">&quot;/&quot;</span> <span class="p">)</span>
+    <span class="n">printFiles</span><span class="p">(</span><span class="n">dirEntry</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="nb">len</span><span class="p">(</span><span class="n">dirEntry</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">typeList</span><span class="p">)</span>
+
+<span class="c"># Konwersja łańcucha znaków wzorca na listę rozszerzeń plików</span>
+<span class="n">extList</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">ext</span> <span class="ow">in</span> <span class="n">pattern</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;;&quot;</span><span class="p">):</span>
+    <span class="n">extList</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ext</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s">&quot;*&quot;</span><span class="p">))</span>
+
+<span class="c"># Przejście drzewa katalogów w celu wydrukowania plików</span>
+<span class="k">for</span> <span class="n">directory</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+    <span class="n">printDirectory</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="n">extList</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>/books/python/
+          /Python Proposal.doc
+          /Python_Phrasebook_TOC.doc
+          /python_schedule.xls
+          /template.doc
+          /TOC_Notes.doc
+/books/python/CH2/
+                 /CH2.doc
+/books/python/CH2/code/
+                      /comp_str.py
+                      /end_str.py
+                      /eval_str.py
+                      /format_str.py
+                      /join_str.py
+/books/python/CH3/
+                 /CH3.doc
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="serializacja-i-trwalosc-obiektow">
+<h2>Serializacja i trwałość obiektów<a class="headerlink" href="#serializacja-i-trwalosc-obiektow" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="modul-pickle">
+<span id="index-2"></span><h3>Moduł <tt class="docutils literal"><span class="pre">pickle</span></tt><a class="headerlink" href="#modul-pickle" title="Permalink to this headline">¶</a></h3>
+<p id="index-3">Serializacja i trwałość obiektów może zostać zrealizowana przy pomocy wbudowanych narzędzi Pythona.
+Moduły <tt class="docutils literal"><span class="pre">pickle</span></tt> i <tt class="docutils literal"><span class="pre">cPickle</span></tt> serializują obiekty do i z plików.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">pickle</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">Pickler</span><span class="p">(</span><span class="nb">file</span><span class="p">)</span>    <span class="c"># file to otwarty obiekt pliku</span>
+<span class="n">p</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>                 <span class="c"># Zrzut obiektu</span>
+</pre></div>
+</div>
+<p>Aby odserializować obiekt, używamy funkcji unpickle.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">p</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">Unpickler</span><span class="p">(</span><span class="nb">file</span><span class="p">)</span>  <span class="c"># file to otwarty obiekt pliku</span>
+<span class="n">obj</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>          <span class="c"># Ładowanie obiektu</span>
+</pre></div>
+</div>
+<div class="section" id="serializacja-wskazowki">
+<h4>Serializacja - wskazówki<a class="headerlink" href="#serializacja-wskazowki" title="Permalink to this headline">¶</a></h4>
+<ol class="arabic simple">
+<li>Większość typów wbudowanych można poddać serializacji.</li>
+<li>Można dokonać serializacji obiektu klasy. Klasa musi być dostępna w momencie odtwarzania obiektu. Sam kod klasy nie jest serializowany. Python automatycznie importuje moduł zawierający odtwarzaną klasę.</li>
+<li>Pewne typy obiektów nie mogą być serializowane np. sockety, pliki.</li>
+<li>Dowolny obiekt zapewniający metody write(), read() i readline() może być używany jako plik.</li>
+<li>Obiekty rekursywne można poddać serializacji.</li>
+<li>Dane po serializacji można przenosić między różnymi systemami operacyjnymi i architekturami sprzętowymi.</li>
+<li>Serializacja obiektów zastosowana w Pythonie nie jest dostępna z poziomu programów napisanych w innych językach programowania.</li>
+</ol>
+</div>
+</div>
+<div class="section" id="modul-marshal">
+<h3>Moduł <tt class="docutils literal"><span class="pre">marshal</span></tt><a class="headerlink" href="#modul-marshal" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="index-4">
+<dt>Moduł <tt class="docutils literal"><span class="pre">marshal</span></tt></dt>
+<dd>używany do szybkiej serializacji i deserializacji prostych obiektów. Nie obsługuje obiektów rekursywnych i instancji klas. Dane przechowywane w niezależnym formacie binarnym.</dd>
+</dl>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">marshal</span>
+<span class="n">marshal</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span><span class="nb">file</span><span class="p">)</span> <span class="c"># Zapis obiektu obj do pliku file</span>
+
+<span class="n">obj</span> <span class="o">=</span> <span class="n">marshal</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">file</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="modul-shelve">
+<h3>Moduł <tt class="docutils literal"><span class="pre">shelve</span></tt><a class="headerlink" href="#modul-shelve" title="Permalink to this headline">¶</a></h3>
+<p id="index-5">Moduł <tt class="docutils literal"><span class="pre">shelve</span></tt> umożliwia prosty zapis serializowanych danych do pliku z wykorzystaniem składni słownika.</p>
+<ul class="simple">
+<li>Klucze muszą być ciągami znaków.</li>
+<li>Wartościami mogą być dowolne obiekty Pythona dla których działa moduł <tt class="docutils literal"><span class="pre">pickle</span></tt>.</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">shelve</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">shelve</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s">&quot;data&quot;</span><span class="p">)</span>
+<span class="n">d</span><span class="p">[</span><span class="s">&#39;foo&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">42</span>       <span class="c"># Zapis danych do pliku</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="s">&#39;bar&#39;</span><span class="p">]</span>        <span class="c"># Odczyt danych z pliku</span>
+</pre></div>
+</div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="38%" />
+<col width="62%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head"><strong>Operacja</strong></th>
+<th class="head"><strong>Opis</strong></th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">d[key]</span> <span class="pre">=</span> <span class="pre">obj</span></tt></td>
+<td>Zapisuje obiekt</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">obj</span> <span class="pre">=</span> <span class="pre">d[key]</span></tt></td>
+<td>Odczytuje obiekt</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">del</span> <span class="pre">d[key]</span></tt></td>
+<td>Usuwa obiekt</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">d.has_key(key)</span></tt></td>
+<td>Sprawdza, czy klucz istnieje</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">d.keys()</span></tt></td>
+<td>Zwraca listę wszystkich kluczy</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">d.close()</span></tt></td>
+<td>Zamyka plik shelve</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="wspolpraca-z-systemem-operacyjnym">
+<h2>Współpraca z systemem operacyjnym<a class="headerlink" href="#wspolpraca-z-systemem-operacyjnym" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="modul-os">
+<span id="index-6"></span><h3>Moduł <tt class="docutils literal"><span class="pre">os</span></tt><a class="headerlink" href="#modul-os" title="Permalink to this headline">¶</a></h3>
+<p id="index-7">Moduł <tt class="docutils literal"><span class="pre">os</span></tt> udostępnia przenośny, niezależny od platformy interfejs dla dostępu do usług operacyjnych.
+Pozwala to na dodanie do programów obsługi na poziomie systemu operacyjnego.</p>
+<dl class="function">
+<dt id="os.path.abspath">
+<tt class="descclassname">os.path.</tt><tt class="descname">abspath</tt><big>(</big><em>path</em><big>)</big><a class="headerlink" href="#os.path.abspath" title="Permalink to this definition">¶</a></dt>
+<dd><p>zwraca bezwzględną ścieżkę w formie łańcucha znaków.</p>
+</dd></dl>
+
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">os</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s">&quot;.&quot;</span><span class="p">)</span>
+<span class="go">/home/my_user/code/Python</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s">&quot;..&quot;</span><span class="p">)</span>
+<span class="go">/home/my_user/code</span>
+</pre></div>
+</div>
+<dl class="function">
+<dt id="os.exists">
+<tt class="descclassname">os.</tt><tt class="descname">exists</tt><big>(</big><em>path</em><big>)</big><a class="headerlink" href="#os.exists" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="os.isdir">
+<tt class="descclassname">os.</tt><tt class="descname">isdir</tt><big>(</big><em>path</em><big>)</big><a class="headerlink" href="#os.isdir" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="os.isfile">
+<tt class="descclassname">os.</tt><tt class="descname">isfile</tt><big>(</big><em>path</em><big>)</big><a class="headerlink" href="#os.isfile" title="Permalink to this definition">¶</a></dt>
+<dd><p>funkcje sprawdzają istnienie plików i katalogów.</p>
+</dd></dl>
+
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s">&quot;/home/InfoTraining&quot;</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="s">&quot;/home/InfoTrainingSzkolenia&quot;</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span> <span class="p">(</span><span class="s">&quot;/home/InfoTrainingSzkolenia/doc1.txt&quot;</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<dl class="function">
+<dt id="os.chdir">
+<tt class="descclassname">os.</tt><tt class="descname">chdir</tt><big>(</big><em>path</em><big>)</big><a class="headerlink" href="#os.chdir" title="Permalink to this definition">¶</a></dt>
+<dd><p>umożliwia zmianę bieżącego katalogu roboczego dla programu.</p>
+</dd></dl>
+
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s">&quot;/home/user/books/python/ch1/code&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s">&quot;.&quot;</span><span class="p">)</span>
+<span class="go">/home/user/books/python/ch1/code</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">os.environ</span></tt></dt>
+<dd>słownik zmiennych środowiskowych.</dd>
+</dl>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s">&#39;PATH&#39;</span><span class="p">]</span>
+<span class="go">&#39;/usr/sbin:/sbin:/usr/local/bin:/usr/bin&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="modul-subprocess">
+<h3>Moduł <tt class="docutils literal"><span class="pre">subprocess</span></tt><a class="headerlink" href="#modul-subprocess" title="Permalink to this headline">¶</a></h3>
+<span class="target" id="index-8"></span><dl class="function">
+<dt id="subprocess.Popen">
+<tt class="descclassname">subprocess.</tt><tt class="descname">Popen</tt><big>(</big><em>command</em>, <em>stdin=None</em>, <em>stdout=None</em><big>)</big><a class="headerlink" href="#subprocess.Popen" title="Permalink to this definition">¶</a></dt>
+<dd><p>wykona funkcję systemową <tt class="docutils literal"><span class="pre">command</span></tt> tak, jakby znajdowała się ona w podpowłoce.</p>
+</dd></dl>
+
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">subprocess</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span><span class="s">&quot;make&quot;</span><span class="p">,</span><span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">communicate</span><span class="p">()</span>
+<span class="k">print</span> <span class="n">result</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="modul-sys">
+<h3>Moduł <tt class="docutils literal"><span class="pre">sys</span></tt><a class="headerlink" href="#modul-sys" title="Permalink to this headline">¶</a></h3>
+<p id="index-9">Moduł <tt class="docutils literal"><span class="pre">sys</span></tt> udostępnia interfejs dostępu do środowiska interpretera Pythona.</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span>
+<span class="go">[&#39;/home/my_user/code/print_it.py&#39;, &#39;text&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="go">&#39;text&#39;</span>
+</pre></div>
+</div>
+<p>Atrybut <tt class="docutils literal"><span class="pre">argv</span></tt> modułu <tt class="docutils literal"><span class="pre">sys</span></tt> jest listą.
+Pierwszy element na liście <tt class="docutils literal"><span class="pre">argv</span></tt> jest ścieżką do modułu.
+Reszta listy składa się z argumentów, które zostały przekazane do modułu na początku wykonania.</p>
+<p>Atrybut <tt class="docutils literal"><span class="pre">stdin</span></tt> modułu <tt class="docutils literal"><span class="pre">sys</span></tt> jest obiektem pliku, który zostaje utworzony na początku wykonywania kodu.</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">text</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdin</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+<span class="go">Dane wejściowe</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">text</span>
+<span class="go">Dane wejściowe</span>
+</pre></div>
+</div>
+<p>Atrybuty <tt class="docutils literal"><span class="pre">stdout</span></tt> i <tt class="docutils literal"><span class="pre">stderr</span></tt> wskazują na pliki używane jako standardowe wyjście oraz standardowe wyjście błędów.
+Pliki te domyślnie są związane z ekranem.</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sOUT</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sERR</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;output.txt&quot;</span><span class="p">,</span> <span class="s">&quot;w&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span> <span class="o">=</span> <span class="n">sOUT</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span> <span class="o">=</span> <span class="n">sERR</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="modul-platform">
+<h3>Moduł <tt class="docutils literal"><span class="pre">platform</span></tt><a class="headerlink" href="#modul-platform" title="Permalink to this headline">¶</a></h3>
+<p id="index-10">Moduł <tt class="docutils literal"><span class="pre">platform</span></tt> udostępnia przenośny interfejs do informacji o platformie, na której uruchamiany jest program.</p>
+<dl class="function">
+<dt id="platform.architecture">
+<tt class="descclassname">platform.</tt><tt class="descname">architecture</tt><big>(</big><big>)</big><a class="headerlink" href="#platform.architecture" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>zwraca krotkę (bits, linkage)</dt>
+<dd><ul class="first last simple">
+<li>bits – liczba bitów wielkości słowa w systemie</li>
+<li>linkage – powiązane informacje o pliku wykonywalnym Pythona</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">platform</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">platform</span><span class="o">.</span><span class="n">architecture</span><span class="p">()</span>
+<span class="go">(&#39;64bit&#39;, &#39;ELF&#39;)</span>
+</pre></div>
+</div>
+<dl class="function">
+<dt id="platform.python_version">
+<tt class="descclassname">platform.</tt><tt class="descname">python_version</tt><big>(</big><big>)</big><a class="headerlink" href="#platform.python_version" title="Permalink to this definition">¶</a></dt>
+<dd><p>zwraca wersję pliku wykonywalnego Pythona dla celów zgodności.</p>
+</dd></dl>
+
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">platform</span><span class="o">.</span><span class="n">python_version</span><span class="p">()</span>
+<span class="go">&#39;3.3.2&#39;</span>
+</pre></div>
+</div>
+<dl class="function">
+<dt id="platform.uname">
+<tt class="descclassname">platform.</tt><tt class="descname">uname</tt><big>(</big><big>)</big><a class="headerlink" href="#platform.uname" title="Permalink to this definition">¶</a></dt>
+<dd><p>zwraca obiekt zawierający informację w formie (system, node, release, version, machine, processor)</p>
+<blockquote>
+<div><ul class="simple">
+<li>system – aktualnie działający system operacyjny</li>
+<li>node – nazwa hosta danej maszyny</li>
+<li>release – główna wersja systemu operacyjnego</li>
+<li>version – informacja o wydaniu systemu operacyjnego w formie łańcucha znaków</li>
+<li>machine, processor – informacje sprzętowe danej platformy</li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">platform</span><span class="o">.</span><span class="n">uname</span><span class="p">()</span>
+<span class="go">uname_result(system=&#39;Linux&#39;, node=&#39;tpad&#39;, release=&#39;3.2.0-4-amd64&#39;,</span>
+<span class="go">version=&#39;#1 SMP Debian 3.2.46-1+deb7u1&#39;, machine=&#39;x86_64&#39;, processor=&#39;&#39;)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="modul-time">
+<h3>Moduł <tt class="docutils literal"><span class="pre">time</span></tt><a class="headerlink" href="#modul-time" title="Permalink to this headline">¶</a></h3>
+<p id="index-11">Moduł <tt class="docutils literal"><span class="pre">time</span></tt> udostępnia przenośny interfejs do funkcji związanych z czasem w systemie, na którym program jest wykonywany.</p>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">time.time()</span></tt></dt>
+<dd>Zwraca bieżący czas systemowy jako liczbę sekund, które upłynęły od 1.01.1970 zgodnie z UTC (Coordinated Universal Time)</dd>
+<dt><tt class="docutils literal"><span class="pre">time.localtime(secs)</span></tt></dt>
+<dd>Zwraca czas w sekundach od 1.01.1970 w formie krotki (year, month, day, hour, second, day of week, day of year, daylight savings)</dd>
+<dt><tt class="docutils literal"><span class="pre">time.ctime(secs)</span></tt></dt>
+<dd>Zwraca czas, określony w sekundach od 1.01.1970, w formie sformatowanego łańcucha znaków, nadającego się do wydruku</dd>
+<dt><tt class="docutils literal"><span class="pre">time.clock()</span></tt></dt>
+<dd>Zwraca aktualny czas procesora w postaci liczby zmiennoprzecinkowej, która może być używana w funkcjach mierzących czas</dd>
+<dt><tt class="docutils literal"><span class="pre">time.sleep(secs)</span></tt></dt>
+<dd>Zmusza bieżący proces do uśpienia przez liczbę sekund określoną przez liczbę zmiennoprzecinkową secs</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="wyrazenia-regularne">
+<h2>Wyrażenia regularne<a class="headerlink" href="#wyrazenia-regularne" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="index-12"></span><p id="index-13">Wyrażenie regularne (<tt class="docutils literal"><span class="pre">regex</span></tt>) definiuje prosty analizator, który sprawdza dopasowanie tekstu do danego wzorca.</p>
+<dl class="docutils">
+<dt>Powody używania wyrażeń regularnych:</dt>
+<dd><ul class="first last simple">
+<li>Przetwarzanie: identyfikacja i wyodrębniane fragmentów tekstu, które spełniają określone kryteria. Wyrażenia regularne są używane w celu tworzenia doraźnych analizatorów składni oraz przez zwykłe narzędzia analizatorów składni.</li>
+<li>Wyszukiwanie: odnajdywanie łańcuchów znaków, które mogą mieć więcej niż jedną formę, na przykład znalezienie dowolnego z plików auto.png, auto.jpg lub auto.svg, ale unikanie pliku autobus.png.</li>
+<li>Wyszukiwanie i zastępowanie: zastępowanie każdego łańcucha znaków dopasowanego przez wyrażenie regularne, na przykład wyszukanie &#8220;motor&#8221; lub &#8220;pojazd jednośladowy&#8221; i zastąpienie słowem &#8220;motocykl&#8221;.</li>
+<li>Dzielenie łańcuchów znaków: podzielenie łańcucha znaków w każdym miejscu dopasowanym przez wyrażenie regularne, na przykład podział w każdym miejscu występowania dwukropka lub znaku równości.</li>
+<li>Sprawdzanie poprawności: weryfikacja, czy dany fragment tekstu spełnia pewne kryteria, na przykład zawiera cyfry, a po nich symbol waluty.</li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-python"><div class="highlight"><pre>foo.* # Dopasowuje string rozpoczynający od foo
+\d* # Dopasowuje dowolny ciąg znaków złożony z cyfr
+[a-zA-Z]+ # Dopasowuje sekwencję jednej lub więcej liter
+</pre></div>
+</div>
+<div class="section" id="modul-re">
+<span id="index-14"></span><h3>Moduł re<a class="headerlink" href="#modul-re" title="Permalink to this headline">¶</a></h3>
+<p>Moduł <tt class="docutils literal"><span class="pre">re</span></tt> umożliwia korzystanie z wyrażeń regularnych w Pythonie.</p>
+<div class="section" id="znaki-specjalne">
+<h4>Znaki specjalne<a class="headerlink" href="#znaki-specjalne" title="Permalink to this headline">¶</a></h4>
+<p>Większość znaków może być używana jako literały.
+Istnieją jednak znaki specjalne, które muszą być poprzedzone ukośnikiem (), aby można ich było używać jako literałów.
+Wspomniane znaki specjalne to <tt class="docutils literal"><span class="pre">\</span> <span class="pre">.</span> <span class="pre">^</span> <span class="pre">$</span> <span class="pre">?</span> <span class="pre">+</span> <span class="pre">*</span> <span class="pre">{}</span> <span class="pre">[]</span> <span class="pre">()</span> <span class="pre">|</span></tt>.</p>
+</div>
+<div class="section" id="klasy-znakow">
+<h4>Klasy znaków<a class="headerlink" href="#klasy-znakow" title="Permalink to this headline">¶</a></h4>
+<p>Jeśli zamiast jednego określonego znaku chcemy dopasować jeden z zestawów znaków, używamy klasy znaków.
+Klasa znaków to jeden lub większa liczba znaków ujętych w nawiasy kwadratowe.
+Klasa znaków jest wyrażeniem, więc jeśli nie jest wyraźnie podany kwantyfikator, to zostanie dopasowany dokładnie jeden znak (dowolny ze znaków zdefiniowanych w klasie znaków).</p>
+<p>Dla często używanych klas znaków dostępne są formy skrótowe.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="87%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">.</span></tt></td>
+<td>Dopasowuje dowolny znak oprócz znaku nowej linii</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">\d</span></tt></td>
+<td>Dopasowuje dowolną cyfrę</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">\D</span></tt></td>
+<td>Dopasowuje dowolny znak nie będący cyfrą</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">\s</span></tt></td>
+<td>Dopasowuje dowolny biały znak</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">\S</span></tt></td>
+<td>Dopasowuje dowolny znak nie będący białym znakiem</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">\w</span></tt></td>
+<td>Dopasowuje dowolny znak alfanumeryczny</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">\W</span></tt></td>
+<td>Dopasowuje znaki nie będące znakami alfanumerycznymi</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="kwantyfikatory-wyrazen-regularnych">
+<h4>Kwantyfikatory wyrażeń regularnych<a class="headerlink" href="#kwantyfikatory-wyrazen-regularnych" title="Permalink to this headline">¶</a></h4>
+<p>Kwantyfikatory służą do określania powtórzeń znaków lub sekwencji we wzorcach.</p>
+<p>Domyślnie wyrażenia regularne realizują tzw. zachłanne dopasowanie.
+Każdy podciąg we wzorcu wyrażenia regularnego jest dopasowywany do największej możliwej liczby znaków w ciągu.
+Dopiero potem następuje przejście do kolejnej części wyrażenia.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="81%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">*</span></tt></td>
+<td>Dopasowuje 0 lub więcej wystąpień</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">+</span></tt></td>
+<td>Dopasowuje 1 lub więcej wystąpień</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">?</span></tt></td>
+<td>Dopasowuje 0 lub 1 wystąpienie</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">{m,n}</span></tt></td>
+<td>Dopasowuje m do n wystąpień</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">[...]</span></tt></td>
+<td>Dopasowuje zbiór znaków</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">[^...]</span></tt></td>
+<td>Dopasowuje znaki, które nie występują w zbiorze</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">A</span> <span class="pre">|</span> <span class="pre">B</span></tt></td>
+<td>Dopasowuje A lub B</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">(...)</span></tt></td>
+<td>Dopasowuje wyrażenie podane w nawiasie jako grupę</td>
+</tr>
+</tbody>
+</table>
+<p>Dodanie znaku zapytania po kwantyfikatorze powoduje przekształcenie go w tzw. kwantyfikator leniwy.
+Kwantyfikator leniwy pobiera znak po znaku szukając dopasowania.
+Ewentualna próba dopasowanie całego tekstu następuje na samym końcu.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">??</span></tt></td>
+<td>Dopasowuje 0 lub 1 wystąpienie, wersja leniwa</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">*?</span></tt></td>
+<td>Dopasowuje 0 lub więcej, wersja leniwa</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">+?</span></tt></td>
+<td>Dopasowuje 1 lub więcej, wersja leniwa</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">{m,n}?</span></tt></td>
+<td>Dopasowuje m do n wystąpień, wersja leniwa</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="asercje-wyrazen-regularnych">
+<h4>Asercje wyrażeń regularnych<a class="headerlink" href="#asercje-wyrazen-regularnych" title="Permalink to this headline">¶</a></h4>
+<p>Asercja pozwala wyznaczyć miejsce w tekście, w którym musi pojawić się dopasowanie.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="7%" />
+<col width="93%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">^</span></tt></td>
+<td>Dopasowuje początek stringa, także po każdym znaku nowego wiersza, jeśli włączono opcję re.MULTILINE</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">$</span></tt></td>
+<td>Dopasowuje koniec stringa, , także przed każdym znakiem nowego wiersza, jeśli włączono opcję re.MULTILINE</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">\A</span></tt></td>
+<td>Dopasowuje początek stringa</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">\b</span></tt></td>
+<td>Dopasowuje pusty string na początku lub na końcu słowa</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">\B</span></tt></td>
+<td>Dopasowuje pusty string, lecz nie na początku lub na końcu słowa</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">\Z</span></tt></td>
+<td>Dopasowuje na końcu stringa</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="surowe-ciagi-znakow">
+<h4>Surowe ciągi znaków<a class="headerlink" href="#surowe-ciagi-znakow" title="Permalink to this headline">¶</a></h4>
+<p>Surowe ciągi znaków (raw strings) ułatwiają pisanie wyrażeń regularnych w Pythonie.
+Ciąg poprzedza się literą <tt class="docutils literal"><span class="pre">r</span></tt>, która wyłącza specjalne znaczenie backslash&#8217;a w kolejnym ciągu znaków.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">expr</span> <span class="o">=</span> <span class="s">r&#39;(\d+)\.(\d*)&#39;</span> <span class="c"># Dopasowuje liczby jak 3.4772</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="opis-modulu-re">
+<h4>opis modułu <tt class="docutils literal"><span class="pre">re</span></tt><a class="headerlink" href="#opis-modulu-re" title="Permalink to this headline">¶</a></h4>
+<blockquote>
+<div><ul class="simple">
+<li>Wyrażenia regularne są definiowane z użyciem opisanej składni</li>
+<li>Kompilowany do wyrażenia regularnego &#8220;obiekt&#8221;</li>
+<li>Używany do wykonywania operacji dopasowywania i zastępowania</li>
+</ul>
+</div></blockquote>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">re</span>
+<span class="n">pattern</span> <span class="o">=</span> <span class="s">r&#39;(\d+)\.(\d*)&#39;</span>       <span class="c"># Mój wzór</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span>         <span class="c"># Kompilacja</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>                  <span class="c"># Sprawdzam</span>
+<span class="k">if</span> <span class="n">m</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span> <span class="s">&quot;pasuje&quot;</span> <span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span> <span class="s">&quot;nie pasuje&quot;</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="obiekty-wyrazen-regularnych">
+<h4>Obiekty wyrażeń regularnych<a class="headerlink" href="#obiekty-wyrazen-regularnych" title="Permalink to this headline">¶</a></h4>
+<p>Obiekty wyrażeń regularnych stworzone przez <tt class="docutils literal"><span class="pre">re.compile()</span></tt> posiadają następujące metody:</p>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">r.search(s</span> <span class="pre">[,pos</span> <span class="pre">[,endpos]])</span></tt></dt>
+<dd>Szuka dopasowania</dd>
+<dt><tt class="docutils literal"><span class="pre">r.match(s</span> <span class="pre">[,pos</span> <span class="pre">[,endpos]])</span></tt></dt>
+<dd>Sprawdza dopasowanie stringu</dd>
+<dt><tt class="docutils literal"><span class="pre">r.split(s)</span></tt></dt>
+<dd>Dzieli według dopasowania regex</dd>
+<dt><tt class="docutils literal"><span class="pre">r.findall(s)</span></tt></dt>
+<dd>Znajduje wszystkie dopasowania</dd>
+<dt><tt class="docutils literal"><span class="pre">r.sub(repl,s)</span></tt></dt>
+<dd><blockquote class="first">
+<div>Zamienia wszystkie dopasowania na repl</div></blockquote>
+<ul class="last simple">
+<li>Jeśli znaleziono dopasowanie, zwracany jest obiekt dopasowania ’MatchObject’, który zawiera informację, gdzie znaleziono dopasowanie oraz o grupie</li>
+<li>Metoda search szuka dopasowania w dowolnym miejscu stringa</li>
+<li>Metoda match szuka dopasowania zaczynając od pierwszego znaku</li>
+<li>Parametry pos i endpos określają początkową i końcową pozycję do wyszukania/dopasowania</li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="obiekty-dopasowania">
+<h4>Obiekty dopasowania<a class="headerlink" href="#obiekty-dopasowania" title="Permalink to this headline">¶</a></h4>
+<p>Obiekty dopasowania zawierają informację o samym dopasowaniu.
+Oparte są na pojęciu grup i stosują reguły grupowania.</p>
+<dl class="docutils">
+<dt>Wyrażenie regularne <tt class="docutils literal"><span class="pre">(\d+)\.(\d*)</span></tt> ma 3 grupy:</dt>
+<dd><ul class="first last simple">
+<li>Grupa 0 : całe wyrażenie regularne</li>
+<li>Grupa 1 : część <tt class="docutils literal"><span class="pre">(\d+)</span></tt></li>
+<li>Grupa 2 : część <tt class="docutils literal"><span class="pre">(\d*)</span></tt></li>
+</ul>
+</dd>
+</dl>
+<p>Numerowanie grup we wzorcu przebiega od lewej do prawej.</p>
+<p>Uzyskiwanie informacji o dopasowaniu:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>  <span class="c"># Zwraca tekst dopasowany dla grupy n</span>
+<span class="n">m</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>  <span class="c"># Zwraca indeks początkowy dla grupy n</span>
+<span class="n">m</span><span class="o">.</span><span class="n">end</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>    <span class="c"># Zwraca indeks końcowy dla grupy n</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="przyklady-dopasowania">
+<h4>Przykłady dopasowania<a class="headerlink" href="#przyklady-dopasowania" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">re</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s">r&#39;(\d+)\.(\d*)&#39;</span><span class="p">)</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s">&quot;42.37&quot;</span><span class="p">)</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c"># Zwraca ’42.37’</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c"># Zwraca ’42’</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>  <span class="c"># Zwraca ’37’</span>
+<span class="k">print</span><span class="p">(</span> <span class="n">m</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="p">)</span>    <span class="c"># Drukuje 3</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># Zastępowanie URL (np.: http://www.python.org) hiperłączem</span>
+<span class="n">pat</span> <span class="o">=</span> <span class="s">r&#39;(http://[\w-]+(\.[\w-]+)*((/[\w-~]*)?))&#39;</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">pat</span><span class="p">)</span>
+<span class="n">r</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s">&#39;&lt;a href=&quot;</span><span class="se">\\</span><span class="s">1&quot;&gt;</span><span class="se">\\</span><span class="s">1&lt;/a&gt;&#39;</span><span class="p">,</span><span class="n">s</span><span class="p">)</span> <span class="c"># Zastępowanie w stringu</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../index.html">
+    <img class="logo" src="../_static/logo_small.png" alt="Logo"/>
+    
+  </a>
+</p>
+
+
+
+
+
+<p>
+<iframe src="http://ghbtns.com/github-btn.html?user=czterybity&repo=python_doc&type=watch&count=true&size=large"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="wprowadzenie.html">Wprowadzenie do programowania w języku Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="programowanie_funkcyjne.html">Elementy programowania funkcyjnego</a></li>
+<li class="toctree-l1"><a class="reference internal" href="programowanie_obiektowe.html">Funkcje, klasy, obiekty i moduły</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Biblioteka standardowa</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#operacje-plikowe">Operacje plikowe</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#otwieranie-plikow">Otwieranie plików</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#odczyt">Odczyt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#zapisywanie-do-pliku">Zapisywanie do pliku</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#przechodzenie-drzewa-katalogow">Przechodzenie drzewa katalogów</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#zmiana-nazwy-pliku">Zmiana nazwy pliku</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rekurencyjne-kasowanie-plikow-i-podkatalogow">Rekurencyjne kasowanie plików i podkatalogów</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wyszukiwanie-plikow-w-oparciu-o-rozszerzenie">Wyszukiwanie plików w oparciu o rozszerzenie</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#serializacja-i-trwalosc-obiektow">Serializacja i trwałość obiektów</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#modul-pickle">Moduł <tt class="docutils literal"><span class="pre">pickle</span></tt></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modul-marshal">Moduł <tt class="docutils literal"><span class="pre">marshal</span></tt></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modul-shelve">Moduł <tt class="docutils literal"><span class="pre">shelve</span></tt></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#wspolpraca-z-systemem-operacyjnym">Współpraca z systemem operacyjnym</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#modul-os">Moduł <tt class="docutils literal"><span class="pre">os</span></tt></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modul-subprocess">Moduł <tt class="docutils literal"><span class="pre">subprocess</span></tt></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modul-sys">Moduł <tt class="docutils literal"><span class="pre">sys</span></tt></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modul-platform">Moduł <tt class="docutils literal"><span class="pre">platform</span></tt></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modul-time">Moduł <tt class="docutils literal"><span class="pre">time</span></tt></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#wyrazenia-regularne">Wyrażenia regularne</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#modul-re">Moduł re</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="lxml.html">Biblioteka lxml</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adv/funkcje.html">Funkcje w języku Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adv/klasy.html">Klasy i obiekty</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adv/dekoratory.html">Dekoratory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adv/metaklasy.html">Metaklasy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adv/TDD.html">Testowanie kodu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adv/watki.html">Programowanie wielowątkowe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adv/wzorce.html">Wzorce projektowe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adv/2vs3.html">Porównanie Pythona 2 i 3</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, Leszek Tarkowski.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.0</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

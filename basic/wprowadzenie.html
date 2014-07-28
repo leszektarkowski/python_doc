@@ -1,0 +1,2058 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Wprowadzenie do programowania w języku Python &mdash; Zaawansowane programowanie w języku Python</title>
+    
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Zaawansowane programowanie w języku Python" href="../index.html" />
+    <link rel="up" title="&lt;no title&gt;" href="basic.html" />
+    <link rel="next" title="Elementy programowania funkcyjnego" href="programowanie_funkcyjne.html" />
+    <link rel="prev" title="&lt;no title&gt;" href="basic.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="programowanie_funkcyjne.html" title="Elementy programowania funkcyjnego"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="basic.html" title="&lt;no title&gt;"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Zaawansowany Python</a> &raquo;</li>
+          <li><a href="basic.html" accesskey="U">&lt;no title&gt;</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="wprowadzenie-do-programowania-w-jezyku-python">
+<h1>Wprowadzenie do programowania w języku Python<a class="headerlink" href="#wprowadzenie-do-programowania-w-jezyku-python" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="wbudowane-typy-pythona">
+<h2>Wbudowane typy Pythona<a class="headerlink" href="#wbudowane-typy-pythona" title="Permalink to this headline">¶</a></h2>
+<p id="index-0">Interpreter języka Python posiada następujące wbudowane typy danych:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="27%" />
+<col width="27%" />
+<col width="46%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Kategoria typu</th>
+<th class="head">Nazwa typu</th>
+<th class="head">Opis</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>None</td>
+<td>Types.NoneType</td>
+<td>Obiekt None (obiekt null)</td>
+</tr>
+<tr class="row-odd"><td>Liczby</td>
+<td>bool</td>
+<td>True lub False (Boolean)</td>
+</tr>
+<tr class="row-even"><td>&nbsp;</td>
+<td>int</td>
+<td>Liczba całkowita</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td>float</td>
+<td>Liczba zmiennoprzecinkowa</td>
+</tr>
+<tr class="row-even"><td>&nbsp;</td>
+<td>complex</td>
+<td>Liczba zespolona</td>
+</tr>
+<tr class="row-odd"><td>Zbiory</td>
+<td>set</td>
+<td>Zbiór zmienny</td>
+</tr>
+<tr class="row-even"><td>&nbsp;</td>
+<td>frozenset</td>
+<td>Zbiór niezmienny</td>
+</tr>
+<tr class="row-odd"><td>Sekwencje</td>
+<td>str</td>
+<td>Łańcuch znaków</td>
+</tr>
+<tr class="row-even"><td>&nbsp;</td>
+<td>list</td>
+<td>Lista</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td>tuple</td>
+<td>Krotka</td>
+</tr>
+<tr class="row-even"><td>&nbsp;</td>
+<td>bytes</td>
+<td>Ciąg bajtów</td>
+</tr>
+<tr class="row-odd"><td>Odwzorowania</td>
+<td>dict</td>
+<td>Słownik</td>
+</tr>
+<tr class="row-even"><td>Pliki</td>
+<td>file</td>
+<td>Plik</td>
+</tr>
+</tbody>
+</table>
+<p>W języku Python zmienne nie posiadają typu – posiadają go wartości wskazywane przez zmienne.
+Do sprawdzenia jakiego typu jest wartość wskazywana przez zmienną służy funkcja type():</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">L</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+<span class="go">&lt;type &#39;list&#39;&gt;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">L</span><span class="p">)</span> <span class="o">==</span> <span class="nb">list</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="podstawy-skladni-pythona">
+<h2>Podstawy składni Pythona<a class="headerlink" href="#podstawy-skladni-pythona" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="komentarze">
+<h3>Komentarze<a class="headerlink" href="#komentarze" title="Permalink to this headline">¶</a></h3>
+<p>Komentarze w Pythonie są oznaczane za pomocą znaku hasza (#).:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># Cała linia komentarza</span>
+<span class="n">x</span> <span class="o">=</span> <span class="mi">1</span> <span class="c"># Krótki komentarz: przypisz do zmiennej x wartość 1</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="zmienne-i-przypisania">
+<h3>Zmienne i przypisania<a class="headerlink" href="#zmienne-i-przypisania" title="Permalink to this headline">¶</a></h3>
+<p>Ponieważ Python jest językiem z dynamiczną kontrolą typów, zmienne nie muszą mieć
+określonego typu w momencie deklaracji. Zmienna o określonej nazwie może wskazywać na
+obiekty różnych typów.:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">var</span> <span class="o">=</span> <span class="s">&#39;text&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">var</span>
+<span class="go">&#39;text&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">var</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">var</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+<p>Usunięcie zmiennej jest dokonywane przy pomocy instrukcji del.:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">del</span> <span class="n">var</span>
+<span class="go">var</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;console&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
+<span class="gr">NameError</span>: <span class="n">name &#39;var&#39; is not defined</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="operatory">
+<h3>Operatory<a class="headerlink" href="#operatory" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="operatory-arytmetyczne">
+<h4>Operatory arytmetyczne<a class="headerlink" href="#operatory-arytmetyczne" title="Permalink to this headline">¶</a></h4>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="85%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Składnia</th>
+<th class="head">Opis</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">x</span> <span class="pre">+</span> <span class="pre">y</span></tt></td>
+<td>Dodaje liczby x i y.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">x</span> <span class="pre">-</span> <span class="pre">y</span></tt></td>
+<td>Odejmuje liczbę y od x.</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">x</span> <span class="pre">*</span> <span class="pre">y</span></tt></td>
+<td>Mnoży liczbę x przez y.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">x</span> <span class="pre">/</span> <span class="pre">y</span></tt></td>
+<td>Dzieli liczbę x przez y. Wynikiem jest liczba zmiennoprzecinkowa,
+nawet jeśli oba operandy są liczbami całkowitymi.</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">x</span> <span class="pre">//</span> <span class="pre">y</span></tt></td>
+<td>Dzielenie z odrzuceniem części dziesiętnej.
+Wynikiem jest zawsze liczba całkowita int.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">x</span> <span class="pre">%</span> <span class="pre">y</span></tt></td>
+<td>Oblicza resztę z dzielenia (modulus)  x przez y.</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">x</span> <span class="pre">**</span> <span class="pre">y</span></tt></td>
+<td>Podnosi liczbę x do potęgi y.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">-x</span></tt></td>
+<td>Zmienia znak liczby x, jeśli jest niezerowa.
+Jeśli x jest zerem, operator nic nie robi.</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="mf">5.3</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">/</span> <span class="n">b</span>
+<span class="go">2.65</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">//</span> <span class="n">b</span>
+<span class="go">2.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">%</span> <span class="n">b</span>
+<span class="go">1.3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">*</span> <span class="n">b</span>
+<span class="go">10.6</span>
+</pre></div>
+</div>
+<p>Operatory skrócone: <tt class="docutils literal"><span class="pre">+=,</span> <span class="pre">-=,</span> <span class="pre">*=,</span> <span class="pre">/=</span></tt>, itp.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">+=</span> <span class="mi">8</span>
+<span class="go">13</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="operatory-porownania">
+<h4>Operatory porównania<a class="headerlink" href="#operatory-porownania" title="Permalink to this headline">¶</a></h4>
+<table border="1" class="docutils">
+<colgroup>
+<col width="38%" />
+<col width="63%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Składnia</th>
+<th class="head">Opis</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">x</span> <span class="pre">&lt;</span>&nbsp; <span class="pre">y</span></tt></td>
+<td>Znak mniejszości</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">x</span> <span class="pre">&lt;=</span> <span class="pre">y</span></tt></td>
+<td>Mniejszy lub równy</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">x</span> <span class="pre">&gt;</span> <span class="pre">y</span></tt></td>
+<td>Znak większości</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">x</span> <span class="pre">&gt;=</span> <span class="pre">y</span></tt></td>
+<td>Większy lub równy</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">x</span> <span class="pre">==</span> <span class="pre">y</span></tt></td>
+<td>Znak równości</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">x</span> <span class="pre">!=</span> <span class="pre">y</span></tt></td>
+<td>Różny od</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="mf">5.3</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">==</span> <span class="n">b</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">!=</span> <span class="n">b</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="operatory-logiczne">
+<h4>Operatory logiczne<a class="headerlink" href="#operatory-logiczne" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils" id="index-3">
+<dt>Język Python udostępnia trzy operatory logiczne:</dt>
+<dd><ul class="first last simple">
+<li>and – koniunkcja</li>
+<li>or – alternatywa</li>
+<li>not – negacja</li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t2</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="ow">and</span> <span class="n">f</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="ow">and</span> <span class="n">t2</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="ow">not</span> <span class="n">f</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="operatory-bitowe">
+<h4>Operatory bitowe<a class="headerlink" href="#operatory-bitowe" title="Permalink to this headline">¶</a></h4>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="85%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Składnia</th>
+<th class="head">Opis</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">i</span> <span class="pre">|</span> <span class="pre">j</span></tt></td>
+<td>Bitowe OR dla liczb int i oraz int j. Zakładamy, że liczby ujemne są
+przedstawiane wraz z uzupełnieniem dwójkowym.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">i</span> <span class="pre">^</span> <span class="pre">j</span></tt></td>
+<td>Bitowe XOR (LUB wyłączające) liczb i oraz j.</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">i</span> <span class="pre">&amp;</span> <span class="pre">j</span></tt></td>
+<td>Bitowe AND liczb i oraz j.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">i</span> <span class="pre">&lt;&lt;</span> <span class="pre">j</span></tt></td>
+<td>Przesunięcie i w lewo o j bitów.</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">i</span> <span class="pre">&gt;&gt;</span> <span class="pre">j</span></tt></td>
+<td>Przesunięcie i w prawo o j bitów.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">~i</span></tt></td>
+<td>Odwrócenie bitów i.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="uzywanie-wciec-kodu">
+<h3>Używanie wcięć kodu<a class="headerlink" href="#uzywanie-wciec-kodu" title="Permalink to this headline">¶</a></h3>
+<p id="index-5">Bloki kodu są oznaczane przez wcięcia wierszy. Liczba spacji we wcięciu może być różna, jednak wszystkie instrukcje wewnątrz bloku muszą być wcięte o tyle samo.</p>
+<p>Oba bloki w pierwszym przykładzie są poprawne:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">if</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span> <span class="s">&quot;Prawda&quot;</span> <span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+  <span class="k">print</span><span class="p">(</span> <span class="s">&quot;Falsz&quot;</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>Drugi blok w drugim przykładzie wygeneruje błąd:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">if</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span> <span class="s">&quot;Odpowiedz&quot;</span> <span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span> <span class="s">&quot;Prawda&quot;</span> <span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span> <span class="s">&quot;Odpowiedz&quot;</span> <span class="p">)</span>
+  <span class="k">print</span><span class="p">(</span> <span class="s">&quot;Falsz&quot;</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="lancuchy-znakow">
+<h3>Łańcuchy znaków<a class="headerlink" href="#lancuchy-znakow" title="Permalink to this headline">¶</a></h3>
+<p id="index-6">Zwykłe łańcuchy znaków w Pythonie tworzone są poprzez ujęcie danego tekstu w apostrofy (&#8216;) lub
+cudzysłów (&#8221;). Ten sam znak ograniczający powinien rozpoczynać i kończyć łańcuch. Można także
+użyć potrójnie cytowanego łańcucha znaków z użyciem trzech znaków cytowania – trzech
+apostrofów (&#8216;&#8217;&#8216;) lub trzech cudzysłowów (&#8220;&#8221;&#8221;).</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">word</span> <span class="o">=</span> <span class="s">&#39;słowo&#39;</span>
+<span class="n">sentence</span> <span class="o">=</span> <span class="s">&quot;To jest zdanie.&quot;</span>
+<span class="n">paragraph</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;To jest akapit. Składa się z kilku wierszy i zdań.&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+<p>Jeśli wewnątrz zwykłego łańcucha znaków ma zostać użyty inny łańcuch znaków, to należy ograniczyć każdy z łańcuchów za pomocą innych znaków.
+W przeciwnym wypadku konieczna będzie zmiana znaczenia znaków ograniczających.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">Z1</span> <span class="o">=</span> <span class="s">&quot;Używamy &#39;apostrofów&#39;, </span><span class="se">\&quot;</span><span class="s">cudzysłów</span><span class="se">\&quot;</span><span class="s"> poprzedzamy ukośnikiem&quot;</span>
+<span class="n">Z2</span> <span class="o">=</span> <span class="s">&#39;Znaki </span><span class="se">\&#39;</span><span class="s">apostrof</span><span class="se">\&#39;</span><span class="s"> poprzedzamy ukośnikiem, a &quot;cudzysłów&quot; nie&#39;</span>
+</pre></div>
+</div>
+<div class="section" id="formatowanie-lancuchow-znakow">
+<h4>Formatowanie łańcuchów znaków<a class="headerlink" href="#formatowanie-lancuchow-znakow" title="Permalink to this headline">¶</a></h4>
+<p>Łańcuchy znaków mogą być formatowane z użyciem predefiniowanego formatującego łańcucha znaków z listą zmiennych.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">letter</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;Szanowny Panie </span><span class="si">%s</span><span class="s">, </span><span class="se">\n</span><span class="s"></span>
+<span class="gp">... </span><span class="s">Dziękujemy za przesłanie nam pańskiego </span><span class="si">%s</span><span class="s">.</span><span class="se">\n</span><span class="s"></span>
+<span class="gp">... </span><span class="s">Skontaktujemy się z Panem w </span><span class="si">%d</span><span class="s"> roku.&quot;&quot;&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span> <span class="n">letter</span> <span class="o">%</span> <span class="p">(</span><span class="s">&quot;Kowalski&quot;</span><span class="p">,</span> <span class="s">&quot;CV&quot;</span><span class="p">,</span> <span class="mi">2010</span><span class="p">)</span> <span class="p">)</span>
+<span class="go">Szanowny Panie Kowalski,</span>
+<span class="go">Dziękujemy za przesłanie nam pańskiego CV.</span>
+<span class="go">Skontaktujemy się z Panem w 2010 roku.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">record</span> <span class="o">=</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s"> | </span><span class="si">%s</span><span class="s"> | </span><span class="si">%s</span><span class="s"> | </span><span class="si">%08d</span><span class="s">&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span> <span class="n">record</span> <span class="o">%</span> <span class="p">(</span><span class="s">&quot;Guido&quot;</span><span class="p">,</span> <span class="s">&quot;van Rossum&quot;</span><span class="p">,</span> <span class="s">&quot;Dutch&quot;</span><span class="p">,</span> <span class="mi">1956</span><span class="p">))</span>
+<span class="go">Guido | van Rossum | Dutch | 00001956</span>
+</pre></div>
+</div>
+<p>Format specyfikatora konwersji:</p>
+<p><tt class="docutils literal"><span class="pre">%[(klucz</span> <span class="pre">słownika)][flaga</span> <span class="pre">konwersji][min.</span> <span class="pre">szerokość][precyzja]</span> <span class="pre">[typ</span> <span class="pre">konwersji]</span></tt></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="75%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Flaga konwersji</th>
+<th class="head">Znaczenie</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">0</span></tt></td>
+<td>Uzupełnienie zerami szerokości pola</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">-</span></tt></td>
+<td>Justowanie do lewej</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">(spacja)</span></tt></td>
+<td>Wstawienie spacji przed dodatnią liczbą</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">+</span></tt></td>
+<td>Wstawienie znaku przed liczbą</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="23%" />
+<col width="77%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Typ konwersji</th>
+<th class="head">Znaczenie</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">s</span></tt></td>
+<td>string lub unicode</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">d</span></tt></td>
+<td>Liczba całkowita</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">f,</span> <span class="pre">F</span></tt></td>
+<td>Liczba zmiennoprzecinkowa</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">e,</span> <span class="pre">E</span></tt></td>
+<td>Liczba zmiennoprzecinkowa w formacie wykładniczym</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">x,</span> <span class="pre">X</span></tt></td>
+<td>Liczba w formacie szesnastkowym</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">o</span></tt></td>
+<td>Liczba w formacie ósemkowym</td>
+</tr>
+</tbody>
+</table>
+<p>Przykład</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="s">&quot;</span><span class="si">%+10.3f</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="mf">3.14</span><span class="p">)</span>
+<span class="go">&#39;    +3.140&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="s">&quot;</span><span class="si">%x</span><span class="s">&quot;</span> <span class="o">%</span> <span class="mi">255</span>
+<span class="go">&#39;ff&#39;</span>
+</pre></div>
+</div>
+<dl class="function">
+<dt id="format">
+<tt class="descname">format</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#format" title="Permalink to this definition">¶</a></dt>
+<dd><p>W Pythonie 3.0 operator <tt class="docutils literal"><span class="pre">%</span></tt> został zastąpiony znacznie potężniejszą metodą formatowania
+łańcuchów, <tt class="docutils literal"><span class="pre">format()</span></tt>.
+Wsparcie dla <tt class="docutils literal"><span class="pre">str.format()</span></tt> zostało przeportowane do Pythona 2.6.
+Zarówno łańcuchy znaków 8-bitowe, jak i Unicode, mają teraz metodę <tt class="docutils literal"><span class="pre">format()</span></tt>, która traktuje łańcuch jako wzorzec i pobiera argumenty do jego sformatowania.
+Wzorzec zawiera nawiasy klamrowe <tt class="docutils literal"><span class="pre">{}</span></tt> jako znaki specjalne.</p>
+</dd></dl>
+
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="c"># Podstaw argument o numerze 0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="s">&quot;User ID: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s">&quot;root&quot;</span><span class="p">)</span>
+<span class="go">&#39;User ID: root&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Użyj argumentów nazwanych</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="s">&quot;ID: {id} Last seen: {login}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s">&quot;root&quot;</span><span class="p">,</span> <span class="n">login</span><span class="o">=</span><span class="s">&quot;5/03/2012&quot;</span><span class="p">)</span>
+<span class="go">&#39;ID: root Last seen: 5/03/2012&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="warunkowe-wykonanie-kodu">
+<h2>Warunkowe wykonanie kodu<a class="headerlink" href="#warunkowe-wykonanie-kodu" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="instrukcja-if-else-oraz-elif">
+<h3>Instrukcja <tt class="docutils literal"><span class="pre">if</span></tt>, <tt class="docutils literal"><span class="pre">else</span></tt> oraz <tt class="docutils literal"><span class="pre">elif</span></tt><a class="headerlink" href="#instrukcja-if-else-oraz-elif" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">if</span> <span class="n">x</span> <span class="o">==</span>  <span class="bp">True</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span> <span class="s">&quot;x jest prawdą&quot;</span> <span class="p">)</span>
+<span class="k">elif</span> <span class="n">y</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span> <span class="s">&quot;y jest prawdą&quot;</span> <span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span> <span class="s">&quot;oba są fałszem&quot;</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>Wszystkie wartości w Pythonie mogą być reprezentowane przez wartości logiczne, niezależnie od ich typu.
+Wyrażenie przyjmuje wartość <tt class="docutils literal"><span class="pre">False</span></tt>, jeżeli jest predefiniowaną stałą <tt class="docutils literal"><span class="pre">False</span></tt>, obiektem specjalnym <tt class="docutils literal"><span class="pre">None</span></tt>, pustą sekwencją, kolekcją (na przykład, pusty łańcuch znaków, lista lub krotka) lub liczbowym typem danych o wartości <tt class="docutils literal"><span class="pre">0</span></tt>.
+Wszystko pozostałe jest uznawane za <tt class="docutils literal"><span class="pre">True</span></tt>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="o">-</span><span class="mf">1.23</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">([])</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>Klauzula <tt class="docutils literal"><span class="pre">else</span></tt> jest opcjonalna.</p>
+</div>
+<div class="section" id="wyrazenie-warunkowe">
+<h3>Wyrażenie warunkowe<a class="headerlink" href="#wyrazenie-warunkowe" title="Permalink to this headline">¶</a></h3>
+<p>Zapis z wykorzystaniem instrukcji warunkowej <tt class="docutils literal"><span class="pre">if/else</span></tt></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">if</span> <span class="n">condition</span><span class="p">:</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">true_value</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">false_value</span>
+</pre></div>
+</div>
+<p>może być skrócony przy pomocy wyrażenia warunkowego</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">x</span> <span class="o">=</span> <span class="n">true_value</span> <span class="k">if</span> <span class="n">condition</span> <span class="k">else</span> <span class="n">false_value</span>
+</pre></div>
+</div>
+<p>Przykład</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">var</span> <span class="o">=</span> <span class="s">&quot;$Password&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="k">if</span> <span class="n">var</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&#39;$&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="n">var</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+<span class="go">$PASSWORD</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="petle">
+<h2>Pętle<a class="headerlink" href="#petle" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="instrukcja-while">
+<h3>Instrukcja while<a class="headerlink" href="#instrukcja-while" title="Permalink to this headline">¶</a></h3>
+<p>Pętla warunkowa.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">x</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">while</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span> <span class="n">x</span> <span class="p">)</span>
+    <span class="n">x</span> <span class="o">+=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="instrukcja-for">
+<h3>Instrukcja for<a class="headerlink" href="#instrukcja-for" title="Permalink to this headline">¶</a></h3>
+<p>Pętla operująca na sekwencjach.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">for</span> <span class="n">zmienna</span> <span class="ow">in</span> <span class="n">iteracja</span><span class="p">:</span>
+    <span class="n">pakiet</span>
+</pre></div>
+</div>
+<p>Do części <em>zmienna</em> zostaje po kolei przypisane odniesienie do każdego obiektu w części <em>iteracja</em>.
+Wymieniona iteracja to dowolny typ danych, przez który można przejść, między innymi ciągi tekstowe, listy, krotki oraz inne kolekcje typów danych Pythona.</p>
+<p>Przykład 1 - wykorzystanie łańcucha znaków</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">word</span> <span class="o">=</span> <span class="s">&quot;Python&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">word</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ch</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span>
+<span class="go">[&#39;P&#39;, &#39;y&#39;, &#39;t&#39;, &#39;h&#39;, &#39;o&#39;, &#39;n&#39;]</span>
+</pre></div>
+</div>
+<p>Przykład 2 - wykorzystanie funkcji range()</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">string</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">)):</span>
+<span class="gp">... </span>    <span class="n">string</span> <span class="o">+=</span> <span class="nb">list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">string</span>
+<span class="go">Python</span>
+</pre></div>
+</div>
+<p>Przykład 3 – wykorzystanie funkcji enumerate(string)</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">dict</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">enumarate</span><span class="p">(</span><span class="n">string</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="nb">dict</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">ch</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">dict</span>
+<span class="go">{0: &#39;P&#39;, 1: &#39;y&#39;, 2: &#39;t&#39;, 3: &#39;h&#39;, 4: &#39;o&#39;, 5: &#39;n&#39;}</span>
+</pre></div>
+</div>
+<p>Przykład 4 – wykorzystanie słownika</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">dict</span>
+<span class="gp">... </span>    <span class="k">print</span><span class="p">(</span> <span class="n">key</span><span class="p">,</span> <span class="s">&#39;=&#39;</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="p">)</span>
+<span class="gp">...</span>
+<span class="go">0 = P</span>
+<span class="go">1 = y</span>
+<span class="go">2 = t</span>
+<span class="go">3 = h</span>
+<span class="go">4 = o</span>
+<span class="go">5 = n</span>
+</pre></div>
+</div>
+<p>Przykład 5. Wykorzystanie funkcji <tt class="docutils literal"><span class="pre">zip()</span></tt>, która z dwóch lub więcej sekwencji tworzy listę krotek</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="s">&#39;abc&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">zip</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
+<span class="go">[(&#39;a&#39;, 0), (&#39;b&#39;, 1), (&#39;c&#39;, 2)]</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Lista wykorzystana w pętli for</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">ss</span><span class="p">,</span> <span class="n">st</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">t</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">print</span><span class="p">(</span> <span class="n">ss</span><span class="p">,</span> <span class="n">st</span> <span class="p">)</span>
+<span class="gp">...</span>
+<span class="go">a 0</span>
+<span class="go">b 1</span>
+<span class="go">c 2</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="instrukcje-break-i-continue">
+<h3>Instrukcje <tt class="docutils literal"><span class="pre">break</span></tt> i <tt class="docutils literal"><span class="pre">continue</span></tt><a class="headerlink" href="#instrukcje-break-i-continue" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">break</span></tt></dt>
+<dd>przerwanie wykonywania i wyjście z bieżącej pętli</dd>
+<dt><tt class="docutils literal"><span class="pre">continue</span></tt></dt>
+<dd>przerwanie wykonywania bieżącej iteracji i rozpoczęcie kolejnej iteracji bieżącej pętli</dd>
+</dl>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">word</span> <span class="o">=</span> <span class="s">&quot;Pithon. Szkolenie&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">string</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">word</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">if</span> <span class="n">ch</span> <span class="o">==</span> <span class="s">&#39;i&#39;</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="n">string</span> <span class="o">+=</span> <span class="s">&#39;y&#39;</span>
+<span class="gp">... </span>        <span class="k">continue</span>
+<span class="gp">... </span>    <span class="k">if</span> <span class="n">ch</span> <span class="o">==</span> <span class="s">&#39; &#39;</span><span class="p">:</span>
+<span class="gp">... </span>      <span class="k">break</span>
+<span class="gp">... </span>    <span class="n">string</span> <span class="o">+=</span> <span class="n">ch</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">string</span>
+<span class="go">Python.</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="instrukcja-for-else">
+<h3>Instrukcja <tt class="docutils literal"><span class="pre">for-else</span></tt><a class="headerlink" href="#instrukcja-for-else" title="Permalink to this headline">¶</a></h3>
+<p>W języku Python można użyć instrukcji <tt class="docutils literal"><span class="pre">else</span></tt> w pętli <tt class="docutils literal"><span class="pre">for</span></tt>.
+Blok występujący po <tt class="docutils literal"><span class="pre">else</span></tt> wykona się jeśli wewnątrz pętli <tt class="docutils literal"><span class="pre">for</span></tt> nie wystąpiła instrukcja <tt class="docutils literal"><span class="pre">break</span></tt>.</p>
+<p>Czyli kod</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">broke_out</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">seq</span><span class="p">:</span>
+    <span class="n">do_something</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">condition</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+        <span class="n">broke_out</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="k">break</span>
+    <span class="n">do_something_else</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">broke_out</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span> <span class="s">&quot;I didn&#39;t break out&quot;</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>można zastąpić kodem</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">seq</span><span class="p">:</span>
+    <span class="n">do_something</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">condition</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+        <span class="k">break</span>
+    <span class="n">do_something_else</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span> <span class="s">&quot;I didn&#39;t break out&quot;</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="obsluga-bledow">
+<h2>Obsługa błędów<a class="headerlink" href="#obsluga-bledow" title="Permalink to this headline">¶</a></h2>
+<p>Jeśli w trakcie działania programu wystąpi zgłoszenie nieobsłużonego wyjątku, Python zatrzyma wykonywanie programu i wyświetli informacje o ostatnich wywołaniach.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="mi">10</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">0</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">?</span>
+<span class="gr">ZeroDivisionError</span>: <span class="n">integer division or modulo by zero</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mi">4</span> <span class="o">+</span> <span class="n">spam</span><span class="o">*</span><span class="mi">3</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">?</span>
+<span class="gr">NameError</span>: <span class="n">name &#39;spam&#39; is not defined</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="s">&#39;2&#39;</span> <span class="o">+</span> <span class="mi">2</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">?</span>
+<span class="gr">TypeError</span>: <span class="n">cannot concatenate &#39;str&#39; and &#39;int&#39; objects</span>
+</pre></div>
+</div>
+<p>Informacje o ostatnich wywołaniach (<em>backtraces</em>) powinny być odczytywane od ostatniego wiersza do pierwszego.
+W ostatnim wierszu podany jest nieobsłużony wyjątek, który został zgłoszony.
+Powyżej znajduje się nazwa pliku, numer wiersza, nazwa funkcji oraz wiersz, który spowodował zgłoszenie wyjątku.</p>
+<p>Obsługa błędów jest wykonywana poprzez wykorzystanie wyjątków, które są ujmowane w bloki <tt class="docutils literal"><span class="pre">try</span></tt> i obsługiwane w blokach <tt class="docutils literal"><span class="pre">except</span></tt>.
+Jeśli napotykany jest błąd, wykonywanie kodu z bloku <tt class="docutils literal"><span class="pre">try</span></tt> jest zatrzymywane i przenoszone do bloku <tt class="docutils literal"><span class="pre">except</span></tt>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">try</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="n">x</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s">&quot;Please enter a number: &quot;</span><span class="p">))</span>
+<span class="gp">... </span>        <span class="k">break</span>
+<span class="gp">... </span>    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">,</span> <span class="n">error</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="k">print</span><span class="p">(</span> <span class="s">&quot;Oops!&quot;</span><span class="p">,</span> <span class="n">error</span><span class="p">,</span> <span class="s">&quot;Try again...&quot;</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>Wartość typu wyjątku odnosi się albo do wyjątków wbudowanych albo do samodzielnie zdefiniowanego obiektu wyjątku.
+Wartość <tt class="docutils literal"><span class="pre">error</span></tt> jest zmienną, która przechwytuje dane zwracane przez wyjątek.
+Blok <tt class="docutils literal"><span class="pre">try</span></tt> obsługuje także wykorzystywanie bloku <tt class="docutils literal"><span class="pre">else</span></tt> po ostatnim bloku <tt class="docutils literal"><span class="pre">except</span></tt>.
+Blok <tt class="docutils literal"><span class="pre">else</span></tt> jest wykonywany, jeśli blok <tt class="docutils literal"><span class="pre">try</span></tt> zakończy działanie bez otrzymania wyjątku.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">try</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;plik.txt&quot;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
+<span class="gp">... </span><span class="k">except</span> <span class="ne">IOError</span><span class="p">,</span> <span class="n">error</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">print</span><span class="p">(</span> <span class="n">error</span> <span class="p">)</span>
+<span class="gp">... </span><span class="k">else</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">print</span><span class="p">(</span> <span class="s">&#39;plik.txt has&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()),</span> <span class="s">&#39;lines&#39;</span> <span class="p">)</span>
+<span class="gp">... </span>    <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Blok except może obsługiwać wiele typów wyjątków:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="o">...</span> <span class="k">except</span> <span class="p">(</span><span class="ne">RuntimeError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">,</span> <span class="ne">NameError</span><span class="p">):</span>
+<span class="o">...</span>     <span class="k">pass</span>
+</pre></div>
+</div>
+<div class="section" id="podstawowe-typy-bledow">
+<h3>Podstawowe typy błędów<a class="headerlink" href="#podstawowe-typy-bledow" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="67%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Typ</th>
+<th class="head">Opis</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">Exception</span></tt></td>
+<td>Klasa bazowa dla wszystkich klas opisujących błędy</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">KeyError</span></tt></td>
+<td>Próba użycia nieistniejącego klucza w słowniku</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">ValueError</span></tt></td>
+<td>Wyszukiwanie w liście nieistniejącej wartości</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">AttributeError</span></tt></td>
+<td>Wywołanie nieistniejącej metody obiektu</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">NameError</span></tt></td>
+<td>Użycie nieistniejącej zmiennej</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">TypeError</span></tt></td>
+<td>Mieszanie niezgodnych typów danych</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">IOError</span></tt></td>
+<td>Błąd operacji we/wy</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">ZeroDivisionError</span></tt></td>
+<td>Błąd dzielenia przez zero</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">SyntaxError</span></tt></td>
+<td>Błąd składni</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">IndexError</span></tt></td>
+<td>Odwołanie do nieistniejącego indeksu sekwencji</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="zglaszanie-wyjatkow">
+<h3>Zgłaszanie wyjątków<a class="headerlink" href="#zglaszanie-wyjatkow" title="Permalink to this headline">¶</a></h3>
+<p>Wyjątki mogą być zgłaszane przy pomocy instrukcji <tt class="docutils literal"><span class="pre">raise</span></tt>.</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">raise</span> <span class="ne">NameError</span><span class="p">(</span><span class="s">&#39;HiThere&#39;</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">?</span>
+<span class="gr">NameError</span>: <span class="n">HiThere</span>
+</pre></div>
+</div>
+<p>Blok <tt class="docutils literal"><span class="pre">finally</span></tt> służy do sprzątania zasobów, gdy zgłoszona zostanie sytuacja wyjątkowa.</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">try</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">raise</span> <span class="ne">KeyboardInterrupt</span>
+<span class="gp">... </span><span class="k">finally</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">print</span><span class="p">(</span> <span class="s">&#39;Clean-up!&#39;</span> <span class="p">)</span>
+
+<span class="go">Clean-up!</span>
+<span class="nc">KeyboardInterrupt</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="pelna-skladnia-obslugi-wyjatkow">
+<h3>Pełna składnia obsługi wyjątków<a class="headerlink" href="#pelna-skladnia-obslugi-wyjatkow" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">try</span><span class="p">:</span>
+    <span class="n">wykonaj_to_dzialanie</span><span class="p">()</span>
+<span class="k">except</span> <span class="n">name1</span><span class="p">:</span>
+    <span class="n">wykonaj_jesli_wyjatek_name1</span><span class="p">()</span>
+<span class="k">except</span> <span class="n">name2</span><span class="p">,</span> <span class="n">name3</span><span class="p">:</span>
+    <span class="n">wykonaj_jesli_wyjatek_name1_lub_name2</span><span class="p">()</span>
+<span class="k">except</span> <span class="n">name4</span> <span class="k">as</span> <span class="n">data</span><span class="p">:</span>
+    <span class="n">wykonaj_plus_dane_w</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">wykonaj_jesli_brak_wyjatku</span><span class="p">()</span>
+<span class="k">finally</span><span class="p">:</span>
+    <span class="n">zawsze_wykonaj</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="zarzadzanie-typami-danych">
+<h2>Zarządzanie typami danych<a class="headerlink" href="#zarzadzanie-typami-danych" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="typy-sekwencyjne">
+<h3>Typy sekwencyjne<a class="headerlink" href="#typy-sekwencyjne" title="Permalink to this headline">¶</a></h3>
+<p>Typy sekwencyjne w Pythonie są <strong>iterowalne</strong>.
+Obiekty można przeglądać element po elemencie (np. w pętli <tt class="docutils literal"><span class="pre">for</span></tt>).
+Sekwencje umożliwiają również dostęp do dowolnego elementu za pomocą operacji indeksowania <tt class="docutils literal"><span class="pre">[]</span></tt>.</p>
+<dl class="docutils">
+<dt>Podstawowymi typami sekwencyjnymi są:</dt>
+<dd><ul class="first last simple">
+<li><tt class="docutils literal"><span class="pre">str</span></tt>, <tt class="docutils literal"><span class="pre">unicode</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">list</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">tuple</span></tt></li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="lista">
+<h3>Lista<a class="headerlink" href="#lista" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="index-7">
+<dt>Lista (<tt class="docutils literal"><span class="pre">list</span></tt>)</dt>
+<dd>uporządkowany zbiór obiektów</dd>
+</dl>
+<ul class="simple">
+<li>Lista może dynamicznie rosnąć,  by obsługiwać dodawanie nowych obiektów</li>
+<li>Listy mogą przechowywać obiekty różnych typów</li>
+<li>Elementy listy są dostępne za pomocą indeksu rozpoczynającego się od zera i będącego nieujemną liczbą całkowitą</li>
+</ul>
+<div class="section" id="definiowanie-listy">
+<h4>Definiowanie listy<a class="headerlink" href="#definiowanie-listy" title="Permalink to this headline">¶</a></h4>
+<p>Definiowanie listy w Pythonie odbywa się poprzez przypisanie pewnej liczby obiektów Pythona do zmiennej za pomocą operatora <tt class="docutils literal"><span class="pre">=</span></tt>.
+Lista musi być zawarta w nawiasach kwadratowych i może zawierać dowolny wybór obiektów Pythona.
+Możliwe jest tworzenie zarówno list homogenicznych jak i heterogenicznych.
+Lista pusta jest definiowana jako <tt class="docutils literal"><span class="pre">[]</span></tt>.</p>
+<p>Przykład:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">emptyList</span> <span class="o">=</span> <span class="p">[]</span> <span class="c"># Lista pusta</span>
+<span class="n">numList</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2000</span><span class="p">,</span> <span class="mi">2003</span><span class="p">,</span> <span class="mi">2005</span><span class="p">,</span> <span class="mi">2006</span><span class="p">]</span>
+<span class="n">stringList</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;Ważny&quot;</span><span class="p">,</span> <span class="s">&quot;kod&quot;</span><span class="p">,</span> <span class="s">&quot;Pythona&quot;</span><span class="p">]</span>
+<span class="n">mixedList</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s">&quot;trzy&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="n">subList</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;Python&quot;</span><span class="p">,</span> <span class="s">&quot;InfoTraining&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s">&quot;Szkolenie&quot;</span><span class="p">,</span> <span class="mi">2009</span><span class="p">]]</span>
+<span class="n">listList</span> <span class="o">=</span> <span class="p">[</span><span class="n">numList</span><span class="p">,</span> <span class="n">stringList</span><span class="p">,</span> <span class="n">mixedList</span><span class="p">,</span> <span class="n">subList</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">listList</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">x</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="k">print</span> <span class="p">(</span><span class="n">y</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="nb">basestring</span><span class="p">):</span>
+            <span class="k">print</span> <span class="p">(</span><span class="s">&quot;Łańcuch znaków:&quot;</span> <span class="o">+</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>2001
+2004
+2006
+2007
+Łańcuch znaków: Ważny
+Łańcuch znaków: kod
+Łańcuch znaków: Pythona
+2
+3
+Łańcuch znaków: trzy
+5
+Łańcuch znaków: Python
+Łańcuch znaków: InfoTraining
+</pre></div>
+</div>
+</div>
+<div class="section" id="dostep-do-listy">
+<h4>Dostęp do listy<a class="headerlink" href="#dostep-do-listy" title="Permalink to this headline">¶</a></h4>
+<p>Dostęp do elementów listy odbywa się za pomocą indeksu rozpoczynającego się od zera.
+Python pozwala na wykorzystanie indeksów ujemnych w dostępie do listy od końca zamiast od początku.
+Jeśli element listy także jest listą, dostęp do jej elementów odbywa się poprzez dodanie na końcu nawiasów indeksujących, w sposób podobny do dostępu do elementów wielowymiarowej tablicy.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># Wszystkie elementy</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">numList</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span> <span class="p">)</span>
+
+<span class="c"># Niektóre elementy</span>
+<span class="k">print</span><span class="p">(</span> <span class="n">stringList</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s">&#39; &#39;</span> <span class="o">+</span> <span class="n">stringList</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s">&#39; &#39;</span> <span class="o">+</span> <span class="n">stringList</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="p">)</span>
+
+<span class="c"># Indeksy ujemne</span>
+<span class="k">print</span><span class="p">(</span> <span class="n">stringList</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="p">)</span>
+
+<span class="c"># Dostęp do elementów z podlist</span>
+<span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">subList</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span> <span class="n">subList</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>2001
+2004
+2006
+2007
+Ważny kod Pythona
+kod
+Wydano
+</pre></div>
+</div>
+</div>
+<div class="section" id="dlugosc-listy">
+<h4>Długość listy<a class="headerlink" href="#dlugosc-listy" title="Permalink to this headline">¶</a></h4>
+<dl class="function">
+<dt id="len">
+<tt class="descname">len</tt><big>(</big><em>sequence</em><big>)</big><a class="headerlink" href="#len" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ilość elementów przechowywanych w liście jest zwracana przy pomocy funkcji wbudowanej <tt class="docutils literal"><span class="pre">len</span></tt>.</p>
+</dd></dl>
+
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">numList</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2000</span><span class="p">,</span> <span class="mi">2003</span><span class="p">,</span> <span class="mi">2005</span><span class="p">,</span> <span class="mi">2006</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">numList</span><span class="p">)</span>
+<span class="go">4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">emptyList</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">emptyList</span><span class="p">)</span>
+<span class="go">0</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="dodawanie-i-usuwanie-elementow-listy">
+<h4>Dodawanie i usuwanie elementów listy<a class="headerlink" href="#dodawanie-i-usuwanie-elementow-listy" title="Permalink to this headline">¶</a></h4>
+<dl class="function">
+<dt id="append">
+<tt class="descname">append</tt><big>(</big><em>item</em><big>)</big><a class="headerlink" href="#append" title="Permalink to this definition">¶</a></dt>
+<dd><p>metoda ta przyjmuje pojedynczy element item jako jedyny parametr i dodaje go na końcu listy. Elementem może być dowolny obiekt Pythona, także inna lista. Jeśli określi się listę jako parametr, lista dodawana jest w całości jako pojedynczy element bieżącej listy.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="extend">
+<tt class="descname">extend</tt><big>(</big><em>list</em><big>)</big><a class="headerlink" href="#extend" title="Permalink to this definition">¶</a></dt>
+<dd><p>jednoczesne dodawanie kilku elementów przechowywanych w innej liście list. Metoda ta jako argument przyjmuje tylko listę. Każdy element nowej listy zostanie dodany jako osobny element do starej listy.</p>
+</dd></dl>
+
+<div class="highlight-pycon"><div class="highlight"><pre><span class="go">list1.append(&quot;Cztery&quot;)</span>
+<span class="go">list2 = [&quot;Pięć&quot;, &quot;Sześć&quot;]</span>
+<span class="go">list1.extend(list2)</span>
+</pre></div>
+</div>
+<p>Można także dodać jedną bądź więcej list do istniejącej listy za pomocą operatora <tt class="docutils literal"><span class="pre">+=</span></tt>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">list1</span> <span class="o">+=</span> <span class="n">list2</span>
+</pre></div>
+</div>
+<dl class="function">
+<dt id="insert">
+<tt class="descname">insert</tt><big>(</big><em>index</em>, <em>item</em><big>)</big><a class="headerlink" href="#insert" title="Permalink to this definition">¶</a></dt>
+<dd><p>metoda przyjmuje jako swój drugi parametr pojedynczy obiekt item i wstawia go do listy pod indeksem index określonym w pierwszym argumencie.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pop">
+<tt class="descname">pop</tt><big>(</big><em>index</em><big>)</big><a class="headerlink" href="#pop" title="Permalink to this definition">¶</a></dt>
+<dd><p>metoda usuwa element o indeksie index.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="remove">
+<tt class="descname">remove</tt><big>(</big><em>item</em><big>)</big><a class="headerlink" href="#remove" title="Permalink to this definition">¶</a></dt>
+<dd><p>metoda przeszukuje listę i usuwa pierwszy odnaleziony element item.</p>
+</dd></dl>
+
+<div class="highlight-python"><div class="highlight"><pre><span class="n">list1</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s">&quot;Dwa i 1/2&quot;</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">list1</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">list1</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s">&quot;Pięć&quot;</span><span class="p">)</span>
+<span class="n">list1</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s">&quot;Sześć&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Przykład:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">list1</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;Raz&quot;</span><span class="p">,</span> <span class="s">&quot;Dwa&quot;</span><span class="p">,</span> <span class="s">&quot;Trzy&quot;</span><span class="p">]</span>
+<span class="n">list2</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;Pięć&quot;</span><span class="p">,</span> <span class="s">&quot;Sześć&quot;</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span> <span class="n">list1</span> <span class="p">)</span>
+
+<span class="c"># Dodanie elementu</span>
+<span class="n">list1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;Cztery&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span> <span class="n">list1</span> <span class="p">)</span>
+
+<span class="c"># Wstawienie elementu pod danym indeksem</span>
+<span class="n">list1</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s">&quot;Dwa i 1/2&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span> <span class="n">list1</span> <span class="p">)</span>
+
+<span class="c"># Rozszerzenie za pomocą listy</span>
+<span class="n">list1</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">list2</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span> <span class="n">list1</span> <span class="p">)</span>
+
+<span class="c"># Usunięcie elementu o wskazanym indeksie</span>
+<span class="k">print</span> <span class="n">list1</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span> <span class="n">list1</span> <span class="p">)</span>
+
+<span class="c"># Usunięcie elementu</span>
+<span class="n">list1</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s">&quot;Pięć&quot;</span><span class="p">)</span>
+<span class="n">list1</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s">&quot;Sześć&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span> <span class="n">list1</span> <span class="p">)</span>
+
+<span class="c"># Operatory</span>
+<span class="n">list1</span> <span class="o">+=</span> <span class="n">list2</span>
+<span class="k">print</span><span class="p">(</span> <span class="n">list1</span> <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>[&#39;Raz&#39;, &#39;Dwa&#39;, &#39;Trzy&#39;]
+[&#39;Raz&#39;, &#39;Dwa&#39;, &#39;Trzy&#39;, &#39;Cztery&#39;]
+[&#39;Raz&#39;, &#39;Dwa&#39;, &#39;Dwa i 1/2&#39;, &#39;Trzy&#39;, &#39;Cztery&#39;]
+[&#39;Raz&#39;, &#39;Dwa&#39;, &#39;Dwa i 1/2&#39;, &#39;Trzy&#39;, &#39;Cztery&#39;, &#39;Pięć&#39;, &#39;Sześć&#39;]
+Dwa i 1/2
+[&#39;Raz&#39;, &#39;Dwa&#39;, &#39;Trzy&#39;, &#39;Cztery&#39;, &#39;Pięć&#39;, &#39;Sześć&#39;]
+[&#39;Raz&#39;, &#39;Dwa&#39;, &#39;Trzy&#39;, &#39;Cztery&#39;]
+[&#39;Raz&#39;, &#39;Dwa&#39;, &#39;Trzy&#39;, &#39;Cztery&#39;, &#39;Pięć&#39;, &#39;Sześć&#39;]
+</pre></div>
+</div>
+</div>
+<div class="section" id="sortowanie-listy">
+<h4>Sortowanie listy<a class="headerlink" href="#sortowanie-listy" title="Permalink to this headline">¶</a></h4>
+<dl class="function">
+<dt id="sort">
+<tt class="descname">sort</tt><big>(</big><em>key=None</em>, <em>reverse=False</em><big>)</big><a class="headerlink" href="#sort" title="Permalink to this definition">¶</a></dt>
+<dd><p>metoda sortująca elementy listy wg wartości (in-place).
+Metoda <tt class="docutils literal"><span class="pre">sort</span></tt> może przyjmować argument o nazwie <tt class="docutils literal"><span class="pre">key</span></tt> będący funkcją.
+Funkcja ta powinna przyjmować jeden argument, który będzie używany do stworzenia klucza dla każdego obiektu listy.
+Klucz ten będzie wykorzystywany do sortowania listy w miejsce wartości tych samych obiektów.</p>
+</dd></dl>
+
+<p>Sortowanie w odwrotnej kolejności jest możliwe z użyciem słowa kluczowego <tt class="docutils literal"><span class="pre">reverse</span></tt> jako argumentu metody sort:</p>
+<blockquote>
+<div><ul class="simple">
+<li>reverse jest typu <tt class="docutils literal"><span class="pre">Boolean</span></tt></li>
+<li>ustawione na <tt class="docutils literal"><span class="pre">True</span></tt> - lista sortowana w odwrotnej kolejności</li>
+<li>słowo kluczowe <tt class="docutils literal"><span class="pre">reverse</span></tt> może być używane wraz z funkcjami porównania lub klucza</li>
+</ul>
+</div></blockquote>
+<dl class="function">
+<dt id="reverse">
+<tt class="descname">reverse</tt><big>(</big><big>)</big><a class="headerlink" href="#reverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>metoda używana do odwrócenia kolejności elementów listy bez ich sortowania.</p>
+</dd></dl>
+
+<div class="highlight-python"><div class="highlight"><pre><span class="n">names</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+<span class="n">names</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Przykład:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># Sortowanie</span>
+<span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;ala&quot;</span><span class="p">,</span> <span class="s">&quot;Ola&quot;</span><span class="p">,</span> <span class="s">&quot;Zenon&quot;</span><span class="p">,</span> <span class="s">&quot;Artur&quot;</span><span class="p">,</span> <span class="s">&quot;beata&quot;</span><span class="p">,</span> <span class="s">&quot;Grzegorz&quot;</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span> <span class="s">&quot;names:&quot;</span><span class="p">,</span> <span class="n">names</span> <span class="p">)</span>
+
+<span class="c"># Sortowanie z uwzglednieniem wielkosci liter</span>
+<span class="n">names</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span> <span class="s">&quot;names.sort():&quot;</span><span class="p">,</span> <span class="n">names</span> <span class="p">)</span>
+
+<span class="c"># Sortowanie bez uwzglednienia wielkosci liter</span>
+<span class="n">names</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="nb">str</span><span class="o">.</span><span class="n">upper</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span> <span class="s">&quot;names.sort(key=upper):&quot;</span><span class="p">,</span> <span class="n">names</span> <span class="p">)</span>
+
+<span class="c"># Sortowanie malejace wg dlugosci imion</span>
+<span class="n">names</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="nb">len</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span> <span class="s">&quot;names.sort(reverse=True, key=len):&quot;</span><span class="p">,</span> <span class="n">names</span> <span class="p">)</span>
+
+<span class="c"># Odwrócenie kolejności</span>
+<span class="n">names</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span> <span class="s">&quot;names.reverse:&quot;</span><span class="p">,</span> <span class="n">names</span> <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>names: [&#39;ala&#39;, &#39;Ola&#39;, &#39;Zenon&#39;, &#39;Artur&#39;, &#39;beata&#39;, &#39;Grzegorz&#39;]
+names.sort(): [&#39;Artur&#39;, &#39;Grzegorz&#39;, &#39;Ola&#39;, &#39;Zenon&#39;, &#39;ala&#39;, &#39;beata&#39;]
+names.sort(key=upper): [&#39;ala&#39;, &#39;Artur&#39;, &#39;beata&#39;, &#39;Grzegorz&#39;, &#39;Ola&#39;, &#39;Zenon&#39;]
+names.sort(reverse=True, key=len): [&#39;Grzegorz&#39;, &#39;Artur&#39;, &#39;beata&#39;, &#39;Zenon&#39;,
+&#39;ala&#39;, &#39;Ola&#39;]
+names.reverse: [&#39;Ola&#39;, &#39;ala&#39;, &#39;Zenon&#39;, &#39;beata&#39;, &#39;Artur&#39;, &#39;Grzegorz&#39;]
+</pre></div>
+</div>
+</div>
+<div class="section" id="pozostale-metody-listy">
+<h4>Pozostałe metody listy<a class="headerlink" href="#pozostale-metody-listy" title="Permalink to this headline">¶</a></h4>
+<dl class="function">
+<dt id="count">
+<tt class="descname">count</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Zwraca ilość wystąpień danej wartości w liście</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="index">
+<tt class="descname">index</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Zwraca indeks danej wartości w liście. Jeżeli wartość nie znajduje się w liście zgłaszany jest wyjątek <tt class="docutils literal"><span class="pre">ValueError</span></tt></p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<tt class="descname">insert</tt><big>(</big><em>pos</em>, <em>value</em><big>)</big></dt>
+<dd><p>Wstawia do listy wartość <tt class="docutils literal"><span class="pre">value</span></tt> przed element o indeksie <tt class="docutils literal"><span class="pre">pos</span></tt>.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="wycinek-listy">
+<h4>Wycinek listy<a class="headerlink" href="#wycinek-listy" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils" id="index-8">
+<dt>Wycinek (<em>slice</em>)</dt>
+<dd><blockquote class="first">
+<div>podzbiór listy</div></blockquote>
+<ul class="last simple">
+<li>Wycinek otrzymuje się poprzez odwołanie do listy i określenie dwóch rozdzielonych przecinkiem indeksów, które odnoszą się do elementów znajdujących się pomiędzy indeksami, a nie do jednego indeksu</li>
+<li>Pierwsza liczba odnosi się do elementu listy, od którego należy rozpocząć, a druga - element, na którym należy zakończyć</li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">firstHalf</span> <span class="o">=</span> <span class="n">monthList</span><span class="p">[</span> <span class="p">:</span> <span class="n">halfCount</span><span class="p">]</span>
+<span class="n">secondHalf</span> <span class="o">=</span> <span class="n">monthList</span><span class="p">[</span><span class="n">halfCount</span> <span class="p">:</span> <span class="p">]</span>
+<span class="n">wordCount</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">firstHalf</span><span class="p">)</span>
+<span class="n">middleStart</span> <span class="o">=</span> <span class="n">wordCount</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">middleHalf</span> <span class="o">=</span> <span class="n">monthList</span><span class="p">[</span><span class="n">middleStart</span> <span class="p">:</span> <span class="n">middleStart</span><span class="o">+</span><span class="n">halfCount</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Wycinki zwracane są jako typy listy i dostęp do nich oraz przypisanie odbywają się w analogiczny sposób.
+Python umożliwia wykorzystanie indeksów ujemnych w celu indeksowania od końca w momencie wyodrębniania wycinków.</p>
+<p>Przykład:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">monthList</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;styczeń&quot;</span><span class="p">,</span> <span class="s">&quot;luty&quot;</span><span class="p">,</span> <span class="s">&quot;marzec&quot;</span><span class="p">,</span>\
+             <span class="s">&quot;kwiecień&quot;</span><span class="p">,</span> <span class="s">&quot;maj&quot;</span><span class="p">,</span> <span class="s">&quot;czerwiec&quot;</span><span class="p">,</span> <span class="s">&quot;lipiec&quot;</span><span class="p">,</span> \
+             <span class="s">&quot;sierpień&quot;</span><span class="p">,</span> <span class="s">&quot;wrzesień&quot;</span><span class="p">,</span> <span class="s">&quot;październik&quot;</span><span class="p">,</span>\
+             <span class="s">&quot;listopad&quot;</span><span class="p">,</span> <span class="s">&quot;grudzień&quot;</span><span class="p">]</span>
+<span class="n">wordCount</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">monthList</span><span class="p">)</span>
+<span class="n">halfCount</span> <span class="o">=</span> <span class="n">wordCount</span><span class="o">/</span><span class="mi">2</span>
+<span class="c"># Wycinek początkowy</span>
+<span class="n">firstHalf</span> <span class="o">=</span> <span class="n">monthList</span><span class="p">[</span> <span class="p">:</span> <span class="n">halfCount</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span> <span class="n">firstHalf</span> <span class="p">)</span>
+<span class="c"># Wycinek końcowy</span>
+<span class="n">secondHalf</span> <span class="o">=</span> <span class="n">monthList</span><span class="p">[</span><span class="n">halfCount</span> <span class="p">:</span> <span class="p">]</span>
+<span class="k">print</span><span class="p">(</span> <span class="n">secondHalf</span> <span class="p">)</span>
+<span class="c"># Wycinek środkowy</span>
+<span class="n">wordCount</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">firstHalf</span><span class="p">)</span>
+<span class="n">middleStart</span> <span class="o">=</span> <span class="n">wordCount</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">middleHalf</span> <span class="o">=</span> <span class="n">monthList</span><span class="p">[</span><span class="n">middleStart</span> <span class="p">:</span> \
+    <span class="n">middleStart</span><span class="o">+</span><span class="n">halfCount</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span> <span class="n">middleHalf</span> <span class="p">)</span>
+<span class="c"># Indeksy ujemne</span>
+<span class="k">print</span><span class="p">(</span> <span class="n">monthList</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span> <span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="p">)</span>
+<span class="c"># Co n-ty element listy</span>
+<span class="k">print</span><span class="p">(</span> <span class="n">monthList</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">12</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">[</span><span class="s">&#39;styczeń&#39;</span><span class="p">,</span> <span class="s">&#39;luty&#39;</span><span class="p">,</span> <span class="s">&#39;marzec&#39;</span><span class="p">,</span> <span class="s">&#39;kwiecień&#39;</span><span class="p">,</span> <span class="s">&#39;maj&#39;</span><span class="p">,</span> <span class="s">&#39;czerwiec&#39;</span><span class="p">]</span>
+<span class="p">[</span><span class="s">&#39;lipiec&#39;</span><span class="p">,</span> <span class="s">&#39;sierpień&#39;</span><span class="p">,</span> <span class="s">&#39;wrzesień&#39;</span><span class="p">,</span> <span class="s">&#39;październik&#39;</span><span class="p">,</span> <span class="s">&#39;listopad&#39;</span><span class="p">,</span> <span class="s">&#39;grudzień&#39;</span><span class="p">]</span>
+<span class="p">[</span><span class="s">&#39;kwiecień&#39;</span><span class="p">,</span> <span class="s">&#39;maj&#39;</span><span class="p">,</span> <span class="s">&#39;czerwiec&#39;</span><span class="p">,</span> <span class="s">&#39;lipiec&#39;</span><span class="p">,</span> <span class="s">&#39;sierpień&#39;</span><span class="p">,</span> <span class="s">&#39;wrzesień&#39;</span><span class="p">]</span>
+<span class="p">[</span><span class="s">&#39;sierpień&#39;</span><span class="p">,</span> <span class="s">&#39;wrzesień&#39;</span><span class="p">,</span> <span class="s">&#39;październik&#39;</span><span class="p">,</span> <span class="s">&#39;listopad&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="operator-in">
+<h4>Operator in<a class="headerlink" href="#operator-in" title="Permalink to this headline">¶</a></h4>
+<p id="index-9">Na typach sekwencyjnych (lista, krotka, string, itp.) można wykonywać działania z wykorzystaniem
+operatora przynależności do zbioru <tt class="docutils literal"><span class="pre">in</span></tt> lub <tt class="docutils literal"><span class="pre">not</span> <span class="pre">in</span></tt>.</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">monthList</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;styczeń&quot;</span><span class="p">,</span> <span class="s">&quot;luty&quot;</span><span class="p">,</span> <span class="s">&quot;marzec&quot;</span><span class="p">,</span> <span class="s">&quot;kwiecień&quot;</span><span class="p">,</span> <span class="s">&quot;maj&quot;</span><span class="p">,</span> <span class="s">&quot;czerwiec&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="s">&quot;luty&quot;</span> <span class="ow">in</span> <span class="n">monthList</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="s">&quot;lipiec&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">monthList</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="krotka">
+<h3>Krotka<a class="headerlink" href="#krotka" title="Permalink to this headline">¶</a></h3>
+<p id="index-10"><strong>Krotka (tuple)</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li>Uporządkowany zbiór obiektów oparty na indeksach</li>
+<li>Wersja listy tylko do odczytu</li>
+</ul>
+</div></blockquote>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">hexStringChars</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;A&#39;</span><span class="p">,</span> <span class="s">&#39;B&#39;</span><span class="p">,</span><span class="s">&#39;C&#39;</span><span class="p">,</span> <span class="s">&#39;D&#39;</span><span class="p">,</span> <span class="s">&#39;E&#39;</span><span class="p">,</span> <span class="s">&#39;F&#39;</span><span class="p">)</span>
+<span class="n">hexStringNums</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;1&#39;</span><span class="p">,</span> <span class="s">&#39;2&#39;</span><span class="p">,</span> <span class="s">&#39;3&#39;</span><span class="p">,</span> <span class="s">&#39;4&#39;</span><span class="p">,</span> <span class="s">&#39;5&#39;</span><span class="p">,</span> <span class="s">&#39;6&#39;</span><span class="p">,</span> <span class="s">&#39;7&#39;</span><span class="p">,</span> <span class="s">&#39;8&#39;</span><span class="p">,</span> <span class="s">&#39;9&#39;</span><span class="p">,</span> <span class="s">&#39;0&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="krotka-a-lista">
+<h4>Krotka a lista<a class="headerlink" href="#krotka-a-lista" title="Permalink to this headline">¶</a></h4>
+<ol class="arabic simple">
+<li>Krotka jest niezmienna (<em>immutable</em>). Elementy nie mogą być do niej dodawane ani z niej usuwane. Dane w niej zawarte pozostaną statyczne.</li>
+<li>Krotka jest definiowana podobnie jak lista, ale umieszczana w nawiasach zwykłych, a nie kwadratowych.</li>
+<li>Krotka jest szybsza od listy pod względem dostępu i użycia.</li>
+<li>Krotka może być używana jako klucz dla słowników, a lista - nie.</li>
+<li><tt class="docutils literal"><span class="pre">list(tuple)</span></tt> - funkcja konwertująca krotkę na listę.</li>
+<li><tt class="docutils literal"><span class="pre">tuple(list)</span></tt> - funkcja konwertująca listę na krotkę.</li>
+</ol>
+</div>
+<div class="section" id="wykorzystywanie-krotek">
+<h4>Wykorzystywanie krotek<a class="headerlink" href="#wykorzystywanie-krotek" title="Permalink to this headline">¶</a></h4>
+<p>Przykład:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">hexStringChars</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;A&#39;</span><span class="p">,</span> <span class="s">&#39;B&#39;</span><span class="p">,</span><span class="s">&#39;C&#39;</span><span class="p">,</span> <span class="s">&#39;D&#39;</span><span class="p">,</span> <span class="s">&#39;E&#39;</span><span class="p">,</span> <span class="s">&#39;F&#39;</span><span class="p">)</span>
+<span class="n">hexStringNums</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;1&#39;</span><span class="p">,</span> <span class="s">&#39;2&#39;</span><span class="p">,</span> <span class="s">&#39;3&#39;</span><span class="p">,</span> <span class="s">&#39;4&#39;</span><span class="p">,</span> <span class="s">&#39;5&#39;</span><span class="p">,</span> <span class="s">&#39;6&#39;</span><span class="p">,</span> <span class="s">&#39;7&#39;</span><span class="p">,</span> <span class="s">&#39;8&#39;</span><span class="p">,</span> <span class="s">&#39;9&#39;</span><span class="p">,</span> <span class="s">&#39;0&#39;</span><span class="p">)</span>
+<span class="n">hexStrings</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;1FC&quot;</span><span class="p">,</span> <span class="s">&quot;1FG&quot;</span><span class="p">,</span> <span class="s">&quot;222&quot;</span><span class="p">,</span> <span class="s">&quot;Dziesięć&quot;</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">hexString</span> <span class="ow">in</span> <span class="n">hexStrings</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">hexString</span><span class="p">:</span>
+        <span class="k">if</span> <span class="p">((</span><span class="ow">not</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">hexStringChars</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">hexStringNums</span><span class="p">)):</span>
+            <span class="k">print</span><span class="p">(</span> <span class="n">hexString</span> <span class="o">+</span> <span class="s">&quot; nie jest szesnastkowym łańcuchem znaków.&quot;</span> <span class="p">)</span>
+            <span class="k">break</span>
+
+<span class="c"># Zamiana krotki na listę</span>
+<span class="n">tupleList</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">hexStringChars</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span> <span class="n">tupleList</span> <span class="p">)</span>
+
+<span class="c"># Zamiana listy na krotkę</span>
+<span class="n">listTuple</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">hexStrings</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span> <span class="n">listTuple</span> <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>1FG nie jest szesnastkowym łańcuchem znaków.
+Dziesięć nie jest szesnastkowym łańcuchem znaków.
+[&#39;A&#39;, &#39;B&#39;,&#39;C&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;]
+(&quot;1FC&quot;, &quot;1FG&quot;, &quot;222&quot;, &quot;Dziesięć&quot;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="slownik">
+<h3>Słownik<a class="headerlink" href="#slownik" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>Słownik (<em>dictionary</em>)</dt>
+<dd><dl class="first last docutils">
+<dt>nieuporządkowany zbiór par obiektów</dt>
+<dd><ul class="first last simple">
+<li>Para składa się z obiektu klucza oraz obiektu wartości</li>
+<li>Klucz jest używany do odszukiwania wartości drugiego obiektu</li>
+<li>Słownik zachowuje się podobnie do tablicy mieszającej (hash table)</li>
+<li>Dostęp do słownika może się odbywać za pomocą metod indeksujących</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="section" id="tworzenie-slownika">
+<h4>Tworzenie słownika<a class="headerlink" href="#tworzenie-slownika" title="Permalink to this headline">¶</a></h4>
+<p>Tworzenie słownika odbywa się poprzez przypisanie grupy wartości wraz z odpowiadającymi im kluczami do zmiennej.
+Wartościami mogą być dowolne obiekty Pythona. Klucze muszą być liczbą, łańcuchem znaków lub niezmienną krotką (<em>tuple</em>).</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">numberDict</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="s">&#39;raz&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s">&#39;dwa&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="s">&#39;trzy&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span> <span class="s">&#39;cztery&#39;</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">numberDict</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="go">&#39;raz&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">numberDict</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+<span class="go">&#39;trzy&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="relacje-w-slownikach">
+<h4>Relacje w słownikach<a class="headerlink" href="#relacje-w-slownikach" title="Permalink to this headline">¶</a></h4>
+<blockquote>
+<div><ul class="simple">
+<li>Proste słowniki składają się z relacji &#8220;jeden do jednego&#8221; pomiędzy kluczami a wartościami.</li>
+<li>Relację &#8220;jeden do wielu&#8221; można uzyskać poprzez wykorzystanie obiektów listy jako wartości w słowniku.</li>
+<li>Relację &#8220;wiele do wielu&#8221; otrzymuje się używając krotek jako kluczy i list jako wartości w słowniku.</li>
+</ul>
+</div></blockquote>
+<p>Przykład</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># Słownik - relacja 1-1</span>
+<span class="n">numberDict</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span><span class="s">&#39;raz&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span><span class="s">&#39;dwa&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span><span class="s">&#39;trzy&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span><span class="s">&#39;cztery&#39;</span><span class="p">}</span>
+
+<span class="c"># Słownik - relacja 1-N</span>
+<span class="n">phoneBook</span> <span class="o">=</span> <span class="p">{</span> <span class="s">&#39;Artur&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s">&#39;22-222-21-12&#39;</span><span class="p">,</span> <span class="s">&#39;606-32-23-11&#39;</span><span class="p">],</span>
+              <span class="s">&#39;Roger&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s">&#39;22-111-22-22&#39;</span><span class="p">,</span> <span class="s">&#39;502-455-44-44&#39;</span><span class="p">,</span> <span class="s">&#39;888-122-44-44&#39;</span><span class="p">]</span> <span class="p">}</span>
+
+<span class="c"># Słownik - relacja N-M</span>
+<span class="n">numbers</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">letters</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;a&#39;</span><span class="p">,</span><span class="s">&#39;b&#39;</span><span class="p">,</span><span class="s">&#39;c&#39;</span><span class="p">,</span><span class="s">&#39;d&#39;</span><span class="p">,</span><span class="s">&#39;e&#39;</span><span class="p">,</span><span class="s">&#39;f&#39;</span><span class="p">)</span>
+<span class="n">punct</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;.&#39;</span><span class="p">,</span> <span class="s">&#39;!&#39;</span><span class="p">,</span> <span class="s">&#39;?&#39;</span><span class="p">)</span>
+<span class="n">charSetDict</span> <span class="o">=</span> <span class="p">{</span> <span class="n">numbers</span> <span class="p">:</span> <span class="p">[],</span> <span class="n">letters</span> <span class="p">:</span> <span class="p">[],</span> <span class="n">punct</span> <span class="p">:</span> <span class="p">[]</span> <span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="dodawanie-wartosci-do-slownika">
+<h4>Dodawanie wartości do słownika<a class="headerlink" href="#dodawanie-wartosci-do-slownika" title="Permalink to this headline">¶</a></h4>
+<blockquote>
+<div><ul class="simple">
+<li>Aby dodać wartość do słownika należy ustanowić klucz, który będzie odpowiadać pewnej wartości.</li>
+<li>Jeśli wybrany klucz nie istnieje jeszcze w słowniku, to zostanie do niego dodany, a następnie przypisana zostanie do niego wartość.</li>
+<li>Jeśli klucz już istnieje, wartość obecnie do niego przypisana zostanie zastąpiona nowym obiektem wartości.</li>
+<li>Typ obiektu wartości i klucza nie muszą sobie odpowiadać i w dowolnym momencie można zastąpić wartość nowym obiektem dowolnego typu.</li>
+<li>Wielkość liter w kluczach słownika ma znaczenie.</li>
+</ul>
+</div></blockquote>
+<p>Przykład:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">tel</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;jack&#39;</span><span class="p">:</span> <span class="mi">4098</span><span class="p">,</span> <span class="s">&#39;sape&#39;</span><span class="p">:</span> <span class="mi">4139</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tel</span><span class="p">[</span><span class="s">&#39;guido&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4127</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tel</span>
+<span class="go">{&#39;sape&#39;: 4139, &#39;guido&#39;: 4127, &#39;jack&#39;: 4098}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tel</span><span class="p">[</span><span class="s">&#39;jack&#39;</span><span class="p">]</span> <span class="mi">4098</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">del</span> <span class="n">tel</span><span class="p">[</span><span class="s">&#39;sape&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tel</span><span class="p">[</span><span class="s">&#39;irv&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4127</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tel</span>
+<span class="go">{&#39;guido&#39;: 4127, &#39;irv&#39;: 4127, &#39;jack&#39;: 4098}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tel</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+<span class="go"> [&#39;guido&#39;, &#39;irv&#39;, &#39;jack&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="s">&#39;guido&#39;</span> <span class="ow">in</span> <span class="n">tel</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="pobieranie-wartosci-ze-slownika">
+<h4>Pobieranie wartości ze słownika<a class="headerlink" href="#pobieranie-wartosci-ze-slownika" title="Permalink to this headline">¶</a></h4>
+<p>Bezpośredni dostęp do wartości za pomocą powiązanego z nią klucza w nawiasach kwadratowych <tt class="docutils literal"><span class="pre">[]</span></tt> następujących po zmiennej słownika.</p>
+<dl class="function">
+<dt id="get">
+<tt class="descname">get</tt><big>(</big><em>key</em><span class="optional">[</span>, <em>d=None</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#get" title="Permalink to this definition">¶</a></dt>
+<dd><p>zwraca wartość skojarzoną z kluczem. Jeśli klucz nie istnieje zwraca d.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="values">
+<tt class="descname">values</tt><big>(</big><big>)</big><a class="headerlink" href="#values" title="Permalink to this definition">¶</a></dt>
+<dd><p>zwraca listę obiektów, które są wartościami słownika.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="keys">
+<tt class="descname">keys</tt><big>(</big><big>)</big><a class="headerlink" href="#keys" title="Permalink to this definition">¶</a></dt>
+<dd><p>zwraca listę obiektów, które są używane jako klucze.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="items">
+<tt class="descname">items</tt><big>(</big><big>)</big><a class="headerlink" href="#items" title="Permalink to this definition">¶</a></dt>
+<dd><p>metoda zwraca listę zawierającą dwuelementowe krotki dla każdej pary klucza i wartości ze słownika.</p>
+</dd></dl>
+
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">tel</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;sape&#39;</span><span class="p">:</span> <span class="mi">4139</span><span class="p">,</span> <span class="s">&#39;guido&#39;</span><span class="p">:</span> <span class="mi">4127</span><span class="p">,</span> <span class="s">&#39;jack&#39;</span><span class="p">:</span> <span class="mi">4098</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tel</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;john&#39;</span><span class="p">,</span> <span class="s">&#39;unknown&#39;</span><span class="p">)</span>
+<span class="go">&#39;unknown&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tel</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+<span class="go"> [4139, 4098, 4127]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tel</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+<span class="go"> [&#39;sape&#39;, &#39;jack&#39;, &#39;guido&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tel</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+<span class="go"> [(&#39;sape&#39;, 4139), (&#39;jack&#39;, 4098), (&#39;guido&#39;, 4127)]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="pozostale-metody">
+<h4>Pozostałe metody<a class="headerlink" href="#pozostale-metody" title="Permalink to this headline">¶</a></h4>
+<dl class="function">
+<dt id="clear">
+<tt class="descname">clear</tt><big>(</big><big>)</big><a class="headerlink" href="#clear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Usuwa wszystkie wpisy ze słownika</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="copy">
+<tt class="descname">copy</tt><big>(</big><big>)</big><a class="headerlink" href="#copy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Zwraca płytką kopię słownika</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="fromkeys">
+<tt class="descname">fromkeys</tt><big>(</big><span class="optional">[</span><em>key1</em>, <em>key2</em>, <em>...</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#fromkeys" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tworzy nowy słownik z kluczami wymienionymi na liście przekazanej jako argument. Wartości są ustawione na <tt class="docutils literal"><span class="pre">None</span></tt></p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<tt class="descname">pop</tt><big>(</big><em>key</em><big>)</big></dt>
+<dd><p>Odczytuje wartość skojarzoną z kluczem key a następnie usuwa wpis ze słownika</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="setdefault">
+<tt class="descname">setdefault</tt><big>(</big><em>key</em>, <em>default</em><big>)</big><a class="headerlink" href="#setdefault" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wstawia wartość do słownika, o ile nie istnieje w nim wpis o podanym kluczu</p>
+</dd></dl>
+
+</div>
+<div class="section" id="iteracja-po-slownikach">
+<h4>Iteracja po słownikach<a class="headerlink" href="#iteracja-po-slownikach" title="Permalink to this headline">¶</a></h4>
+<dl class="function">
+<dt>
+<tt class="descname">items</tt><big>(</big><big>)</big></dt>
+<dd><p>W trakcie iteracji po słowniku pary klucz-wartość mogą być dostępne przy pomocy metody <tt class="docutils literal"><span class="pre">items()</span></tt></p>
+</dd></dl>
+
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">knights</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;gallahad&#39;</span><span class="p">:</span> <span class="s">&#39;the pure&#39;</span><span class="p">,</span> <span class="s">&#39;robin&#39;</span><span class="p">:</span> <span class="s">&#39;the brave&#39;</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">knights</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<span class="gp">... </span>  <span class="k">print</span><span class="p">(</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="p">)</span>
+<span class="go">gallahad the pure</span>
+<span class="go">robin the brave</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="wycinek-slownika">
+<h4>Wycinek słownika<a class="headerlink" href="#wycinek-slownika" title="Permalink to this headline">¶</a></h4>
+<p>Używamy metody <tt class="docutils literal"><span class="pre">.keys()</span></tt> do otrzymania listy kluczy i tworzymy z listy kluczy podzbiór listy przez wycinanie lub inne operacje.
+Jeśli posiadamy konkretny podzbiór kluczy słownika. możemy pobrać wartości z oryginalnego słownika i dodać je do nowego słownika.</p>
+<p>Przykład:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">year</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span><span class="s">&#39;styczeń&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span><span class="s">&#39;luty&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span><span class="s">&#39;marzec&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span><span class="s">&#39;kwiecień&#39;</span><span class="p">,</span>\
+        <span class="mi">5</span><span class="p">:</span><span class="s">&#39;maj&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">:</span><span class="s">&#39;czerwiec&#39;</span><span class="p">,</span> <span class="mi">7</span><span class="p">:</span><span class="s">&#39;lipiec&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">:</span><span class="s">&#39;sierpień&#39;</span><span class="p">,</span>\
+        <span class="mi">9</span><span class="p">:</span><span class="s">&#39;wrzesień&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">:</span><span class="s">&#39;październik&#39;</span><span class="p">,</span> <span class="mi">11</span><span class="p">:</span><span class="s">&#39;listopad&#39;</span><span class="p">,</span>\
+        <span class="mi">12</span><span class="p">:</span><span class="s">&#39;grudzień&#39;</span><span class="p">}</span>
+
+<span class="k">print</span><span class="p">(</span> <span class="n">year</span> <span class="p">)</span>
+
+<span class="c"># Otrzymanie listy kluczy</span>
+<span class="n">months</span> <span class="o">=</span> <span class="n">year</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+
+<span class="c"># Utworzenie podzbioru kluczy</span>
+<span class="n">months</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+<span class="n">halfCount</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">months</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">half</span> <span class="o">=</span> <span class="n">months</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">halfCount</span><span class="p">]</span>
+
+<span class="c"># Utworzenie nowego słownika z podzbioru kluczy</span>
+<span class="n">firstHalf</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">half</span><span class="p">:</span>
+   <span class="n">firstHalf</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">year</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>
+
+<span class="k">print</span><span class="p">(</span> <span class="n">firstHalf</span> <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="s">&#39;styczeń&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s">&#39;luty&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="s">&#39;marzec&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span> <span class="s">&#39;kwiecień&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">:</span> <span class="s">&#39;maj&#39;</span><span class="p">,</span>
+<span class="mi">6</span><span class="p">:</span> <span class="s">&#39;czerwiec&#39;</span><span class="p">,</span> <span class="mi">7</span><span class="p">:</span> <span class="s">&#39;lipiec&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">:</span> <span class="s">&#39;sierpień&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">:</span> <span class="s">&#39;wrzesień&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">:</span> <span class="s">&#39;październik&#39;</span><span class="p">,</span>
+<span class="mi">11</span><span class="p">:</span> <span class="s">&#39;listopad&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">:</span> <span class="s">&#39;grudzień&#39;</span><span class="p">}</span>
+<span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="s">&#39;styczeń&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s">&#39;luty&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="s">&#39;marzec&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span> <span class="s">&#39;kwiecień&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">:</span> <span class="s">&#39;maj&#39;</span><span class="p">,</span>
+<span class="mi">6</span><span class="p">:</span> <span class="s">&#39;czerwiec&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="zamiana-kluczy-na-wartosci-w-slowniku">
+<h4>Zamiana kluczy na wartości w słowniku<a class="headerlink" href="#zamiana-kluczy-na-wartosci-w-slowniku" title="Permalink to this headline">¶</a></h4>
+<p>Aby zamienić w słowniku klucze z wartościami, należy dokonać iteracji przez elementy słownika za pomocą metody <tt class="docutils literal"><span class="pre">items</span></tt>, a następnie wykorzystać wartości jako klucze przypisując im oryginalne klucze w charakterze wartości.
+Wartości muszą być typami, które mogą być w Pythonie kluczami.</p>
+<p>Przykład:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">myDictionary</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;kolor&#39;</span><span class="p">:</span><span class="s">&#39;niebieski&#39;</span><span class="p">,</span> <span class="s">&#39;prędkość&#39;</span><span class="p">:</span><span class="s">&#39;szybka&#39;</span><span class="p">,</span>
+<span class="s">&#39;liczba&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">:</span><span class="s">&#39;liczba&#39;</span><span class="p">}</span>
+<span class="k">print</span><span class="p">(</span> <span class="n">myDictionary</span> <span class="p">)</span>
+
+<span class="c"># Zamiana kluczy z wartościami</span>
+<span class="n">swapDictionary</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">myDictionary</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+   <span class="n">swapDictionary</span><span class="p">[</span><span class="n">val</span><span class="p">]</span> <span class="o">=</span> <span class="n">key</span>
+
+<span class="k">print</span><span class="p">(</span> <span class="n">swapDictionary</span> <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&#39;kolor&#39;</span><span class="p">:</span> <span class="s">&#39;niebieski&#39;</span><span class="p">,</span> <span class="s">&#39;prędkość&#39;</span><span class="p">:</span> <span class="s">&#39;szybka&#39;</span><span class="p">,</span> <span class="s">&#39;liczba&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">:</span> <span class="s">&#39;liczba&#39;</span><span class="p">}</span>
+<span class="p">{</span><span class="s">&#39;niebieski&#39;</span><span class="p">:</span> <span class="s">&#39;kolor&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="s">&#39;liczba&#39;</span><span class="p">,</span> <span class="s">&#39;liczba&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s">&#39;szybka&#39;</span><span class="p">:</span> <span class="s">&#39;prędkość&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="przetwarzanie-lancuchow-znakow">
+<h2>Przetwarzanie łańcuchów znaków<a class="headerlink" href="#przetwarzanie-lancuchow-znakow" title="Permalink to this headline">¶</a></h2>
+<p>Łańcuchy znaków w Pythonie reprezentowane są z użyciem niezmiennego typu danych <tt class="docutils literal"><span class="pre">str</span></tt>, który
+przechowuje sekwencję znaków.</p>
+<dl class="docutils">
+<dt>Typ danych str można wywołać jako funkcję w celu utworzenia obiektu łańcucha znaków:</dt>
+<dd><ul class="first last simple">
+<li>Wywołanie bez argumentu powoduje zwrócenie pustego łańcucha znaków.</li>
+<li>Wywołanie z argumentem innym niż łańcuch znaków powoduje zwrócenie argumentu w formie łańcucha znaków.</li>
+<li>Wywołanie z argumentem w postaci łańcucha znaków powoduje zwrócenie kopii danego łańcucha.</li>
+</ul>
+</dd>
+</dl>
+<div class="section" id="porownywanie-lancuchow-znakow">
+<h3>Porównywanie łańcuchów znaków<a class="headerlink" href="#porownywanie-lancuchow-znakow" title="Permalink to this headline">¶</a></h3>
+<p>Łańcuchy znaków można porównywać ze sobą z użyciem prostych operacji logicznych <tt class="docutils literal"><span class="pre">&lt;</span></tt>, <tt class="docutils literal"><span class="pre">&lt;=</span></tt>, <tt class="docutils literal"><span class="pre">==</span></tt>, <tt class="docutils literal"><span class="pre">!=</span></tt>, <tt class="docutils literal"><span class="pre">&gt;</span></tt> oraz <tt class="docutils literal"><span class="pre">&gt;=</span></tt>.
+Operatory powodują porównywanie łańcuchów tekstowych w pamięci, bajt po bajcie.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">cmpStr</span> <span class="o">=</span> <span class="s">&quot;abc&quot;</span>
+<span class="n">upperStr</span> <span class="o">=</span> <span class="s">&quot;ABC&quot;</span>
+<span class="k">if</span> <span class="n">cmpStr</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">==</span> <span class="n">upperStr</span><span class="o">.</span><span class="n">upper</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span> <span class="n">upperStr</span> <span class="o">+</span> <span class="s">&quot; odpowiada &quot;</span> <span class="o">+</span> <span class="n">cmpStr</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>Metody przydatne w trakcie porównywania:</p>
+<dl class="function">
+<dt id="upper">
+<tt class="descname">upper</tt><big>(</big><big>)</big><a class="headerlink" href="#upper" title="Permalink to this definition">¶</a></dt>
+<dd><p>zwraca nowy łańcuch znaków, który składa się z wielkich liter</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="lower">
+<tt class="descname">lower</tt><big>(</big><big>)</big><a class="headerlink" href="#lower" title="Permalink to this definition">¶</a></dt>
+<dd><p>zwraca nowy łańcuch złożony z małych liter</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="capitalize">
+<tt class="descname">capitalize</tt><big>(</big><big>)</big><a class="headerlink" href="#capitalize" title="Permalink to this definition">¶</a></dt>
+<dd><p>zwraca nowy łańcuch, w którym pierwszy znak jest z wielkiej litery</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="swapcase">
+<tt class="descname">swapcase</tt><big>(</big><big>)</big><a class="headerlink" href="#swapcase" title="Permalink to this definition">¶</a></dt>
+<dd><p>zwraca nowy łańcuch, w którym wielkość liter jest odwrócona</p>
+</dd></dl>
+
+<p>Przykład:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">cmpStr</span> <span class="o">=</span> <span class="s">&quot;abc&quot;</span>
+<span class="n">upperStr</span> <span class="o">=</span> <span class="s">&quot;ABC&quot;</span>
+<span class="n">lowerStr</span> <span class="o">=</span> <span class="s">&quot;abc&quot;</span>
+<span class="k">print</span> <span class="s">&quot;Porównanie z uwzględnieniem wielkości liter&quot;</span>
+<span class="k">if</span> <span class="n">cmpStr</span> <span class="o">==</span> <span class="n">lowerStr</span><span class="p">:</span>
+   <span class="k">print</span><span class="p">(</span> <span class="n">lowerStr</span> <span class="o">+</span> <span class="s">&quot; odpowiada &quot;</span> <span class="o">+</span> <span class="n">cmpStr</span> <span class="p">)</span>
+<span class="k">if</span> <span class="n">cmpStr</span> <span class="o">==</span> <span class="n">upperStr</span><span class="p">:</span>
+   <span class="k">print</span><span class="p">(</span> <span class="n">upperStr</span> <span class="o">+</span> <span class="s">&quot; odpowiada &quot;</span> <span class="o">+</span> <span class="n">cmpStr</span> <span class="p">)</span>
+<span class="k">print</span><span class="p">(</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">Porównanie bez uwzględnienia wielkości liter&quot;</span> <span class="p">)</span>
+<span class="k">if</span> <span class="n">cmpStr</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">==</span> <span class="n">lowerStr</span><span class="o">.</span><span class="n">upper</span><span class="p">():</span>
+   <span class="k">print</span><span class="p">(</span> <span class="n">lowerStr</span> <span class="o">+</span> <span class="s">&quot; odpowiada &quot;</span> <span class="o">+</span> <span class="n">cmpStr</span> <span class="p">)</span>
+<span class="k">if</span> <span class="n">cmpStr</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">==</span> <span class="n">upperStr</span><span class="o">.</span><span class="n">upper</span><span class="p">():</span>
+   <span class="k">print</span><span class="p">(</span> <span class="n">upperStr</span> <span class="o">+</span> <span class="s">&quot; odpowiada &quot;</span> <span class="o">+</span> <span class="n">cmpStr</span> <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>Porównanie z uwzględnieniem wielkości liter
+abc odpowiada abc
+Porównanie bez uwzględnienia wielkości liter
+abc odpowiada abc
+ABC odpowiada abc
+</pre></div>
+</div>
+</div>
+<div class="section" id="segmentowanie-i-poruszanie-sie-krokami-w-lancuchu-znakow">
+<h3>Segmentowanie i poruszanie się krokami w łańcuchu znaków<a class="headerlink" href="#segmentowanie-i-poruszanie-sie-krokami-w-lancuchu-znakow" title="Permalink to this headline">¶</a></h3>
+<p>Poszczególne elementy sekwencji, a tym samym poszczególne znaki łańcucha tekstowego mogą być wyodrębnione za pomocą operatora dostępu (<tt class="docutils literal"><span class="pre">[]</span></tt>).
+Operator ten może być wykorzystywany do wyodrębnienia nie tylko pojedynczego elementu lub znaku, ale również całego segmentu (podsekwencji) elementów lub znaków. W takim kontekście operator staje się operatorem segmentowania.</p>
+<div class="section" id="wyodrebnianie-poszczegolnych-znakow">
+<h4>Wyodrębnianie poszczególnych znaków<a class="headerlink" href="#wyodrebnianie-poszczegolnych-znakow" title="Permalink to this headline">¶</a></h4>
+<p>Indeks w łańcuchu znaków rozpoczyna się od zera i osiąga wartość długości łańcucha minus jeden.
+Możliwe jest także używanie ujemnej wartości indeksu, która wskazuje pozycję obliczaną od ostatniego znaku w kierunku pierwszego.
+Indeks -1 zawsze wskazuje ostatni znak w łańcuchu.</p>
+<p>Przykład: wartości pozycji indeksu w łańcuchu znaków:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">s</span> <span class="o">=</span> <span class="s">&quot;Python&quot;</span>
+</pre></div>
+</div>
+<img alt="basic/pics/strings.png" class="align-center" src="basic/pics/strings.png" />
+<p>Przypisanie indeksu o wartości wykraczającej poza łańcuch znaków lub każdego indeksu w pustym
+łańcuchu powoduje zgłoszenie wyjątku IndexError.</p>
+</div>
+<div class="section" id="segmenty-ciagu-tekstowego">
+<h4>Segmenty ciągu tekstowego<a class="headerlink" href="#segmenty-ciagu-tekstowego" title="Permalink to this headline">¶</a></h4>
+<p>Operator segmentowania ma trzy składnie:</p>
+<blockquote>
+<div><ul class="simple">
+<li><tt class="docutils literal"><span class="pre">sekwencja[początek]</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">sekwencja[początek:koniec]</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">sekwencja[początek:koniec:krok]</span></tt></li>
+</ul>
+</div></blockquote>
+<p>Sekwencja oznacza dowolną sekwencję znaków, na przykład listę, łańcuch tekstowy lub krotkę.
+Wartości początek, koniec i krok muszą być liczbami całkowitymi lub zmiennymi przechowującymi liczby całkowite.
+Pierwsza składnia wyodrębnia element początkowy z sekwencji.
+Druga składnia powoduje wyodrębnienie segmentu rozpoczynającego się w miejscu początek o długości do miejsca koniec, ale bez tego elementu.</p>
+<blockquote>
+<div><ul class="simple">
+<li>Jeśli pominięto pierwszy indeks, przyjmowana jest jego wartość domyślna czyli 0.</li>
+<li>W przypadku pominięcia drugiego indeksu wartością domyślną jest wynik wywołania funkcji len(sekwencja).</li>
+<li>Pominięcie obydwu indeksów spowoduje wyodrębnienie (skopiowanie) całej sekwencji. Wywołanie <tt class="docutils literal"><span class="pre">s[:]</span></tt> odpowiada wywołaniu <tt class="docutils literal"><span class="pre">s[0:len(s)]</span></tt></li>
+</ul>
+</div></blockquote>
+<p>Przykład:</p>
+<img alt="basic/pics/strings_2.png" class="align-center" src="basic/pics/strings_2.png" />
+<p>Trzecia składnia powoduje pobieranie znaków co wskazany krok.</p>
+<blockquote>
+<div><ul class="simple">
+<li>Pominięcie indeksu początek powoduje przyjęcie jego wartości domyślnej (0 dla dodatniej wartości krok, - 1 dla ujemnej wartości krok).</li>
+<li>W przypadku pominięcia drugiego indeksu wartością domyślną jest wynik wywołania funkcji <tt class="docutils literal"><span class="pre">len(sekwencja)</span></tt>, o ile wartość krok nie jest ujemna. Wówczas wartość domyślna indeksu koniec będzie znajdowała się przed początkiem łańcucha znaków.</li>
+<li>Jeśli zostaną pominięte obydwa indeksów oraz wartość krok, to zostanie przyjęta domyślna wartość krok czyli 1.</li>
+<li>Niedozwolone jest stosowanie kroku o wartości 0.</li>
+</ul>
+</div></blockquote>
+<p>Przykład:</p>
+<img alt="basic/pics/strings_3.png" class="align-center" src="basic/pics/strings_3.png" />
+<p>W przykładzie użyto wartości domyślnych dla indeksów początek i koniec.
+Polecenie <tt class="docutils literal"><span class="pre">s[::-2]</span></tt> oznacza rozpoczęcie działania od ostatniego znaku i wyodrębnienie co drugiego znaku, poruszając się w kierunku początku łańcucha znaków.
+Polecenie <tt class="docutils literal"><span class="pre">s[::3]</span></tt> oznacza rozpoczęcie od pierwszego znaku i wyodrębnienie co trzeciego, poruszając się w kierunku końca łańcucha znaków.</p>
+<p>Możliwe jest także połączenie segmentowania i poruszania się krokami.</p>
+<img alt="basic/pics/strings_4.png" class="align-center" src="basic/pics/strings_4.png" />
+<p>Aby odwrócić łańcuch znaków, używamy kroku <tt class="docutils literal"><span class="pre">-1</span></tt>. Pozwala to wyodrębnić każdy znak od końca do
+początku łańcucha znaków.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">s</span> <span class="o">=</span> <span class="s">&quot;The waxwork man&quot;</span>
+<span class="k">print</span><span class="p">(</span> <span class="n">s</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>nam krowxaw ehT
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="laczenie-lancuchow-znakow">
+<h3>Łączenie łańcuchów znaków<a class="headerlink" href="#laczenie-lancuchow-znakow" title="Permalink to this headline">¶</a></h3>
+<p>Jednym ze sposobów wstawiania podłańcucha znaków do istniejącego łańcucha jest połączenie
+segmentowania z konkatenacją.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">s</span> <span class="o">=</span> <span class="s">&quot;The waxwork man&quot;</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="p">[:</span><span class="mi">12</span><span class="p">]</span> <span class="o">+</span> <span class="s">&quot;wo&quot;</span> <span class="o">+</span> <span class="n">s</span><span class="p">[</span><span class="mi">12</span><span class="p">:]</span>
+<span class="k">print</span><span class="p">(</span> <span class="n">s</span> <span class="p">)</span>
+
+<span class="n">The</span> <span class="n">waxwork</span> <span class="n">woman</span>
+</pre></div>
+</div>
+<p>Ponieważ segment &#8220;wo&#8221; znajduje się w początkowym łańcuchu znaków, ten sam efekt można
+uzyskać poprzez użycie przypisania:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">s</span><span class="o">=</span> <span class="n">s</span><span class="p">[:</span><span class="mi">12</span><span class="p">]</span> <span class="o">+</span> <span class="n">s</span><span class="p">[</span><span class="mi">7</span><span class="p">:</span><span class="mi">9</span><span class="p">]</span> <span class="o">+</span> <span class="n">s</span><span class="p">[</span><span class="mi">12</span><span class="p">:]</span>
+<span class="k">print</span><span class="p">(</span> <span class="n">s</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>Stosowanie operatora <tt class="docutils literal"><span class="pre">+</span></tt> w celu konkatenacji i operatora <tt class="docutils literal"><span class="pre">+=</span></tt> w celu dołączania nie jest efektywną metodą, zwłaszcza dla operacji na wielu łańcuchach znaków. Najlepszym rozwiązaniem będzie użycie metody <tt class="docutils literal"><span class="pre">str.join().</span></tt></p>
+</div>
+<div class="section" id="formatowanie-lancuchow">
+<h3>Formatowanie łańcuchów<a class="headerlink" href="#formatowanie-lancuchow" title="Permalink to this headline">¶</a></h3>
+<p>Formatowanie łańcuchów razem jest wykonywane poprzez zdefiniowanie nowego łańcucha z
+kodem formatu %s, a następnie dodanie dodatkowych łańcuchów jako parametrów do
+wypełnienia każdego kodu formatu.</p>
+</div>
+<div class="section" id="metoda-join-wordlist">
+<h3>Metoda <tt class="docutils literal"><span class="pre">join(wordList)</span></tt><a class="headerlink" href="#metoda-join-wordlist" title="Permalink to this headline">¶</a></h3>
+<p>Metoda join(wordList) zapewnia efektywny sposób łączenia wszystkich łańcuchów z listy.
+Każdy łańcuch jest po kolei dodawany do istniejącego łańcucha. Wykonuje operację
+string=+list[x] na każdej iteracji przez listę łańcuchów znaków. Łańcuch dodawany jako
+prefiks do każdego z elementów listy.</p>
+<p>Przykład:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">word1</span> <span class="o">=</span> <span class="s">&quot;Tylko&quot;</span>
+<span class="n">word2</span> <span class="o">=</span> <span class="s">&quot;kilka&quot;</span>
+<span class="n">word3</span> <span class="o">=</span> <span class="s">&quot;miłych&quot;</span>
+<span class="n">word4</span> <span class="o">=</span> <span class="s">&quot;słów&quot;</span>
+<span class="n">wordList</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;Tylko&quot;</span><span class="p">,</span> <span class="s">&quot;kilka&quot;</span><span class="p">,</span> <span class="s">&quot;więcej&quot;</span><span class="p">,</span> <span class="s">&quot;miłych&quot;</span><span class="p">,</span> <span class="s">&quot;słów&quot;</span><span class="p">]</span>
+
+<span class="c"># Proste łączenie za pomocą metody join</span>
+<span class="k">print</span><span class="p">(</span> <span class="s">&quot;Słowa:&quot;</span> <span class="o">+</span> <span class="n">word1</span> <span class="o">+</span> <span class="n">word2</span> <span class="o">+</span> <span class="n">word3</span> <span class="o">+</span> <span class="n">word4</span> <span class="p">)</span>
+<span class="k">print</span><span class="p">(</span> <span class="s">&quot;Lista: &quot;</span> <span class="o">+</span> <span class="s">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">wordList</span><span class="p">)</span> <span class="p">)</span>
+
+<span class="c"># Sformatowany łańcuch znaków</span>
+<span class="n">sentence</span> <span class="o">=</span> <span class="p">(</span><span class="s">&quot;Pierwsze zdanie: </span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s">.&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">word1</span><span class="p">,</span><span class="n">word2</span><span class="p">,</span><span class="n">word3</span><span class="p">,</span><span class="n">word4</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span> <span class="n">sentence</span> <span class="p">)</span>
+
+<span class="c"># Połączenie listy słów</span>
+<span class="n">sentence</span> <span class="o">=</span> <span class="s">&quot;Drugie zdanie:&quot;</span>
+<span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">wordList</span><span class="p">:</span>
+   <span class="n">sentence</span> <span class="o">+=</span> <span class="s">&quot; &quot;</span> <span class="o">+</span> <span class="n">word</span>
+<span class="n">sentence</span> <span class="o">+=</span> <span class="s">&quot;.&quot;</span>
+<span class="k">print</span><span class="p">(</span> <span class="n">sentence</span> <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>Słowa:Tylkokilkamiłychsłów
+Lista: Tylko kilka więcej miłych słów
+Pierwsze zdanie: Tylko kilka miłych słów.
+Drugie zdanie: Tylko kilka więcej miłych słów.
+</pre></div>
+</div>
+</div>
+<div class="section" id="dzielenie-lancuchow-znakow">
+<h3>Dzielenie łańcuchów znaków<a class="headerlink" href="#dzielenie-lancuchow-znakow" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="split">
+<tt class="descname">split</tt><big>(</big><em>separator</em><big>)</big><a class="headerlink" href="#split" title="Permalink to this definition">¶</a></dt>
+<dd><p>metoda przeszukuje łańcuch znaków, dzieli go przy każdym wystąpieniu znaku separatora, a następnie rozkłada na listę łańcuchów znaków.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="splitlines">
+<tt class="descname">splitlines</tt><big>(</big><em>keeplineends</em><big>)</big><a class="headerlink" href="#splitlines" title="Permalink to this definition">¶</a></dt>
+<dd><p>metoda dzieli łańcuch na każdym znaku nowej linii na listę łańcuchów przyjmując jeden argument będący wartością logiczną <tt class="docutils literal"><span class="pre">True</span></tt> lub <tt class="docutils literal"><span class="pre">False</span></tt> w celu ustalenia, czy znak nowej linii powinien być zachowany.</p>
+</dd></dl>
+
+<p>Przykład:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">sentence</span> <span class="o">=</span> <span class="s">&quot;To jest proste zdanie.&quot;</span>
+
+<span class="n">paragraph</span> <span class="o">=</span> <span class="s">&quot;To jest prosty akapit.</span><span class="se">\n\</span>
+<span class="s">Składa się on z wielu</span><span class="se">\n\</span>
+<span class="s">wierszy tekstu.&quot;</span>
+
+<span class="n">entry</span> <span class="o">=</span> <span class="s">&quot;Imię i nazwisko:Artur Borucki:Zawód:Bramkarz&quot;</span>
+
+<span class="k">print</span><span class="p">(</span> <span class="n">sentence</span><span class="o">.</span><span class="n">split</span><span class="p">()</span> <span class="p">)</span>
+<span class="k">print</span><span class="p">(</span> <span class="n">entry</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;:&#39;</span><span class="p">)</span> <span class="p">)</span>
+<span class="k">print</span><span class="p">(</span> <span class="n">paragraph</span><span class="o">.</span><span class="n">splitlines</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>[&#39;To&#39;, &#39;jest&#39;, &#39;proste&#39;, &#39;zdanie.&#39;]
+[&#39;Imię i nazwisko&#39;, &#39;Artur Borucki&#39;, &#39;Zawód&#39;, &#39;Bramkarz&#39;]
+[&#39;To jest prost akapit.\n,
+ &#39;Składa się on z wielu \n&#39;,
+ &#39;linii tekstu.&#39;]
+</pre></div>
+</div>
+</div>
+<div class="section" id="wyszukiwanie-podlancuchow-w-lancuchu">
+<h3>Wyszukiwanie podłańcuchów w łańcuchu<a class="headerlink" href="#wyszukiwanie-podlancuchow-w-lancuchu" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="find">
+<tt class="descname">find</tt><big>(</big><em>sub</em><span class="optional">[</span>, <em>start</em><span class="optional">[</span>, <em>end</em><span class="optional">]</span><span class="optional">]</span><big>)</big><a class="headerlink" href="#find" title="Permalink to this definition">¶</a></dt>
+<dd><p>jeśli metoda nie odnajdzie podłańcucha znaków, zwracane jest -1</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<tt class="descname">index</tt><big>(</big><em>sub</em><span class="optional">[</span>, <em>start</em><span class="optional">[</span>, <em>end</em><span class="optional">]</span><span class="optional">]</span><big>)</big></dt>
+<dd><p>jeśli metoda nie odnajdzie podłańcucha, generowany jest wyjątek</p>
+</dd></dl>
+
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">sub</span></tt></dt>
+<dd>szukany podłańcuch znaków</dd>
+<dt><tt class="docutils literal"><span class="pre">start,</span> <span class="pre">end</span></tt></dt>
+<dd>opcjonalne indeksy przeszukiwanego łańcucha</dd>
+</dl>
+<p>Przykład:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">searchStr</span> <span class="o">=</span> <span class="s">&quot;Czerwony Niebieski Fioletowy Zielony Niebieski Żółty Czarny&quot;</span>
+<span class="n">searchStr</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;Czerwony&quot;</span><span class="p">)</span>
+<span class="n">searchStr</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="s">&quot;Niebieski&quot;</span><span class="p">)</span>
+<span class="n">searchStr</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;Niebieski&quot;</span><span class="p">)</span>
+<span class="n">searchStr</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;Turkusowy&quot;</span><span class="p">)</span>
+<span class="n">searchStr</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s">&quot;Niebieski&quot;</span><span class="p">)</span>
+<span class="n">searchStr</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s">&quot;Niebieski&quot;</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">searchStr</span><span class="o">.</span><span class="n">rindex</span><span class="p">(</span><span class="s">&quot;Niebieski&quot;</span><span class="p">)</span>
+<span class="n">searchStr</span><span class="o">.</span><span class="n">rindex</span><span class="p">(</span><span class="s">&quot;Niebieski&quot;</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">18</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># Dane wyjściowe:</span>
+<span class="mi">0</span>
+<span class="mi">37</span>
+<span class="mi">9</span>
+<span class="o">-</span><span class="mi">1</span>
+<span class="mi">9</span>
+<span class="mi">37</span>
+<span class="mi">37</span>
+<span class="mi">9</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="wyszukiwanie-i-zastepowanie-w-lancuchach">
+<h3>Wyszukiwanie i zastępowanie w łańcuchach<a class="headerlink" href="#wyszukiwanie-i-zastepowanie-w-lancuchach" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="replace">
+<tt class="descname">replace</tt><big>(</big><em>old</em>, <em>new</em><span class="optional">[</span>, <em>maxreplace</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#replace" title="Permalink to this definition">¶</a></dt>
+<dd><p>zastępuje konkretny podłańcuch znaków nowym tekstem. Metoda przyjmuje poszukiwany łańcuch znaków jako pierwszy argument (old), a zastępujący łańcuch znaków jako drugi (new). Opcjonalnie można określić maksymalną liczbę zastąpień w trzecim argumencie <em>maxreplace</em>.</p>
+</dd></dl>
+
+<p>Przykład:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">question</span> <span class="o">=</span> <span class="s">&quot;Jaka jest prędkość lotu jaskółki bez obciążenia?&quot;</span>
+<span class="k">print</span><span class="p">(</span> <span class="n">question</span> <span class="p">)</span>
+<span class="n">question2</span> <span class="o">=</span> <span class="n">question</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;jaskółki&quot;</span><span class="p">,</span> <span class="s">&quot;europejskiej jaskółki&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span> <span class="n">question2</span> <span class="p">)</span>
+<span class="n">question3</span> <span class="o">=</span> <span class="n">question</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;jaskółki&quot;</span><span class="p">,</span> <span class="s">&quot;afrykańskiej jaskółki&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span> <span class="n">question3</span> <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>Jaka jest prędkość lotu jaskółki bez obciążenia?
+Jaka jest prędkość lotu europejskiej jaskółki bez obciążenia?
+Jaka jest prędkość lotu afrykańskiej jaskółki bez obciążenia?
+</pre></div>
+</div>
+</div>
+<div class="section" id="wyszukiwanie-lancuchow-z-prefiksem-lub-sufiksem">
+<h3>Wyszukiwanie łańcuchów z prefiksem lub sufiksem<a class="headerlink" href="#wyszukiwanie-lancuchow-z-prefiksem-lub-sufiksem" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="startswith">
+<tt class="descname">startswith</tt><big>(</big><em>prefix</em><span class="optional">[</span>, <em>start</em><span class="optional">[</span>, <em>end</em><span class="optional">]</span><span class="optional">]</span><big>)</big><a class="headerlink" href="#startswith" title="Permalink to this definition">¶</a></dt>
+<dd><p>sprawdza, czy łańcuch rozpoczyna się od właściwego prefiksu</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="endswith">
+<tt class="descname">endswith</tt><big>(</big><em>suffix</em><span class="optional">[</span>, <em>start</em><span class="optional">[</span>, <em>end</em><span class="optional">]</span><span class="optional">]</span><big>)</big><a class="headerlink" href="#endswith" title="Permalink to this definition">¶</a></dt>
+<dd><p>sprawdza, czy łańcuch kończy się właściwym sufiksem</p>
+</dd></dl>
+
+<p>Metody użyteczne do przetwarzania list plików w oparciu o rozszerzenia lub nazwy plików</p>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">prefix,</span> <span class="pre">suffix</span></tt></dt>
+<dd>łańcuch znaków wykorzystywany do porównywania z prefiksem lub sufiksem łańcucha</dd>
+<dt><tt class="docutils literal"><span class="pre">start,</span> <span class="pre">end</span></tt></dt>
+<dd>argumenty indeksujące</dd>
+</dl>
+<p>Przykład:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">os</span>
+<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s">&#39;C:</span><span class="se">\\</span><span class="s">txtfiles&#39;</span><span class="p">):</span>
+   <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s">&#39;.py&#39;</span><span class="p">):</span>
+      <span class="k">print</span><span class="p">(</span> <span class="s">&quot;Plik Pythona: &quot;</span> <span class="o">+</span> <span class="n">f</span> <span class="p">)</span>
+   <span class="k">elif</span> <span class="n">f</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s">&#39;.txt&#39;</span><span class="p">):</span>
+      <span class="k">print</span><span class="p">(</span> <span class="s">&quot;Plik tekstowy: &quot;</span> <span class="o">+</span> <span class="n">f</span> <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>Plik Pythona: comp_str.py
+Plik Pythona: join_str.py
+Plik tekstowy: output.txt
+Plik Pythona: split_str.py
+</pre></div>
+</div>
+<div class="section" id="przycinanie-lancuchow-znakow">
+<h4>Przycinanie łańcuchów znaków<a class="headerlink" href="#przycinanie-lancuchow-znakow" title="Permalink to this headline">¶</a></h4>
+<dl class="function">
+<dt id="strip">
+<tt class="descname">strip</tt><big>(</big><span class="optional">[</span><em>chrs</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#strip" title="Permalink to this definition">¶</a></dt>
+<dd><p>usuwa określone znaki z obu stron łańcucha</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="lstrip">
+<tt class="descname">lstrip</tt><big>(</big><span class="optional">[</span><em>chrs</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#lstrip" title="Permalink to this definition">¶</a></dt>
+<dd><p>usuwa tylko znaki z początku łańcucha</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="rstrip">
+<tt class="descname">rstrip</tt><big>(</big><span class="optional">[</span><em>chrs</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#rstrip" title="Permalink to this definition">¶</a></dt>
+<dd><p>usuwa tylko znaki z końca łańcucha</p>
+</dd></dl>
+
+<p>Przykład:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">string</span>
+<span class="n">badSentence</span> <span class="o">=</span> <span class="s">&quot;</span><span class="se">\t\t</span><span class="s">To zdanie ma pewne problemy.   &quot;</span>
+<span class="n">badParagraph</span> <span class="o">=</span> <span class="s">&quot;</span><span class="se">\t\t</span><span class="s">Ten akapit </span><span class="se">\n</span><span class="s">ma jeszcze więcej </span><span class="se">\n</span><span class="s">problemów.!?   &quot;</span>
+
+<span class="c"># Odcięcie końcowych znaków spacji</span>
+<span class="k">print</span><span class="p">(</span> <span class="s">&quot;Długość = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">badSentence</span><span class="p">))</span> <span class="p">)</span>
+<span class="k">print</span><span class="p">(</span> <span class="s">&quot;Bez końcowych spacji = &quot;</span> <span class="o">+</span> \
+   <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">badSentence</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s">&#39; &#39;</span><span class="p">)))</span> <span class="p">)</span>
+
+<span class="c"># Odcięcie znaków tabulatora</span>
+<span class="k">print</span><span class="p">(</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">Źle:</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">+</span> <span class="n">badSentence</span> <span class="p">)</span>
+<span class="k">print</span><span class="p">(</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">Dobrze:</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">+</span> <span class="n">badSentence</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\t</span><span class="s">&#39;</span><span class="p">)</span> <span class="p">)</span>
+
+<span class="c"># Odcięcie znaków końcowych i początkowych</span>
+<span class="k">print</span><span class="p">(</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">Źle:</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">+</span> <span class="n">badParagraph</span> <span class="p">)</span>
+<span class="k">print</span><span class="p">(</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">Dobrze:</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">+</span> <span class="n">badParagraph</span><span class="o">.</span><span class="n">strip</span><span class="p">((</span><span class="s">&#39; ?!</span><span class="se">\t</span><span class="s">&#39;</span><span class="p">))</span> <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>Długość = 33
+Bez końców spacji = 30
+Źle:
+  To zdanie ma pewne problemy.
+Dobrze:
+To zdanie ma pewne problemy.
+Źle:
+  Ten akapit
+ma jeszcze więcej
+problemów.!?
+Dobrze:
+Ten akapit
+ma jeszcze więcej
+problemów.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="wyrownywanie-i-formatowanie-lancuchow">
+<h3>Wyrównywanie i formatowanie łańcuchów<a class="headerlink" href="#wyrownywanie-i-formatowanie-lancuchow" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="rjust">
+<tt class="descname">rjust</tt><big>(</big><em>width</em><span class="optional">[</span>, <em>fill</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#rjust" title="Permalink to this definition">¶</a></dt>
+<dd><p>wyrównanie tekstu w łańcuchu o odpowiednią liczbę znaków do prawa</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ljust">
+<tt class="descname">ljust</tt><big>(</big><em>width</em><span class="optional">[</span>, <em>fill</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#ljust" title="Permalink to this definition">¶</a></dt>
+<dd><p>wyrównanie tekstu w łańcuchu o odpowiednią liczbę znaków do lewa</p>
+</dd></dl>
+
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">fill</span></tt></dt>
+<dd>argument opcjonalny, wypełniający przestrzeń utworzoną przez wyrównanie podanym znakiem</dd>
+<dt><tt class="docutils literal"><span class="pre">%</span></tt></dt>
+<dd>operator służący do przekazania argumentów do formatującego łańcucha znaków</dd>
+</dl>
+<p>Przykład:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">chapters</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span><span class="mi">46</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span><span class="mi">52</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span><span class="mi">87</span><span class="p">,</span> <span class="mi">5</span><span class="p">:</span><span class="mi">90</span><span class="p">}</span>
+<span class="n">hexStr</span> <span class="o">=</span> <span class="s">&quot;3f8&quot;</span>
+
+<span class="c"># Wyrównanie do prawej</span>
+<span class="k">print</span> <span class="s">&quot;Szesnastkowy łańcuch znaków: &quot;</span> <span class="o">+</span> <span class="n">hexStr</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="o">.</span><span class="n">rjust</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="s">&#39;0&#39;</span><span class="p">)</span>
+<span class="k">print</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">chapters</span><span class="p">:</span>
+   <span class="k">print</span><span class="p">(</span> <span class="s">&quot;Rozdział &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> \
+      <span class="nb">str</span><span class="p">(</span><span class="n">chapters</span><span class="p">[</span><span class="n">x</span><span class="p">])</span><span class="o">.</span><span class="n">rjust</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="s">&#39;.&#39;</span><span class="p">)</span> <span class="p">)</span>
+
+<span class="c"># Wyrównanie do lewej</span>
+<span class="k">print</span><span class="p">(</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">Szesnastkowy łańcuch znaków: &quot;</span> <span class="o">+</span> <span class="n">hexStr</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="s">&#39;0&#39;</span><span class="p">)</span> <span class="p">)</span>
+
+<span class="c"># Formatujący łańcuch znaków</span>
+<span class="k">print</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">chapters</span><span class="p">:</span>
+   <span class="k">print</span><span class="p">(</span> <span class="s">&quot;Rozdział </span><span class="si">%d</span><span class="s"> </span><span class="si">%15s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="nb">str</span><span class="p">(</span><span class="n">chapters</span><span class="p">[</span><span class="n">x</span><span class="p">]))</span> <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>Szesnastkowy łańcuch znaków: 000003F8
+Rozdział 1.............5
+Rozdział 2............46
+Rozdział 3............52
+Rozdział 4............87
+Rozdział 5............90
+Szesnastkowy łańcuch znaków: 3F800000
+Rozdział 1      5
+Rozdział 2     46
+Rozdział 3     52
+Rozdział 4     87
+Rozdział 5     90
+</pre></div>
+</div>
+</div>
+<div class="section" id="wykonywanie-kodu-zawartego-w-lancuchach">
+<h3>Wykonywanie kodu zawartego w łańcuchach<a class="headerlink" href="#wykonywanie-kodu-zawartego-w-lancuchach" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="exec">
+<tt class="descname">exec</tt><big>(</big><em>str</em><span class="optional">[</span>, <em>globals</em><span class="optional">[</span>, <em>locals</em><span class="optional">]</span><span class="optional">]</span><big>)</big><a class="headerlink" href="#exec" title="Permalink to this definition">¶</a></dt>
+<dd><p>funkcja wykonuje kod zawarty w łańcuchu znaków i zwraca jego wynik</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="eval">
+<tt class="descname">eval</tt><big>(</big><em>str</em><span class="optional">[</span>, <em>globals</em><span class="optional">[</span>, <em>locals</em><span class="optional">]</span><span class="optional">]</span><big>)</big><a class="headerlink" href="#eval" title="Permalink to this definition">¶</a></dt>
+<dd><p>funkcja analizuje łańcuch znaków jako wyrażenie Pythona oraz zwraca wyniki</p>
+</dd></dl>
+
+<div class="highlight-python"><div class="highlight"><pre><span class="n">code</span> <span class="o">=</span> <span class="s">&quot;for card in cards: </span><span class="se">\</span>
+<span class="s">    print( &#39;Karta = &#39; + card )&quot;</span>
+<span class="k">exec</span><span class="p">(</span><span class="n">codeStr</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Zmienne lokalne <tt class="docutils literal"><span class="pre">locals</span></tt> oraz globalne <tt class="docutils literal"><span class="pre">globals</span></tt> są dodawane do środowiska wykorzystywanego dla wykonania kodu poprzez określenie globalnych lub lokalnych słowników, zawierających odpowiadające im nazwy i wartości zmiennych.</p>
+<p>Przykład:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">cards</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;As&#39;</span><span class="p">,</span> <span class="s">&#39;Król&#39;</span><span class="p">,</span> <span class="s">&#39;Królowa&#39;</span><span class="p">,</span> <span class="s">&#39;Walet&#39;</span><span class="p">]</span>
+<span class="n">codeStr</span> <span class="o">=</span> <span class="s">&quot;for card in cards: </span><span class="se">\</span>
+<span class="s">   print (</span><span class="se">\&quot;</span><span class="s">Karta = </span><span class="se">\&quot;</span><span class="s"> + card )&quot;</span>
+<span class="n">areaStr</span> <span class="o">=</span> <span class="s">&quot;pi*(radius*radius)&quot;</span>
+
+<span class="c"># Wykonanie łańcucha znaków</span>
+<span class="k">exec</span><span class="p">(</span><span class="n">codeStr</span><span class="p">)</span>
+
+<span class="c"># Obliczenie łańcucha znaków</span>
+<span class="k">print</span> <span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">Pole = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">eval</span><span class="p">(</span><span class="n">areaStr</span><span class="p">,</span> <span class="p">{</span><span class="s">&quot;pi&quot;</span><span class="p">:</span><span class="mf">3.14</span><span class="p">},</span> <span class="p">{</span><span class="s">&quot;radius&quot;</span><span class="p">:</span><span class="mi">5</span><span class="p">}))</span> <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>Karta = As
+Karta = Król
+Karta = Królowa
+Karta = Walet
+Pole = 78.5
+</pre></div>
+</div>
+</div>
+<div class="section" id="zastepowanie-zmiennych-wewnatrz-lancuchow">
+<h3>Zastępowanie zmiennych wewnątrz łańcuchów<a class="headerlink" href="#zastepowanie-zmiennych-wewnatrz-lancuchow" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>Zastępowanie zmiennych (<em>string interpolation</em>) jest wykonywane w dwóch etapach:</dt>
+<dd><ol class="first last arabic simple">
+<li>Utworzenie szablonu łańcucha znaków za pomocą metody Template(string), która zawiera sformatowany tekst oraz odpowiednio rozmieszczone nazwy zmiennych, poprzedzone znakiem <tt class="docutils literal"><span class="pre">$</span></tt></li>
+<li>Zastosowanie wartości zmiennej do szablonu za pomocą metody <tt class="docutils literal"><span class="pre">substitute(m</span> <span class="pre">[,kwargs])</span></tt> klasy <tt class="docutils literal"><span class="pre">Template</span></tt>. Argument m może być przypisaniem, słownikiem wartości zmiennych lub listą słów kluczowych.</li>
+</ol>
+</dd>
+</dl>
+<p>Przykład:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">string</span>
+<span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s">&#39;niebieski&#39;</span><span class="p">,</span> <span class="s">&#39;czerwony&#39;</span><span class="p">]</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="n">Template</span><span class="p">(</span><span class="s">&quot;Zmienna v = $v&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">values</span><span class="p">:</span>
+   <span class="k">print</span><span class="p">(</span> <span class="n">s</span><span class="o">.</span><span class="n">substitute</span><span class="p">(</span><span class="n">v</span><span class="o">=</span><span class="n">x</span><span class="p">)</span> <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>Zmienna v = 5
+Zmienna v = 3
+Zmienna v = niebieski
+Zmienna v = czerwony
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../index.html">
+    <img class="logo" src="../_static/logo_small.png" alt="Logo"/>
+    
+  </a>
+</p>
+
+
+
+
+
+<p>
+<iframe src="http://ghbtns.com/github-btn.html?user=czterybity&repo=python_doc&type=watch&count=true&size=large"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="">Wprowadzenie do programowania w języku Python</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#wbudowane-typy-pythona">Wbudowane typy Pythona</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#podstawy-skladni-pythona">Podstawy składni Pythona</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#komentarze">Komentarze</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#zmienne-i-przypisania">Zmienne i przypisania</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#operatory">Operatory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uzywanie-wciec-kodu">Używanie wcięć kodu</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#lancuchy-znakow">Łańcuchy znaków</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#warunkowe-wykonanie-kodu">Warunkowe wykonanie kodu</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#instrukcja-if-else-oraz-elif">Instrukcja <tt class="docutils literal"><span class="pre">if</span></tt>, <tt class="docutils literal"><span class="pre">else</span></tt> oraz <tt class="docutils literal"><span class="pre">elif</span></tt></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wyrazenie-warunkowe">Wyrażenie warunkowe</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#petle">Pętle</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#instrukcja-while">Instrukcja while</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#instrukcja-for">Instrukcja for</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#instrukcje-break-i-continue">Instrukcje <tt class="docutils literal"><span class="pre">break</span></tt> i <tt class="docutils literal"><span class="pre">continue</span></tt></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#instrukcja-for-else">Instrukcja <tt class="docutils literal"><span class="pre">for-else</span></tt></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#obsluga-bledow">Obsługa błędów</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#podstawowe-typy-bledow">Podstawowe typy błędów</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#zglaszanie-wyjatkow">Zgłaszanie wyjątków</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pelna-skladnia-obslugi-wyjatkow">Pełna składnia obsługi wyjątków</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#zarzadzanie-typami-danych">Zarządzanie typami danych</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#typy-sekwencyjne">Typy sekwencyjne</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#lista">Lista</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#krotka">Krotka</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#slownik">Słownik</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#przetwarzanie-lancuchow-znakow">Przetwarzanie łańcuchów znaków</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#porownywanie-lancuchow-znakow">Porównywanie łańcuchów znaków</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#segmentowanie-i-poruszanie-sie-krokami-w-lancuchu-znakow">Segmentowanie i poruszanie się krokami w łańcuchu znaków</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#laczenie-lancuchow-znakow">Łączenie łańcuchów znaków</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#formatowanie-lancuchow">Formatowanie łańcuchów</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#metoda-join-wordlist">Metoda <tt class="docutils literal"><span class="pre">join(wordList)</span></tt></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dzielenie-lancuchow-znakow">Dzielenie łańcuchów znaków</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wyszukiwanie-podlancuchow-w-lancuchu">Wyszukiwanie podłańcuchów w łańcuchu</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wyszukiwanie-i-zastepowanie-w-lancuchach">Wyszukiwanie i zastępowanie w łańcuchach</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wyszukiwanie-lancuchow-z-prefiksem-lub-sufiksem">Wyszukiwanie łańcuchów z prefiksem lub sufiksem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wyrownywanie-i-formatowanie-lancuchow">Wyrównywanie i formatowanie łańcuchów</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wykonywanie-kodu-zawartego-w-lancuchach">Wykonywanie kodu zawartego w łańcuchach</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#zastepowanie-zmiennych-wewnatrz-lancuchow">Zastępowanie zmiennych wewnątrz łańcuchów</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="programowanie_funkcyjne.html">Elementy programowania funkcyjnego</a></li>
+<li class="toctree-l1"><a class="reference internal" href="programowanie_obiektowe.html">Funkcje, klasy, obiekty i moduły</a></li>
+<li class="toctree-l1"><a class="reference internal" href="biblioteka_standardowa.html">Biblioteka standardowa</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lxml.html">Biblioteka lxml</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adv/funkcje.html">Funkcje w języku Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adv/klasy.html">Klasy i obiekty</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adv/dekoratory.html">Dekoratory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adv/metaklasy.html">Metaklasy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adv/TDD.html">Testowanie kodu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adv/watki.html">Programowanie wielowątkowe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adv/wzorce.html">Wzorce projektowe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adv/2vs3.html">Porównanie Pythona 2 i 3</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, Leszek Tarkowski.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.0</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

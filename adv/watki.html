@@ -1,0 +1,572 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Programowanie wielowątkowe &mdash; Zaawansowane programowanie w języku Python</title>
+    
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Zaawansowane programowanie w języku Python" href="../index.html" />
+    <link rel="up" title="&lt;no title&gt;" href="adv.html" />
+    <link rel="next" title="Wzorce projektowe" href="wzorce.html" />
+    <link rel="prev" title="Testowanie kodu" href="TDD.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="wzorce.html" title="Wzorce projektowe"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="TDD.html" title="Testowanie kodu"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Zaawansowany Python</a> &raquo;</li>
+          <li><a href="adv.html" accesskey="U">&lt;no title&gt;</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="programowanie-wielowatkowe">
+<h1>Programowanie wielowątkowe<a class="headerlink" href="#programowanie-wielowatkowe" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="zarzadzanie-watkami">
+<h2>Zarządzanie wątkami<a class="headerlink" href="#zarzadzanie-watkami" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><strong>Proces</strong></dt>
+<dd>egzemplarz wykonywanego programu. Może istnieć wiele różnych procesów wykonujących ten sam program. Każdemu procesowi przydzielane zostają zasoby, takie jak procesor, pamięć, dostęp do urządzeń wejścia-wyjścia, pliki.</dd>
+</dl>
+<p>Za zarządzanie procesami odpowiada jądro systemu operacyjnego. System operacyjny zarządza priorytetami procesów.</p>
+<p>W systemach wielozadaniowych procesy mogą być wykonywane współbieżnie:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Systemy wieloprocesorowe lub wielordzeniowe – współbieżność rzeczywista</li>
+<li>Jednoprocesorowe – emulacja współbieżności</li>
+<li>z wywłaszczaniem - pre-emptive multitasking</li>
+<li>bez wywłaszczania</li>
+</ul>
+</div></blockquote>
+<dl class="docutils">
+<dt><strong>Wątek</strong> (<tt class="docutils literal"><span class="pre">thread</span></tt>)</dt>
+<dd>jest innym rodzajem procesu, wykonywanego współbieżnie w obrębie jednego zadania (programu). Pojedynczy proces może tworzyć i zarządzać wieloma wątkami, które współdzielą się zasobami ( np. plikami, gniazdami, zmiennymi).</dd>
+</dl>
+<p>Wątki są udostępniane wprost przez system operacyjny:</p>
+<ul class="simple">
+<li>MS Windows – Win32 API</li>
+<li>Linux, BSD - pthread</li>
+</ul>
+</div>
+<div class="section" id="problemy-z-watkami">
+<h2>Problemy z wątkami<a class="headerlink" href="#problemy-z-watkami" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><strong>Szeregowanie</strong></dt>
+<dd>W systemie jednoprocesorowym jednocześnie można wykonywać tylko jeden wątek. System operacyjny korzysta z algorytmu szeregowania (thread scheduler), który bezustannie przełącza działające wątki, zezwalając na ich działanie przez określony, skończony przedział czasu (time-slice). Wątek jest wywłaszczony jeśli wyczerpie się jego przedział czasu – stan wątku (zmienne lokalne, itp.) jest zapamiętywany</dd>
+<dt><strong>Współdzielenie zasobów</strong></dt>
+<dd>Wątki współdzielą pamięć i inne zasoby. Dwa lub więcej wątków może próbować uzyskać dostęp do tych samych danych w tym samym czasie, co może spowodować wyścig (race condition) i prowadzić do zakleszczenia systemu (deadlock)</dd>
+</dl>
+</div>
+<div class="section" id="zarzadzanie-watkami-synchronizacja">
+<h2>Zarządzanie wątkami – synchronizacja<a class="headerlink" href="#zarzadzanie-watkami-synchronizacja" title="Permalink to this headline">¶</a></h2>
+<p>Wątki mogą być wykonywane równocześnie (współbieżnie). Równoczesny dostęp do wspólnych danych grozi jednak utratą spójności danych i w konsekwencji błędem działania programu.</p>
+<p>Do zapobiegania takim sytuacjom wykorzystuje się mechanizmy synchronizacji wątków, takie jaks semafory, muteksy oraz sekcje krytyczne</p>
+</div>
+<div class="section" id="modul-threading">
+<h2>Moduł <tt class="docutils literal"><span class="pre">threading</span></tt><a class="headerlink" href="#modul-threading" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">threading</span></tt></dt>
+<dd>umożliwia obsługę oraz synchronizację wątków.</dd>
+</dl>
+<p>Konstruktor klasy <tt class="docutils literal"><span class="pre">Thread</span></tt> umożliwia uruchomienie dowolnej funkcji w nowym wątku.
+Utworzony obiekt wątku uruchamiamy za pomocą metody <tt class="docutils literal"><span class="pre">start()</span></tt>.
+Synchronizacja z wątkiem głównym odbywa się za pomocą metody <tt class="docutils literal"><span class="pre">join()</span></tt>.
+Metoda <tt class="docutils literal"><span class="pre">join()</span></tt> powróci dopiero w momencie zakończenia się wątku.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">threading</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="k">def</span> <span class="nf">worker</span><span class="p">(</span><span class="n">delay</span><span class="p">,</span> <span class="n">info</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">delay</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">info</span><span class="p">)</span>
+
+<span class="n">w1</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">worker</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="s">&quot;Worker 1&quot;</span><span class="p">))</span>
+<span class="n">w1</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="n">w1</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="section" id="tworzenie-i-wychodzenie-z-watkow">
+<h3>Tworzenie i wychodzenie z wątków<a class="headerlink" href="#tworzenie-i-wychodzenie-z-watkow" title="Permalink to this headline">¶</a></h3>
+<p>Moduł <tt class="docutils literal"><span class="pre">threading</span></tt> wprowadza klasę <tt class="docutils literal"><span class="pre">Thread</span></tt>, która reprezentuje osobny wątek wykonywania.
+Aby zaimplementować nowy wątek za pomocą modułu threading, należy najpierw zdefiniować nową podklasę klasy <tt class="docutils literal"><span class="pre">Thread</span></tt>.
+Metoda <tt class="docutils literal"><span class="pre">__init__(self</span> <span class="pre">[,</span> <span class="pre">args])</span></tt> jest nadpisywana w celu dodania dodatkowych argumentów <tt class="docutils literal"><span class="pre">args</span></tt>.
+Następnie należy nadpisać metodę <tt class="docutils literal"><span class="pre">run(self</span> <span class="pre">[,</span> <span class="pre">args])</span></tt> w celu zaimplementowania tego, co wątek powinien robić po rozpoczęciu.
+Po utworzeniu nowej podklasy <tt class="docutils literal"><span class="pre">Thread</span></tt> można utworzyć jej obiekt, a następnie rozpocząć nowy wątek poprzez wywołanie metody <tt class="docutils literal"><span class="pre">start()</span></tt>.</p>
+<p>Przykład:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">threading</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="n">do_exit</span> <span class="o">=</span> <span class="bp">False</span>
+
+<span class="k">class</span> <span class="nc">newThread</span><span class="p">(</span><span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threadID</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">counter</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">threadID</span> <span class="o">=</span> <span class="n">threadID</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">=</span> <span class="n">counter</span>
+        <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&quot;Rozpoczynam &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">print_time</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">counter</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&quot;Kończę &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">print_time</span><span class="p">(</span><span class="n">threadName</span><span class="p">,</span> <span class="n">delay</span><span class="p">,</span> <span class="n">counter</span><span class="p">):</span>
+        <span class="k">while</span> <span class="n">counter</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">do_exit</span><span class="p">:</span>
+               <span class="k">return</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">delay</span><span class="p">)</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">&quot;{}: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">threadName</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">ctime</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())))</span>
+            <span class="n">counter</span> <span class="o">-=</span> <span class="mi">1</span>
+
+<span class="c"># Utworzenie nowych wątków</span>
+<span class="n">thread1</span> <span class="o">=</span> <span class="n">newThread</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s">&quot;Wątek01&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">thread2</span> <span class="o">=</span> <span class="n">newThread</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s">&quot;Wątek02&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="c"># Rozpoczęcie nowych wątków</span>
+<span class="n">thread1</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="n">thread2</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+
+<span class="k">while</span> <span class="n">thread2</span><span class="o">.</span><span class="n">is_alive</span><span class="p">():</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">thread1</span><span class="o">.</span><span class="n">is_alive</span><span class="p">():</span>
+       <span class="n">do_exit</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="k">pass</span>
+<span class="k">print</span> <span class="s">&quot;Kończenie głównego wątku&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>Rozpoczynam Wątek01
+Rozpoczynam Wątek02
+Wątek01: Wed Jun 14 13:06:10 2008
+Wątek01: Wed Jun 14 13:06:11 2008
+Wątek02: Wed Jun 14 13:06:11 2008
+Wątek01: Wed Jun 14 13:06:12 2008
+Wątek01: Wed Jun 14 13:06:13 2008
+Wątek02: Wed Jun 14 13:06:13 2008
+Wątek01: Wed Jun 14 13:06:14 2008
+Kończę Wątek01
+Wątek02: Wed Jun 14 13:06:15 2008
+Kończenie głównego wątku
+</pre></div>
+</div>
+</div>
+<div class="section" id="synchronizacja-watkow">
+<h3>Synchronizacja wątków<a class="headerlink" href="#synchronizacja-watkow" title="Permalink to this headline">¶</a></h3>
+<p>Moduł <tt class="docutils literal"><span class="pre">Threading</span></tt> biblioteki Pythona zawiera łatwy do zaimplementowania mechanizm blokowania, który pozwala na synchronizację wątków. Nowa blokada jest tworzona poprzez wywołanie metody <tt class="docutils literal"><span class="pre">Lock()</span></tt> zwracającej nową blokadę.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">threadLock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Lock</span><span class="p">()</span>
+<span class="c"># ...</span>
+<span class="n">threadLock</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+<span class="c"># Sekcja krytyczna</span>
+<span class="n">threadLock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Po utworzeniu nowego obiektu blokady, można zmusić wątki do synchronicznego działania poprzez wywołanie metody <tt class="docutils literal"><span class="pre">acquire([blocking])</span></tt>.</p>
+<p>Opcjonalny argument blocking pozwala na kontrolowanie, czy wątek ma czekać na otrzymanie blokady:</p>
+<blockquote>
+<div><ul class="simple">
+<li><tt class="docutils literal"><span class="pre">0</span></tt> - metoda zakończy działanie zwracając 0, jeśli blokada nie może być uzyskana lub 1, jeśli zostanie uzyskana</li>
+<li><tt class="docutils literal"><span class="pre">1</span></tt> - wątek zostanie zablokowany i będzie oczekiwał na zwolnienie blokady</li>
+</ul>
+</div></blockquote>
+<p>Kiedy blokada ma być zakończona, jest ona zwalniania poprzez wywołanie metody <tt class="docutils literal"><span class="pre">release()</span></tt> nowego obiektu blokady.</p>
+<p>Przykład:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">thread_lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Lock</span><span class="p">()</span>
+
+<span class="o">...</span>
+
+    <span class="k">def</span> <span class="nf">print_time</span><span class="p">(</span><span class="n">threadName</span><span class="p">,</span> <span class="n">delay</span><span class="p">,</span> <span class="n">counter</span><span class="p">):</span>
+        <span class="k">while</span> <span class="n">counter</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">do_exit</span><span class="p">:</span>
+               <span class="k">return</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">delay</span><span class="p">)</span>
+            <span class="n">thread_lock</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">&quot;{}: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">threadName</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">ctime</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())))</span>
+            <span class="n">thread_lock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+            <span class="n">counter</span> <span class="o">-=</span> <span class="mi">1</span>
+<span class="o">...</span>
+
+<span class="n">threads</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="c"># Tworzenie nowych wątków</span>
+<span class="n">thread1</span> <span class="o">=</span> <span class="n">newThread</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s">&quot;Wątek01&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">thread2</span> <span class="o">=</span> <span class="n">newThread</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s">&quot;Wątek02&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="c"># Rozpoczynanie nowych wątków</span>
+<span class="n">thread1</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="n">thread2</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="c"># Dodawanie wątków do listy wątków</span>
+<span class="n">threads</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">thread1</span><span class="p">)</span>
+<span class="n">threads</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">thread2</span><span class="p">)</span>
+<span class="c"># Czekanie na zakończenie wszystkich wątków</span>
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">threads</span><span class="p">:</span>
+    <span class="n">t</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+<span class="k">print</span> <span class="s">&quot;Kończenie głównego wątku&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>Rozpoczynam Wątek01
+Rozpoczynam Wątek02
+Wątek01: Wed Jun 14 10:06:24 2008
+Wątek01: Wed Jun 14 10:06:25 2008
+Wątek01: Wed Jun 14 10:06:26 2008
+Wątek02: Wed Jun 14 10:06:28 2008
+Wątek02: Wed Jun 14 10:06:30 2008
+Wątek02: Wed Jun 14 10:06:32 2008
+Kończenie głównego wątku
+</pre></div>
+</div>
+<p>Kolejny przykład - menadżer kontekstu:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">threading</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="n">thread_lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Lock</span><span class="p">()</span>
+
+<span class="k">class</span> <span class="nc">newThread</span> <span class="p">(</span><span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threadID</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">counter</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">threadID</span> <span class="o">=</span> <span class="n">threadID</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">=</span> <span class="n">counter</span>
+        <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s">&quot;Rozpoczynam &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+        <span class="c"># Otrzymanie blokady w celu zsynchronizowania wątków</span>
+        <span class="k">with</span> <span class="n">thread_lock</span><span class="p">:</span>
+            <span class="n">print_time</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">counter</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">print_time</span><span class="p">(</span><span class="n">threadName</span><span class="p">,</span> <span class="n">delay</span><span class="p">,</span> <span class="n">counter</span><span class="p">):</span>
+        <span class="k">while</span> <span class="n">counter</span><span class="p">:</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">delay</span><span class="p">)</span>
+            <span class="k">print</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">: </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">threadName</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">ctime</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()))</span>
+            <span class="n">counter</span> <span class="o">-=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="modul-queue">
+<h2>Moduł <tt class="docutils literal"><span class="pre">queue</span></tt><a class="headerlink" href="#modul-queue" title="Permalink to this headline">¶</a></h2>
+<p>Moduł <tt class="docutils literal"><span class="pre">queue</span></tt> pozwala na tworzenie synchronizowanych obiektów kolejek, które będą przechowywać określoną liczbę elementów.
+Obiekt Queue umożliwia bezpieczną wymianę danych między wątkami. Przydatny do implementacji wzorca <em>Producer/Consumer</em>.</p>
+<p>Najważniejsze metody:</p>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">__init__(maxsize)</span></tt></dt>
+<dd>Inicjalizacja kolejki. Jeśli maxsize &gt; 0 wątek próbujący dodać element do kolejki zostanie zablokowany.</dd>
+<dt><tt class="docutils literal"><span class="pre">qsize()</span></tt></dt>
+<dd>Zwraca bieżący rozmiar kolejki</dd>
+<dt><tt class="docutils literal"><span class="pre">empty()</span></tt></dt>
+<dd>Zwraca <tt class="docutils literal"><span class="pre">True</span></tt> jeśli kolejka jest pusta</dd>
+<dt><tt class="docutils literal"><span class="pre">full()</span></tt></dt>
+<dd>Zwraca <tt class="docutils literal"><span class="pre">True</span></tt> jeśli kolejka jest pełna</dd>
+<dt><tt class="docutils literal"><span class="pre">put(item)</span></tt></dt>
+<dd>Włożenie elementu do kolejki</dd>
+<dt><tt class="docutils literal"><span class="pre">get()</span></tt></dt>
+<dd>Wyciągnięcie elementu z kolejki</dd>
+<dt><tt class="docutils literal"><span class="pre">put_nowait(item)</span></tt></dt>
+<dd>Nieblokująca wersja put(item). Zgłasza Queue.Full, jeśli kolejka jest pełna</dd>
+<dt><tt class="docutils literal"><span class="pre">get_nowait()</span></tt></dt>
+<dd>Nieblokująca wersja get(). Zgłasza Queue.Empty</dd>
+</dl>
+<p><em>Producer/Consumer</em>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">queue</span>
+
+<span class="k">def</span> <span class="nf">worker</span><span class="p">():</span>
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="n">item</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+        <span class="n">do_work</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+        <span class="n">q</span><span class="o">.</span><span class="n">task_done</span><span class="p">()</span>
+
+<span class="n">q</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">Queue</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_worker_threads</span><span class="p">):</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">worker</span><span class="p">)</span>
+    <span class="n">t</span><span class="o">.</span><span class="n">daemon</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="n">t</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">source</span><span class="p">():</span>
+    <span class="n">q</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+
+<span class="n">q</span><span class="o">.</span><span class="n">join</span><span class="p">()</span> <span class="c"># czekanie na zakończenie wątku</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="watki-z-przerwaniem-zegarowym">
+<h2>Wątki z przerwaniem zegarowym<a class="headerlink" href="#watki-z-przerwaniem-zegarowym" title="Permalink to this headline">¶</a></h2>
+<p>Wątki z przerwaniem zegarowym (<em>timer-interrupted</em>) służą do czyszczenia zasobów, dostarczania powiadomień oraz sprawdzania statusu.</p>
+<p>Metoda <tt class="docutils literal"><span class="pre">Timer(interval,</span> <span class="pre">func</span> <span class="pre">[,</span> <span class="pre">args</span> <span class="pre">[,</span> <span class="pre">kwargs]])</span></tt> modułu <tt class="docutils literal"><span class="pre">Threading</span></tt> tworzy nowy obiekt wątku z przerwaniem zegarowym.</p>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">interval</span></tt></dt>
+<dd>określa liczbę sekund, które należy odczekać przed wykonaniem funkcji określonej w argumencie <tt class="docutils literal"><span class="pre">func</span></tt>.</dd>
+</dl>
+<div class="section" id="inicjalizacja-watku-z-przerwaniem-zegarowym">
+<h3>Inicjalizacja wątku z przerwaniem zegarowym<a class="headerlink" href="#inicjalizacja-watku-z-przerwaniem-zegarowym" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">start()</span></tt></dt>
+<dd>wątek odczeka określony interwał czasu, a następnie rozpocznie wykonywanie.</dd>
+<dt><tt class="docutils literal"><span class="pre">cancel()</span></tt></dt>
+<dd>anulowanie wątku pod warunkiem, że funkcja nie została jeszcze wykonana.</dd>
+</dl>
+<p>Przykład:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">threading</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="k">def</span> <span class="nf">clean_queue</span> <span class="p">(</span><span class="n">qPath</span><span class="p">):</span>
+    <span class="n">jobList</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">qPath</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">jobList</span><span class="p">:</span>
+       <span class="n">delPath</span> <span class="o">=</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">qPath</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+       <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">delPath</span><span class="p">)</span>
+       <span class="k">print</span> <span class="s">&quot;Usuwanie &quot;</span> <span class="o">+</span> <span class="n">delPath</span>
+
+<span class="n">qPath</span> <span class="o">=</span> <span class="s">&quot;/print/queue01&quot;</span>
+<span class="n">waitTime</span> <span class="o">=</span> <span class="mi">600</span> <span class="c">#10 minut</span>
+
+<span class="c"># Utworzenie wątku z przerwaniem zegarowym</span>
+<span class="n">wakeCall</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Timer</span><span class="p">(</span><span class="n">waitTime</span><span class="p">,</span> <span class="n">clean_queue</span><span class="p">,</span> <span class="p">(</span><span class="n">qPath</span> <span class="p">,))</span>
+
+<span class="c"># Rozpoczęcie wątku z przerwaniem zegarowym</span>
+<span class="n">wakeCall</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">Usuwanie</span> <span class="o">/</span><span class="k">print</span><span class="o">/</span><span class="n">queue01</span><span class="o">/</span><span class="mf">102.</span><span class="n">txt</span>
+<span class="n">Usuwanie</span> <span class="o">/</span><span class="k">print</span><span class="o">/</span><span class="n">queue01</span><span class="o">/</span><span class="mf">103.</span><span class="n">txt</span>
+<span class="n">Usuwanie</span> <span class="o">/</span><span class="k">print</span><span class="o">/</span><span class="n">queue01</span><span class="o">/</span><span class="mf">104.</span><span class="n">txt</span>
+<span class="n">Usuwanie</span> <span class="o">/</span><span class="k">print</span><span class="o">/</span><span class="n">queue01</span><span class="o">/</span><span class="mf">105.</span><span class="n">txt</span>
+<span class="n">Usuwanie</span> <span class="o">/</span><span class="k">print</span><span class="o">/</span><span class="n">queue01</span><span class="o">/</span><span class="mf">106.</span><span class="n">txt</span>
+<span class="n">Usuwanie</span> <span class="o">/</span><span class="k">print</span><span class="o">/</span><span class="n">queue01</span><span class="o">/</span><span class="mf">107.</span><span class="n">txt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="modul-concurrent">
+<h2>Moduł <tt class="docutils literal"><span class="pre">concurrent</span></tt><a class="headerlink" href="#modul-concurrent" title="Permalink to this headline">¶</a></h2>
+<p>Bardzo interesującą biblioteką wspierającą asynchroniczne wywołania jest <tt class="docutils literal"><span class="pre">concurrent.futures</span></tt>, która jest częścią biblioteki standardowej od wersji 3.2. Istnieje też backport dla Pythona z serii 2.6-2.7</p>
+<p>Moduł ma za zadanie uprościć zrównoleglanie prostych zadań.</p>
+<p>Najprostszym sposobem jest użycie <em>ThreadPoolExecutor</em></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">concurrent</span> <span class="kn">import</span> <span class="n">futures</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span>
+
+<span class="k">def</span> <span class="nf">worker</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;name&quot;</span><span class="p">,</span> <span class="n">delay</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+        <span class="k">print</span> <span class="n">name</span>
+        <span class="n">sleep</span><span class="p">(</span><span class="n">delay</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">name</span> <span class="o">+</span> <span class="s">&quot; has finished&quot;</span>
+
+<span class="k">with</span> <span class="n">futures</span><span class="o">.</span><span class="n">ThreadPoolExecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="n">futu1</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">worker</span><span class="p">,</span> <span class="s">&quot;worker 1&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">futu2</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">worker</span><span class="p">,</span> <span class="s">&quot;worker 2&quot;</span><span class="p">,</span> <span class="mf">0.35</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Wynikiem jest obiekt <em>Future</em>, który udostępnia metody:</p>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">running()</span></tt></dt>
+<dd>sprawdza czy zadanie się wciąż wykonuje</dd>
+<dt><tt class="docutils literal"><span class="pre">result()</span></tt></dt>
+<dd>zwraca wynik wygenerowany przez funkcję roboczą (działa podobnie do <tt class="docutils literal"><span class="pre">threading.Thread.join()</span></tt>}</dd>
+</dl>
+<p><tt class="docutils literal"><span class="pre">futures.as_completed(futures_iterable)</span></tt> zwraca obiekty <em>Future</em> w kolejności ich wykonania.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">concurrent</span> <span class="kn">import</span> <span class="n">futures</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span>
+<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span>
+
+<span class="k">def</span> <span class="nf">worker</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;name&quot;</span><span class="p">):</span>
+    <span class="n">sleep</span><span class="p">(</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="mf">0.01</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">name</span> <span class="o">+</span> <span class="s">&quot; has finished&quot;</span>
+
+<span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;Worker {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">)]</span>
+
+<span class="k">with</span> <span class="n">futures</span><span class="o">.</span><span class="n">ThreadPoolExecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="n">threadlist</span> <span class="o">=</span> <span class="p">[</span><span class="n">e</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">worker</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">future</span> <span class="ow">in</span> <span class="n">futures</span><span class="o">.</span><span class="n">as_completed</span><span class="p">(</span><span class="n">threadlist</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span> <span class="n">future</span><span class="o">.</span><span class="n">result</span><span class="p">()</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p><em>ThreadPoolExecutor</em> zawiera również asynchroniczne wersje wyrażeń funkcyjnych, <tt class="docutils literal"><span class="pre">map</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">with</span> <span class="n">futures</span><span class="o">.</span><span class="n">ThreadPoolExecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">worker</span><span class="p">,</span> <span class="n">names</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span> <span class="n">res</span> <span class="p">)</span>
+    <span class="c">#print( list(results) )</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="modul-multiprocessing">
+<h2>Moduł <tt class="docutils literal"><span class="pre">multiprocessing</span></tt><a class="headerlink" href="#modul-multiprocessing" title="Permalink to this headline">¶</a></h2>
+<p>Aby obejść ograniczenia związane z istnieniem Global Interpreter Lock powstał moduł <tt class="docutils literal"><span class="pre">multiprocessing</span></tt>
+wykorzystujący API zbliżone do modułu <tt class="docutils literal"><span class="pre">threading</span></tt>, ale tworzące procesy zamiast wątków.</p>
+<p>Weźmy pod uwagę pierwszy program jaki testowaliśmy:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">multiprocessing</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="k">def</span> <span class="nf">worker</span><span class="p">(</span><span class="n">delay</span><span class="p">,</span> <span class="n">info</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">delay</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">info</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">w1</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">worker</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="s">&quot;Worker 1&quot;</span><span class="p">))</span>
+    <span class="n">w1</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="n">w1</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Należy pamiętać o utworzeniu nowego procesu wewnątrz <tt class="docutils literal"><span class="pre">if</span> <span class="pre">__name__</span> <span class="pre">==</span> <span class="pre">'__main__':</span></tt></p>
+<p>Moduł <tt class="docutils literal"><span class="pre">multiprocessing</span></tt> dostarcza reimplementacji takich klas jak <tt class="docutils literal"><span class="pre">Queue</span></tt> oraz <tt class="docutils literal"><span class="pre">Lock</span></tt>.</p>
+<p>Oprócz klas i funkcji kompatybilnych z <tt class="docutils literal"><span class="pre">threading</span></tt> dodane są też klasy specyficzne dla podprocesów</p>
+<dl class="class">
+<dt id="Pipe">
+<em class="property">class </em><tt class="descname">Pipe</tt><a class="headerlink" href="#Pipe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Klasa opakowująca dwukierunkowe połączenia między procesami</p>
+</dd></dl>
+
+<p>Oraz klasy które pozwalają na przechowywanie struktur danych w tzw. pamięci współdzielonej:</p>
+<dl class="class">
+<dt id="Value">
+<em class="property">class </em><tt class="descname">Value</tt><a class="headerlink" href="#Value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="class">
+<dt id="Array">
+<em class="property">class </em><tt class="descname">Array</tt><a class="headerlink" href="#Array" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Oraz własną implementację wzorca <em>Pool</em>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span>  <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Pool</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="k">def</span> <span class="nf">worker</span><span class="p">(</span><span class="n">delay</span><span class="p">,</span> <span class="n">info</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">delay</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">info</span><span class="p">)</span>
+
+<span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;Worker {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">)]</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="k">with</span> <span class="n">Pool</span><span class="p">(</span><span class="n">processes</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span> <span class="k">as</span> <span class="n">pool</span><span class="p">:</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="p">[</span><span class="n">pool</span><span class="o">.</span><span class="n">apply_async</span><span class="p">(</span><span class="n">worker</span><span class="p">,</span> <span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../index.html">
+    <img class="logo" src="../_static/logo_small.png" alt="Logo"/>
+    
+  </a>
+</p>
+
+
+
+
+
+<p>
+<iframe src="http://ghbtns.com/github-btn.html?user=czterybity&repo=python_doc&type=watch&count=true&size=large"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../basic/wprowadzenie.html">Wprowadzenie do programowania w języku Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basic/programowanie_funkcyjne.html">Elementy programowania funkcyjnego</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basic/programowanie_obiektowe.html">Funkcje, klasy, obiekty i moduły</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basic/biblioteka_standardowa.html">Biblioteka standardowa</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basic/lxml.html">Biblioteka lxml</a></li>
+<li class="toctree-l1"><a class="reference internal" href="funkcje.html">Funkcje w języku Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="klasy.html">Klasy i obiekty</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dekoratory.html">Dekoratory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metaklasy.html">Metaklasy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TDD.html">Testowanie kodu</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Programowanie wielowątkowe</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#zarzadzanie-watkami">Zarządzanie wątkami</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#problemy-z-watkami">Problemy z wątkami</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#zarzadzanie-watkami-synchronizacja">Zarządzanie wątkami – synchronizacja</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#modul-threading">Moduł <tt class="docutils literal"><span class="pre">threading</span></tt></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#tworzenie-i-wychodzenie-z-watkow">Tworzenie i wychodzenie z wątków</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#synchronizacja-watkow">Synchronizacja wątków</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#modul-queue">Moduł <tt class="docutils literal"><span class="pre">queue</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#watki-z-przerwaniem-zegarowym">Wątki z przerwaniem zegarowym</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#inicjalizacja-watku-z-przerwaniem-zegarowym">Inicjalizacja wątku z przerwaniem zegarowym</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#modul-concurrent">Moduł <tt class="docutils literal"><span class="pre">concurrent</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#modul-multiprocessing">Moduł <tt class="docutils literal"><span class="pre">multiprocessing</span></tt></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="wzorce.html">Wzorce projektowe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2vs3.html">Porównanie Pythona 2 i 3</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, Leszek Tarkowski.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.0</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

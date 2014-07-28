@@ -1,0 +1,386 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Biblioteka lxml &mdash; Zaawansowane programowanie w języku Python</title>
+    
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Zaawansowane programowanie w języku Python" href="../index.html" />
+    <link rel="up" title="&lt;no title&gt;" href="basic.html" />
+    <link rel="next" title="&lt;no title&gt;" href="../adv/adv.html" />
+    <link rel="prev" title="Biblioteka standardowa" href="biblioteka_standardowa.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../adv/adv.html" title="&lt;no title&gt;"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="biblioteka_standardowa.html" title="Biblioteka standardowa"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Zaawansowany Python</a> &raquo;</li>
+          <li><a href="basic.html" accesskey="U">&lt;no title&gt;</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="biblioteka-lxml">
+<h1>Biblioteka lxml<a class="headerlink" href="#biblioteka-lxml" title="Permalink to this headline">¶</a></h1>
+<p><tt class="docutils literal"><span class="pre">lxml</span></tt> - wygodna biblioteka do obsługi XML w Pythonie opakowująca biblioteki libxml2 i libxslt.
+Kompatybilna z ElementTree API.</p>
+<p>Do pobrania ze strony <a class="reference external" href="http://codespeak.net/lxml/">http://codespeak.net/lxml/</a></p>
+<div class="section" id="podstawy-elementtree-api">
+<h2>Podstawy <tt class="docutils literal"><span class="pre">ElementTree</span> <span class="pre">API</span></tt><a class="headerlink" href="#podstawy-elementtree-api" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>Element</dt>
+<dd>podstawowy obiekt kontenerowy umożliwiający przechowywanie danych w hierarchicznych strukturach danych (drzewach).</dd>
+</dl>
+<p>Właściwości obiektu typu Element:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">tag</span></tt> – string identyfikujący typ danych przechowywanych w elemencie</li>
+<li><tt class="docutils literal"><span class="pre">attrib</span></tt> – słownik atrybutów elementu</li>
+<li><tt class="docutils literal"><span class="pre">text</span></tt>, <tt class="docutils literal"><span class="pre">tail</span></tt> – dane tekstowe przechowywane w elemencie</li>
+<li>sekwencja elementów podrzędnych</li>
+</ul>
+<p>Import biblioteki</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">lxml</span> <span class="kn">import</span> <span class="n">etree</span>
+</pre></div>
+</div>
+<div class="section" id="tworzenie-elementow-drzewa">
+<h3>Tworzenie elementów drzewa<a class="headerlink" href="#tworzenie-elementow-drzewa" title="Permalink to this headline">¶</a></h3>
+<p>Tworzenie elementów drzewa odbywa się za pomocą fabryki Element lub SubElement.</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">root</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">Element</span><span class="p">(</span><span class="s">&quot;root&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">etree</span><span class="o">.</span><span class="n">Element</span><span class="p">(</span><span class="s">&quot;child1&quot;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">child2</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s">&quot;child2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">child3</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s">&quot;child3&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span> <span class="n">etree</span><span class="o">.</span><span class="n">tostring</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">pretty_print</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span> <span class="p">)</span>
+<span class="go">&lt;root&gt;</span>
+<span class="go">  &lt;child1/&gt;</span>
+<span class="go">  &lt;child2/&gt;</span>
+<span class="go">  &lt;child3/&gt;</span>
+<span class="go">&lt;/root&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="dostep-do-elementow-drzewa">
+<h3>Dostęp do elementów drzewa<a class="headerlink" href="#dostep-do-elementow-drzewa" title="Permalink to this headline">¶</a></h3>
+<p>Dostęp do elementów podrzędnych w drzewie:</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">child</span> <span class="o">=</span> <span class="n">root</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">child</span><span class="o">.</span><span class="n">tag</span>
+<span class="go">child1</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="nb">len</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+<span class="go">3</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">children</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">root</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">print</span><span class="p">(</span> <span class="n">child</span><span class="o">.</span><span class="n">tag</span> <span class="p">)</span>
+<span class="go">child1</span>
+<span class="go">child2</span>
+<span class="go">child3</span>
+</pre></div>
+</div>
+<p>Dostęp do elementów nadrzędnych – metoda <tt class="docutils literal"><span class="pre">getparent()</span></tt></p>
+<p>Dostęp do elementów z tego samego poziomu:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">getprevious()</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">getnext()</span></tt></li>
+</ul>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="go"># Dostęp do rodzica</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span> <span class="ow">is</span> <span class="n">root</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">getparent</span><span class="p">()</span>
+<span class="go">True</span>
+
+<span class="go"># Dostęp do rodzeństwa</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span> <span class="n">root</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">getprevious</span><span class="p">()</span><span class="o">.</span><span class="n">tag</span> <span class="p">)</span>
+<span class="go">child1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span> <span class="n">root</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">getnext</span><span class="p">()</span><span class="o">.</span><span class="n">tag</span> <span class="p">)</span>
+<span class="go">child3</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="atrybuty-elementow">
+<h3>Atrybuty elementów<a class="headerlink" href="#atrybuty-elementow" title="Permalink to this headline">¶</a></h3>
+<p>Atrybuty elementów można dodawać:</p>
+<ul class="simple">
+<li>z wykorzystaniem fabryki <tt class="docutils literal"><span class="pre">Element</span></tt></li>
+<li>metodami <tt class="docutils literal"><span class="pre">set()</span></tt></li>
+<li>przy pomocy słownika <tt class="docutils literal"><span class="pre">attrib</span></tt> elementu</li>
+</ul>
+</div>
+<div class="section" id="dane-tekstowe">
+<h3>Dane tekstowe<a class="headerlink" href="#dane-tekstowe" title="Permalink to this headline">¶</a></h3>
+<p>Elementy mogą przechowywać dane tekstowe w polach <tt class="docutils literal"><span class="pre">text</span></tt> lub <tt class="docutils literal"><span class="pre">tail</span></tt>.</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">root</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">Element</span><span class="p">(</span><span class="s">&quot;root&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="s">&quot;TEXT&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span> <span class="n">etree</span><span class="o">.</span><span class="n">tostring</span><span class="p">(</span><span class="n">root</span><span class="p">)</span> <span class="p">)</span>
+<span class="go">&lt;root&gt;TEXT&lt;/root&gt;</span>
+
+<span class="go"># Zapis fragmentu &lt;html&gt;&lt;body&gt;Hello&lt;br/&gt;World&lt;/body&gt;&lt;/html&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">html</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">Element</span><span class="p">(</span><span class="s">&quot;html&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">body</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="s">&quot;body&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">body</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="s">&quot;Hello&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">br</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">body</span><span class="p">,</span> <span class="s">&quot;br&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">br</span><span class="o">.</span><span class="n">tail</span> <span class="o">=</span> <span class="s">&quot;World&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span> <span class="n">etree</span><span class="o">.</span><span class="n">tostring</span><span class="p">(</span><span class="n">html</span><span class="p">)</span> <span class="p">)</span>
+<span class="go">&lt;html&gt;&lt;body&gt;Hello&lt;br/&gt;World&lt;/body&gt;&lt;/html&gt;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="iteracja-po-drzewie-elementow">
+<h2>Iteracja po drzewie elementów<a class="headerlink" href="#iteracja-po-drzewie-elementow" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="rekursywna-iteracja">
+<h3>Rekursywna iteracja<a class="headerlink" href="#rekursywna-iteracja" title="Permalink to this headline">¶</a></h3>
+<p>Rekursywna iteracja po drzewach elementów – metoda <tt class="docutils literal"><span class="pre">iter()</span></tt></p>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">root</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">Element</span><span class="p">(</span><span class="s">&quot;root&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s">&quot;child&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="s">&quot;Child 1&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s">&quot;child&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="s">&quot;Child 2&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s">&quot;another&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="s">&quot;Child 3&quot;</span>
+<span class="go">&lt;root&gt;</span>
+<span class="go">  &lt;child&gt;Child 1&lt;/child&gt;</span>
+<span class="go">  &lt;child&gt;Child 2&lt;/child&gt;</span>
+<span class="go">  &lt;another&gt;Child 3&lt;/another&gt;</span>
+<span class="go">&lt;/root&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">root</span><span class="o">.</span><span class="n">iter</span><span class="p">():</span>
+<span class="gp">... </span>    <span class="k">print</span><span class="p">(</span> <span class="s">&quot;{} - {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">tag</span><span class="p">,</span> <span class="n">element</span><span class="o">.</span><span class="n">text</span><span class="p">)</span> <span class="p">)</span>
+<span class="go">root - None</span>
+<span class="go">child - Child 1</span>
+<span class="go">child - Child 2</span>
+<span class="go">another - Child 3</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="iteracja-po-przefiltrowanych-wezlach">
+<h3>Iteracja po przefiltrowanych węzłach<a class="headerlink" href="#iteracja-po-przefiltrowanych-wezlach" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">root</span><span class="o">.</span><span class="n">iter</span><span class="p">(</span><span class="s">&quot;child&quot;</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">print</span><span class="p">()</span> <span class="s">&quot;{} {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">tag</span><span class="p">,</span> <span class="n">element</span><span class="o">.</span><span class="n">text</span><span class="p">))</span>
+<span class="go">child - Child 1</span>
+<span class="go">child - Child 2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="serializacja">
+<h2>Serializacja<a class="headerlink" href="#serializacja" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>funkcja <tt class="docutils literal"><span class="pre">tostring()</span></tt> zwracająca string</li>
+<li>metoda <tt class="docutils literal"><span class="pre">ElementTree.write()</span></tt> - zapis do pliku, obiektu plikowego lub URL</li>
+<li>argumenty: <tt class="docutils literal"><span class="pre">pretty_print</span></tt> oraz <tt class="docutils literal"><span class="pre">encoding</span></tt></li>
+</ul>
+</div>
+<div class="section" id="klasa-elementtree">
+<h2>Klasa ElementTree<a class="headerlink" href="#klasa-elementtree" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>ElementTree</dt>
+<dd>klasa opakowująca drzewo wraz z węzłem początkowym (<tt class="docutils literal"><span class="pre">root</span></tt>).
+Dostarcza szereg metod parsujących oraz serializujących dokument.</dd>
+</dl>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="go"># Parsowanie dokumentu xml – zwraca obiekt ElementTree</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">StringIO</span><span class="p">(</span><span class="s">&quot;&quot;&quot;</span>
+<span class="gp">... </span><span class="s">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
+<span class="gp">... </span><span class="s">&lt;!DOCTYPE root SYSTEM &quot;test&quot; [ &lt;!ENTITY tasty &quot;eggs&quot;&gt; ]&gt;</span>
+<span class="gp">... </span><span class="s">&lt;root&gt;</span>
+<span class="gp">... </span><span class="s"> &lt;a&gt;&amp;tasty;&lt;/a&gt;</span>
+<span class="gp">... </span><span class="s">&lt;/root&gt;</span>
+<span class="gp">... </span><span class="s">&quot;&quot;&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="go"># Zapis do pliku XML</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;test.xml&quot;</span><span class="p">,</span>
+<span class="gp">... </span><span class="n">pretty_print</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="go">&lt;!DOCTYPE root SYSTEM &quot;test&quot;</span>
+<span class="go">[&lt;!ENTITY tasty &quot;eggs&quot;&gt;]&gt;</span>
+<span class="go">&lt;root&gt;</span>
+<span class="go">  &lt;a&gt;eggs&lt;/a&gt;</span>
+<span class="go">&lt;/root&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="parsowanie-dokumentow-xml">
+<h2>Parsowanie dokumentów XML<a class="headerlink" href="#parsowanie-dokumentow-xml" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>parsowanie plików lub obiektów plikowych – funkcja <tt class="docutils literal"><span class="pre">parse()</span></tt></li>
+</ul>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">some_file_like</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">(</span><span class="s">&quot;&lt;root&gt;data&lt;/root&gt;&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">some_file_like</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">etree</span><span class="o">.</span><span class="n">tostring</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
+<span class="go">&#39;&lt;root&gt;data&lt;/root&gt;&#39;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>parsowanie stringów - funkcja <tt class="docutils literal"><span class="pre">fromstring()</span></tt> lub <tt class="docutils literal"><span class="pre">XML()</span></tt></li>
+</ul>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">some_xml_data</span> <span class="o">=</span> <span class="s">&quot;&lt;root&gt;data&lt;/root&gt;&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="n">some_xml_data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span> <span class="n">etree</span><span class="o">.</span><span class="n">tostring</span><span class="p">(</span><span class="n">root</span><span class="p">)</span> <span class="p">)</span>
+<span class="go">&lt;root&gt;data&lt;/root&gt;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">XML</span><span class="p">(</span><span class="n">some_xml_data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span> <span class="n">root</span><span class="o">.</span><span class="n">text</span> <span class="p">)</span>
+<span class="go">data</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="elementpath">
+<h2>ElementPath<a class="headerlink" href="#elementpath" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>ElementPath</dt>
+<dd>język zapytań podobny do Xpath</dd>
+</dl>
+<p>Metody:</p>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">iterfind()</span></tt></dt>
+<dd>iteruje po wszystkich elementach, które pasują do wyrażenia filtrującego</dd>
+<dt><tt class="docutils literal"><span class="pre">findall()</span></tt></dt>
+<dd>zwraca listę pasujących elementów</dd>
+<dt><tt class="docutils literal"><span class="pre">find()</span></tt></dt>
+<dd>zwraca pierwszy pasujący element</dd>
+<dt><tt class="docutils literal"><span class="pre">findtext()</span></tt></dt>
+<dd>zwraca  zawartość .text pasującego elementu</dd>
+</dl>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">root</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">XML</span><span class="p">(</span><span class="s">&quot;&lt;root&gt;&lt;a x=&#39;123&#39;&gt;aText&lt;b/&gt;&lt;c/&gt;&lt;b/&gt;&lt;/a&gt;&lt;/root&gt;&quot;</span><span class="p">)</span>
+
+<span class="go"># Znajdź element podrzędny</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span> <span class="n">root</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;b&quot;</span><span class="p">)</span> <span class="p">)</span>
+<span class="go">None</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span> <span class="n">root</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;a&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">tag</span> <span class="p">)</span>
+<span class="go">a</span>
+
+<span class="go"># Znajdź element w drzewie</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span> <span class="n">root</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;.//b&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">tag</span> <span class="p">)</span>
+<span class="go">b</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">b</span><span class="o">.</span><span class="n">tag</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">root</span><span class="o">.</span><span class="n">iterfind</span><span class="p">(</span><span class="s">&quot;.//b&quot;</span><span class="p">)]</span>
+<span class="go">[&#39;b&#39;, &#39;b&#39;]</span>
+
+<span class="go"># Znajdź elementy z danym atrybutem</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span> <span class="n">root</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s">&quot;.//a[@x]&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tag</span> <span class="p">)</span>
+<span class="go">a</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span> <span class="n">root</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s">&quot;.//a[@y]&quot;</span><span class="p">)</span> <span class="p">)</span>
+<span class="go">[]</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../index.html">
+    <img class="logo" src="../_static/logo_small.png" alt="Logo"/>
+    
+  </a>
+</p>
+
+
+
+
+
+<p>
+<iframe src="http://ghbtns.com/github-btn.html?user=czterybity&repo=python_doc&type=watch&count=true&size=large"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="wprowadzenie.html">Wprowadzenie do programowania w języku Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="programowanie_funkcyjne.html">Elementy programowania funkcyjnego</a></li>
+<li class="toctree-l1"><a class="reference internal" href="programowanie_obiektowe.html">Funkcje, klasy, obiekty i moduły</a></li>
+<li class="toctree-l1"><a class="reference internal" href="biblioteka_standardowa.html">Biblioteka standardowa</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Biblioteka lxml</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#podstawy-elementtree-api">Podstawy <tt class="docutils literal"><span class="pre">ElementTree</span> <span class="pre">API</span></tt></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#tworzenie-elementow-drzewa">Tworzenie elementów drzewa</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dostep-do-elementow-drzewa">Dostęp do elementów drzewa</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#atrybuty-elementow">Atrybuty elementów</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dane-tekstowe">Dane tekstowe</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#iteracja-po-drzewie-elementow">Iteracja po drzewie elementów</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rekursywna-iteracja">Rekursywna iteracja</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#iteracja-po-przefiltrowanych-wezlach">Iteracja po przefiltrowanych węzłach</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#serializacja">Serializacja</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#klasa-elementtree">Klasa ElementTree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#parsowanie-dokumentow-xml">Parsowanie dokumentów XML</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#elementpath">ElementPath</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../adv/funkcje.html">Funkcje w języku Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adv/klasy.html">Klasy i obiekty</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adv/dekoratory.html">Dekoratory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adv/metaklasy.html">Metaklasy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adv/TDD.html">Testowanie kodu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adv/watki.html">Programowanie wielowątkowe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adv/wzorce.html">Wzorce projektowe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adv/2vs3.html">Porównanie Pythona 2 i 3</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, Leszek Tarkowski.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.0</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

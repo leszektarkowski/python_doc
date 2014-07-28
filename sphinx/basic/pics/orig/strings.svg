@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="267.15625"
+   height="90.886719"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="strings.svg"
+   inkscape:export-filename="D:\trainings\py_arcgis\book_py_arcgis\pics\strings.png"
+   inkscape:export-xdpi="300.0531"
+   inkscape:export-ydpi="300.0531">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.979899"
+     inkscape:cx="70.641006"
+     inkscape:cy="-15.389185"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1147"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     fit-margin-top="10"
+     fit-margin-left="10"
+     fit-margin-right="10"
+     fit-margin-bottom="10" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-42.34375,-192.73495)">
+    <rect
+       style="fill:#eeeeec;fill-opacity:1;stroke:#2e3436;stroke-width:1"
+       id="rect2985"
+       width="39"
+       height="39"
+       x="52.857143"
+       y="218.88829" />
+    <rect
+       style="fill:#eeeeec;fill-opacity:1;stroke:#2e3436;stroke-width:1"
+       id="rect2985-1"
+       width="39"
+       height="39"
+       x="94.273399"
+       y="218.88829" />
+    <rect
+       style="fill:#eeeeec;fill-opacity:1;stroke:#2e3436;stroke-width:1"
+       id="rect2985-7"
+       width="39"
+       height="39"
+       x="135.68965"
+       y="218.88829" />
+    <rect
+       style="fill:#eeeeec;fill-opacity:1;stroke:#2e3436;stroke-width:1"
+       id="rect2985-1-4"
+       width="39"
+       height="39"
+       x="177.10591"
+       y="218.88829" />
+    <rect
+       style="fill:#eeeeec;fill-opacity:1;stroke:#2e3436;stroke-width:1"
+       id="rect2985-8"
+       width="39"
+       height="39"
+       x="218.57143"
+       y="218.88829" />
+    <rect
+       style="fill:#eeeeec;fill-opacity:1;stroke:#2e3436;stroke-width:1"
+       id="rect2985-1-2"
+       width="39"
+       height="39"
+       x="259.98767"
+       y="218.88829" />
+    <text
+       xml:space="preserve"
+       style="font-size:28px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:89.99999762%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Calibri;-inkscape-font-specification:Calibri"
+       x="70"
+       y="242.36218"
+       id="text3066"
+       sodipodi:linespacing="89.999998%"><tspan
+         sodipodi:role="line"
+         id="tspan3068"
+         x="70"
+         y="242.36218"></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:28px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;letter-spacing:26.30999947px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Consolas;-inkscape-font-specification:Consolas"
+       x="64.379036"
+       y="246.0085"
+       id="text3090"
+       sodipodi:linespacing="100%"><tspan
+         sodipodi:role="line"
+         id="tspan3092"
+         x="64.379036"
+         y="246.0085"
+         dy="0 -8.8415195e-009"
+         dx="0 8.8415195e-009"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:26.30999947px;font-family:Consolas;-inkscape-font-specification:Consolas">Python</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:89.99999762%;letter-spacing:-1.73000014px;word-spacing:17.47999954px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Consolas;-inkscape-font-specification:Consolas"
+       x="58.57143"
+       y="271.21933"
+       id="text3094"
+       sodipodi:linespacing="89.999998%"><tspan
+         sodipodi:role="line"
+         id="tspan3096"
+         x="58.57143"
+         y="271.21933"
+         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:-1.73000014px;word-spacing:17.47999954px;font-family:Consolas;-inkscape-font-specification:Consolas">s[0] s[1] s[2] s[3] s[4] s[5]</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:89.99999762%;letter-spacing:-1.73000014px;word-spacing:11.97000027px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Consolas;-inkscape-font-specification:Consolas"
+       x="58.57143"
+       y="211.21933"
+       id="text3094-5"
+       sodipodi:linespacing="89.999998%"><tspan
+         sodipodi:role="line"
+         id="tspan3096-1"
+         x="58.57143"
+         y="211.21933"
+         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:-1.73000014px;word-spacing:11.97000027px;font-family:Consolas;-inkscape-font-specification:Consolas">s[-6] s[-5] s[-4] s[-3] s[-2] s[-1]</tspan></text>
+  </g>
+</svg>

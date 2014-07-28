@@ -1,0 +1,689 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Funkcje, klasy, obiekty i moduły &mdash; Zaawansowane programowanie w języku Python</title>
+    
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Zaawansowane programowanie w języku Python" href="../index.html" />
+    <link rel="up" title="&lt;no title&gt;" href="basic.html" />
+    <link rel="next" title="Biblioteka standardowa" href="biblioteka_standardowa.html" />
+    <link rel="prev" title="Elementy programowania funkcyjnego" href="programowanie_funkcyjne.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="biblioteka_standardowa.html" title="Biblioteka standardowa"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="programowanie_funkcyjne.html" title="Elementy programowania funkcyjnego"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Zaawansowany Python</a> &raquo;</li>
+          <li><a href="basic.html" accesskey="U">&lt;no title&gt;</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="funkcje-klasy-obiekty-i-moduly">
+<h1>Funkcje, klasy, obiekty i moduły<a class="headerlink" href="#funkcje-klasy-obiekty-i-moduly" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="obiekty-w-pythonie">
+<h2>Obiekty w Pythonie<a class="headerlink" href="#obiekty-w-pythonie" title="Permalink to this headline">¶</a></h2>
+<p>Python jest zbudowany wokół koncepcji &#8220;obiektu&#8221;. Każdy fragment danych (listy, słowniki, funkcje, moduły, itp.) przechowywany i wykorzystywany przez Pythona jest obiektem.</p>
+<dl class="docutils">
+<dt>Każdy obiekt posiada:</dt>
+<dd><ul class="first last simple">
+<li>Tożsamość <em>(identity)</em> – wskazuje na lokalizację obiektu w pamięci</li>
+<li>Typ <em>(type)</em> – opisuje reprezentację obiektu dla Pythona</li>
+<li>Wartość <em>(value)</em> – dane przechowywane w obiekcie</li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">lst</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">id</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>
+<span class="go">30098576</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>
+<span class="go">&lt;type &#39;list&#39;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lst</span>
+<span class="go">[1, 2, 3]</span>
+</pre></div>
+</div>
+<p>Po utworzeniu obiektu jego tożsamość i typ nie mogą być zmienione.
+Jeśli wartość obiektu się zmienia, jest to obiekt zmienny <em>(mutable)</em>.
+Jeśli nie może ulec zmianie – obiekt niezmienny <em>(immutable)</em>.
+Na przykład, typy <tt class="docutils literal"><span class="pre">str</span></tt> i <tt class="docutils literal"><span class="pre">tuple</span></tt> są niezmienne.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="gt">Traceback (most recent call last):</span>
+    <span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="gr">TypeError</span>: <span class="n">&#39;tuple&#39; object does not support item assignment</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>Niektóre obiekty posiadają:</dt>
+<dd><ul class="first last simple">
+<li>Atrybuty – wartości powiązane z obiektem</li>
+<li>Metody – wywoływalne funkcje, które operują na obiekcie</li>
+</ul>
+</dd>
+</dl>
+<p>Dostęp do atrybutów i metod uzyskuje się poprzez wykorzystanie składni z kropkami (.)</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">r&quot;c:</span><span class="se">\\</span><span class="s">Training</span><span class="se">\\</span><span class="s">test.txt&quot;</span><span class="p">,</span> <span class="s">&quot;w&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">f</span><span class="o">.</span><span class="n">closed</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">f</span><span class="o">.</span><span class="n">closed</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="funkcje">
+<h2>Funkcje<a class="headerlink" href="#funkcje" title="Permalink to this headline">¶</a></h2>
+<p id="index-0">Definicja i użycie funkcji</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">reminder</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Zwraca reszte z dzielenia a/b&quot;&quot;&quot;</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="n">a</span> <span class="o">//</span> <span class="n">b</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">a</span> <span class="o">-</span> <span class="n">q</span><span class="o">*</span><span class="n">b</span>
+    <span class="k">return</span> <span class="n">r</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="c"># Użycie funkcji</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">reminder</span><span class="p">(</span><span class="mi">42</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>  <span class="c"># a = 2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">a</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">reminder</span><span class="o">.</span><span class="n">__doc__</span>
+<span class="go">Zwraca resztę z dzielenia a/b</span>
+</pre></div>
+</div>
+<p>Funkcje mogą zwracać wiele wartości. Wartości zwracane pakowane są do krotki.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">divide</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="n">a</span><span class="o">/</span><span class="n">b</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">a</span> <span class="o">-</span> <span class="n">q</span><span class="o">*</span><span class="n">b</span>
+    <span class="k">return</span> <span class="n">q</span><span class="p">,</span> <span class="n">r</span>
+
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">divide</span><span class="p">(</span><span class="mi">42</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>  <span class="c"># x = 8, y = 2</span>
+</pre></div>
+</div>
+<p>Definiowanie parametrów funkcji i sposoby wywoływania:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">fun</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="mi">2009</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span> <span class="s">&quot;{} / {} / {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">year</span><span class="p">)</span> <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">fun</span><span class="p">(</span><span class="s">&quot;Robert&quot;</span><span class="p">,</span> <span class="s">&quot;Kraków&quot;</span><span class="p">)</span>
+<span class="go">Robert / Kraków / 2009</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fun</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="s">&quot;Berlin&quot;</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="mi">2004</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;Anna&quot;</span><span class="p">)</span>
+<span class="go">Anna / Berlin / 2004</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fun</span><span class="p">(</span><span class="s">&quot;Artur&quot;</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="mi">2005</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="s">&quot;Toronto&quot;</span><span class="p">)</span>
+<span class="go">Artur / Toronto / 2005</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>Parametry mogą być przekazywane również jako:</dt>
+<dd><ul class="first last simple">
+<li>Krotka – przy pomocy składni z *</li>
+<li>Słownik – przy pomocy składni z **</li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">tuple</span> <span class="o">=</span> <span class="p">(</span><span class="s">&quot;Edward&quot;</span><span class="p">,</span> <span class="s">&quot;Kolonia&quot;</span><span class="p">,</span> <span class="mi">2003</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fun</span><span class="p">(</span><span class="o">*</span><span class="nb">tuple</span><span class="p">)</span>
+<span class="go">Edward/Kolonia/2003</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dictionary</span> <span class="o">=</span> <span class="p">{</span> <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;Zenon&quot;</span><span class="p">,</span> <span class="s">&quot;location&quot;</span><span class="p">:</span> <span class="s">&quot;Gdynia&quot;</span><span class="p">,</span> <span class="s">&quot;year&quot;</span><span class="p">:</span> <span class="mi">1999</span> <span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fun</span><span class="p">(</span><span class="o">**</span><span class="n">dictionary</span><span class="p">)</span>
+<span class="go">Zenon/Gdynia/1999</span>
+</pre></div>
+</div>
+<div class="section" id="operator-lambda">
+<h3>Operator <tt class="docutils literal"><span class="pre">lambda</span></tt><a class="headerlink" href="#operator-lambda" title="Permalink to this headline">¶</a></h3>
+<p id="index-1">Operator lambda umożliwia tworzenie funkcji anonimowych.</p>
+<p>Składnia: <tt class="docutils literal"><span class="pre">lambda</span> <span class="pre">&lt;args&gt;</span> <span class="pre">:</span> <span class="pre">&lt;expression&gt;</span></tt></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">bigger</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="p">:</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bigger</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bigger</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="klasy">
+<h2>Klasy<a class="headerlink" href="#klasy" title="Permalink to this headline">¶</a></h2>
+<p id="index-2">Klasy są zbiorami atrybutów oraz metod.</p>
+<dl class="docutils">
+<dt>Klasy umożliwiają:</dt>
+<dd><ul class="first last simple">
+<li>Tworzenie nowych typów danych definiowanych przez użytkownika</li>
+<li>Rozszerzanie możliwości istniejących typów danych</li>
+</ul>
+</dd>
+</dl>
+<div class="section" id="definicja-klasy">
+<h3>Definicja klasy<a class="headerlink" href="#definicja-klasy" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">BankAccount</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">owner</span><span class="p">,</span> <span class="n">balance</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">owner</span> <span class="o">=</span> <span class="n">owner</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">balance</span> <span class="o">=</span> <span class="n">balance</span>
+
+    <span class="k">def</span> <span class="nf">withdraw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amount</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">balance</span> <span class="o">-=</span> <span class="n">amount</span>
+
+    <span class="k">def</span> <span class="nf">deposit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amount</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">balance</span> <span class="o">+=</span> <span class="n">amount</span>
+
+    <span class="k">def</span> <span class="nf">info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span> <span class="s">&quot;owner:&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">owner</span><span class="p">,</span> <span class="s">&quot;; balance:&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">balance</span> <span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">W wesji Pythona 2.x definicja klasy powinna zawierać rodzica <tt class="docutils literal"><span class="pre">class</span> <span class="pre">BankAccount(object):</span></tt>.
+W przeciwnym razie zostanie wygenerowana klasa tzw. &#8220;starego typu&#8221;.
+Wszyskie klasy w Pythonie 3.x są &#8220;nowego typu&#8221;.</p>
+</div>
+</div>
+<div class="section" id="tworzenie-obiektow">
+<h3>Tworzenie obiektów<a class="headerlink" href="#tworzenie-obiektow" title="Permalink to this headline">¶</a></h3>
+<p>Aby utworzyć obiekt danej klasy należy wywołać klasę przy pomocy operatora ().</p>
+<p>Przykład:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">jk</span> <span class="o">=</span> <span class="n">BankAccount</span><span class="p">(</span><span class="s">&quot;Jan Kowalski&quot;</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">jk</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<span class="n">jk</span><span class="o">.</span><span class="n">deposit</span><span class="p">(</span><span class="mi">2000</span><span class="p">)</span>
+<span class="n">jk</span><span class="o">.</span><span class="n">withdraw</span><span class="p">(</span><span class="mi">2500</span><span class="p">)</span>
+<span class="n">jk</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<span class="n">jk</span><span class="o">.</span><span class="n">balance</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c"># Dostęp do składowej balance</span>
+<span class="n">jk</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>owner: Jan Kowalski ; balance: 1000
+owner: Jan Kowalski ; balance: 500
+owner: Jan Kowalski ; balance: 0
+</pre></div>
+</div>
+</div>
+<div class="section" id="skladowe-prywatne-klasy">
+<h3>Składowe prywatne klasy<a class="headerlink" href="#skladowe-prywatne-klasy" title="Permalink to this headline">¶</a></h3>
+<p id="index-3">Wszystkie atrybuty i metody zdefiniowane w klasie są publiczne.
+Aby ukryć atrybut lub metodę przed dostępem spoza klasy (składowa private) należy jej nazwę poprzedzić dwoma podkreślnikami (np.  <tt class="docutils literal"><span class="pre">__atrybut</span></tt>).</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">BankAccount</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">owner</span><span class="p">,</span> <span class="n">balance</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">owner</span> <span class="o">=</span> <span class="n">owner</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__balance</span> <span class="o">=</span> <span class="n">balance</span>
+
+    <span class="k">def</span> <span class="nf">withdraw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amount</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__balance</span> <span class="o">-=</span> <span class="n">amount</span>
+
+    <span class="k">def</span> <span class="nf">deposit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amount</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__balance</span> <span class="o">+=</span> <span class="n">amount</span>
+
+    <span class="k">def</span> <span class="nf">info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s">&quot;owner:&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">owner</span><span class="p">,</span> <span class="s">&quot;; balance:&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__balance</span>
+
+<span class="n">jk</span> <span class="o">=</span> <span class="n">BankAccount</span><span class="p">(</span><span class="s">&quot;Kowalski&quot;</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span> <span class="n">jk</span><span class="o">.</span><span class="n">balance</span> <span class="p">)</span>               <span class="c"># Błąd!</span>
+<span class="k">print</span><span class="p">(</span> <span class="n">jk</span><span class="o">.</span><span class="n">_BankAccount__balance</span> <span class="p">)</span> <span class="c"># OK</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="skladowe-statyczne">
+<h3>Składowe statyczne<a class="headerlink" href="#skladowe-statyczne" title="Permalink to this headline">¶</a></h3>
+<p id="index-4">Składowe statyczne są wspólne dla wszystkich instancji klasy.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">CountedObject</span><span class="p">:</span>
+    <span class="n">__count</span> <span class="o">=</span> <span class="mi">0</span>   <span class="c"># Statyczna skladowa</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">CountedObject</span><span class="o">.</span><span class="n">__count</span> <span class="o">+=</span> <span class="mi">1</span>
+
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">staticGetCount</span><span class="p">():</span>
+        <span class="k">return</span> <span class="n">CountedObject</span><span class="o">.</span><span class="n">__count</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">classGetCount</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s">&quot;classGetCount invoked for instance of&quot;</span><span class="p">,</span> <span class="n">cls</span>
+        <span class="k">return</span> <span class="n">cls</span><span class="o">.</span><span class="n">__count</span>
+
+<span class="k">print</span> <span class="s">&quot;Number of objects: </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">CountedObject</span><span class="o">.</span><span class="n">staticGetCount</span><span class="p">()</span>
+<span class="k">print</span> <span class="s">&quot;Creating objects...&quot;</span>
+
+<span class="n">c1</span> <span class="o">=</span> <span class="n">CountedObject</span><span class="p">()</span>
+<span class="n">c2</span> <span class="o">=</span> <span class="n">CountedObject</span><span class="p">()</span>
+<span class="n">cs</span> <span class="o">=</span> <span class="p">[</span><span class="n">CountedObject</span><span class="p">(),</span> <span class="n">CountedObject</span><span class="p">()]</span>
+
+<span class="k">print</span> <span class="s">&quot;Number of objects: </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">CountedObject</span><span class="o">.</span><span class="n">staticGetCount</span><span class="p">()</span>
+<span class="k">print</span> <span class="s">&quot;Number of objects: </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">CountedObject</span><span class="o">.</span><span class="n">classGetCount</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>Number of objects: 0
+Creating objects...
+Number of objects: 4
+classGetCount invoked for instance of &lt;class &#39;__main__.CountedObject&#39;&gt;
+</pre></div>
+</div>
+</div>
+<div class="section" id="wlasciwosci">
+<h3>Właściwości<a class="headerlink" href="#wlasciwosci" title="Permalink to this headline">¶</a></h3>
+<p id="index-5">Właściwości umożliwiają enkapsulację obiektu.
+Są odpowiednikiem metod dostępowych.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Rectangle</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">def</span> <span class="nf">setSize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="n">size</span>
+    <span class="k">def</span> <span class="nf">getSize</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span>
+    <span class="n">size</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">getSize</span><span class="p">,</span> <span class="n">setSize</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">Rectangle</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">size</span>
+<span class="go">(10, 20)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">100</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">height</span>
+<span class="go">100</span>
+</pre></div>
+</div>
+<p>Istnieje możliwość definiowania właściwości typu &#8220;read-only&#8221;.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">BankAccount</span><span class="p">:</span>
+    <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">owner</span><span class="p">,</span> <span class="n">balance</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">owner</span> <span class="o">=</span> <span class="n">owner</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__balance</span> <span class="o">=</span> <span class="n">balance</span>
+        <span class="n">BankAccount</span><span class="o">.</span><span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">def</span> <span class="nf">__getBalance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__balance</span>
+    <span class="n">balance</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">__getBalance</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ba</span> <span class="o">=</span> <span class="n">BankAccount</span><span class="p">(</span><span class="s">&quot;jk&quot;</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ba</span><span class="o">.</span><span class="n">balance</span>
+<span class="go">100</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ba</span><span class="o">.</span><span class="n">balance</span> <span class="o">=</span> <span class="mi">100</span> <span class="c"># Błąd!</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="specjalne-atrybuty">
+<h3>Specjalne atrybuty<a class="headerlink" href="#specjalne-atrybuty" title="Permalink to this headline">¶</a></h3>
+<p id="index-6">Instancje klas posiadają specjalne atrybuty, które opisują obiekty.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ba</span> <span class="o">=</span> <span class="n">BankAccount</span><span class="p">(</span><span class="s">&quot;Kowalski&quot;</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ba</span><span class="o">.</span><span class="n">__dict__</span>  <span class="c"># Słownik zdefiniowanych przez użytkownika atrybutów</span>
+<span class="go">{&#39;owner&#39;: &#39;Kowalski&#39;, &#39;_BankAccount__balance&#39;: 1000}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ba</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span>  <span class="c"># Nazwa klasy</span>
+<span class="go">&#39;BankAccount&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ba</span><span class="o">.</span><span class="n">withdraw</span><span class="o">.</span><span class="n">__name__</span>  <span class="c"># Nazwa metody</span>
+<span class="go">&#39;withdraw&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">attrib</span> <span class="k">for</span> <span class="n">attrib</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="n">ba</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">attrib</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&#39;_&#39;</span><span class="p">)]</span> <span class="c"># Interfejs</span>
+<span class="go">[&#39;counter&#39;, &#39;deposit&#39;, &#39;info&#39;, &#39;owner&#39;, &#39;withdraw&#39;]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="metody-specjalne">
+<h3>Metody specjalne<a class="headerlink" href="#metody-specjalne" title="Permalink to this headline">¶</a></h3>
+<p id="index-7">Klasy umożliwiają przeładowywanie operatorów (podobnie jak w C++).
+Jest to możliwe dzięki specjalnym metodom, które można zaimplementować w klasie.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Special</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">pass</span>
+        <span class="c"># konstruktor</span>
+
+    <span class="k">def</span> <span class="nf">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+        <span class="c"># Destruktor – rzadko wykorzystywany</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+        <span class="c"># Reprezentacja znakowa; wywoływana przez print i str</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+        <span class="c"># Reprezentacja znakowa; wywoływana przez repr</span>
+        <span class="c"># eval(repr(a)) powinno być równe a</span>
+
+    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+        <span class="k">pass</span>
+        <span class="c"># Indeksacja dla obiektu: b = a[i]</span>
+
+    <span class="k">def</span> <span class="nf">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="k">pass</span>
+        <span class="c"># Przypisanie z wykorzystaniem indeksacji: a[i] = v</span>
+
+    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+        <span class="c"># Wywoływane przez len(a);  Funkcja powinna zwrócić</span>
+        <span class="c"># długość obiektu (o ile ma to uzasadnienie)</span>
+
+    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">pass</span>
+        <span class="c"># Test self == x; zwraca True lub False</span>
+
+    <span class="k">def</span> <span class="nf">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="k">pass</span>
+        <span class="c"># Definiuje self + b</span>
+
+    <span class="k">def</span> <span class="nf">__sub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="k">pass</span>
+        <span class="c"># Definiuje self – b</span>
+
+    <span class="k">def</span> <span class="nf">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="k">pass</span>
+        <span class="c"># Definiuje self * b</span>
+
+    <span class="k">def</span> <span class="nf">__div__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="k">pass</span>
+        <span class="c"># Definiuje self / b</span>
+
+    <span class="k">def</span> <span class="nf">__pow__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="k">pass</span>
+        <span class="c"># Definiuje self ** b</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="dziedziczenie">
+<h2>Dziedziczenie<a class="headerlink" href="#dziedziczenie" title="Permalink to this headline">¶</a></h2>
+<p id="index-8">Dziedziczenie – umożliwia tworzenie nowych klas, które przejmują formę i funkcjonalność klas bazowych.</p>
+<p>Dziedziczenie definiowane jest za pomocą składni:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Base</span><span class="p">:</span>
+    <span class="k">pass</span>
+<span class="k">class</span> <span class="nc">Derived</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+<p>Przykład:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">CheckedAccount</span><span class="p">(</span><span class="n">BankAccount</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">owner</span><span class="p">,</span> <span class="n">balance</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">limit</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="n">BankAccount</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">owner</span><span class="p">,</span> <span class="n">balance</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">limit</span> <span class="o">=</span> <span class="n">limit</span>
+
+    <span class="k">def</span> <span class="nf">withdraw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amount</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">balance</span><span class="o">-</span><span class="n">amount</span><span class="p">)</span> <span class="o">&lt;</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">limit</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span> <span class="s">&quot;Brak srodkow na koncie&quot;</span> <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">BankAccount</span><span class="o">.</span><span class="n">withdraw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amount</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Aby wywołać konstruktor klasy bazowej można użyć metody <tt class="docutils literal"><span class="pre">super()</span></tt> zwracającej objekt <em>proxy</em> rodzica.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">owner</span><span class="p">,</span> <span class="n">balance</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">limit</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">owner</span><span class="p">,</span> <span class="n">balance</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">limit</span> <span class="o">=</span> <span class="n">limit</span>
+</pre></div>
+</div>
+<div class="section" id="wielokrotne-dziedziczenie">
+<h3>Wielokrotne dziedziczenie<a class="headerlink" href="#wielokrotne-dziedziczenie" title="Permalink to this headline">¶</a></h3>
+<p id="index-9">Dziedziczenie wielokrotne – klasy mogą dziedziczyć po kilku klasach bazowych.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Base1</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="s">&quot;Base1.a&quot;</span>
+  <span class="k">def</span> <span class="nf">fa</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">print</span> <span class="s">&quot;a:&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span>
+<span class="k">class</span> <span class="nc">Base2</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">b</span> <span class="o">=</span> <span class="s">&quot;Base2.b&quot;</span>
+  <span class="k">def</span> <span class="nf">fb</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">print</span> <span class="s">&quot;b:&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span>
+
+<span class="k">class</span> <span class="nc">Derived</span><span class="p">(</span><span class="n">Base2</span><span class="p">,</span> <span class="n">Base1</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">Derived</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="o">.</span><span class="n">a</span>
+<span class="go">&#39;Base1.a&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="o">.</span><span class="n">b</span>
+<span class="go">&#39;Base2.a&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="o">.</span><span class="n">fa</span><span class="p">()</span>
+<span class="go">a: Base1.a</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="o">.</span><span class="n">fb</span><span class="p">()</span>
+<span class="go">b: Base2.b</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="interfejsy-i-introspekcja">
+<h2>Interfejsy i introspekcja<a class="headerlink" href="#interfejsy-i-introspekcja" title="Permalink to this headline">¶</a></h2>
+<p>Istnieje możliwość sprawdzania charakterystyk klas i obiektów w trakcie działania programu.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">issubclass</span><span class="p">(</span><span class="n">Derived</span><span class="p">,</span> <span class="n">Base1</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">issubclass</span><span class="p">(</span><span class="n">Base2</span><span class="p">,</span> <span class="n">Derived</span><span class="p">)</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Derived</span><span class="o">.</span><span class="n">__bases__</span>
+<span class="go">(&lt;class &#39;__main__.Base2&#39;&gt;, &lt;class &#39;__main__.Base1&#39;&gt;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">Derived</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">isinstance</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">Base1</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">hasattr</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s">&quot;fa&quot;</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">callable</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s">&quot;fa&quot;</span><span class="p">,</span> <span class="bp">None</span><span class="p">))</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="moduly">
+<h2>Moduły<a class="headerlink" href="#moduly" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils" id="index-10">
+<dt>Moduł</dt>
+<dd>plik źródłowy z rozszerzeniem <tt class="docutils literal"><span class="pre">.py</span></tt> zawierający kod Pythona. Może zawierać definicje funkcji, klas, a także niezależny od nich kod. Moduł może zawierać dokumentację informującą o sposobie jego działania i zastosowaniach.</dd>
+</dl>
+<p>Wewnątrz modułu jego nazwa (nazwa pliku bez rozszerzenia .py) jest dostępna pod globalną zmienną <tt class="docutils literal"><span class="pre">__name__</span></tt></p>
+<p>Plik: fibo.py</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">fib</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;wypisuje wartości ciągu Fibonacciego od 0 do n&quot;&quot;&quot;</span>
+    <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
+    <span class="k">while</span> <span class="n">b</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span> <span class="n">b</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">)</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="o">+</span><span class="n">b</span>
+
+<span class="k">def</span> <span class="nf">fib2</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;zwraca wartość ciągu Fibonacciego dla n&quot;&quot;&quot;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
+    <span class="k">while</span> <span class="n">b</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="o">+</span><span class="n">b</span>
+        <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+</div>
+<div class="section" id="import-modulow">
+<h3>Import modułów<a class="headerlink" href="#import-modulow" title="Permalink to this headline">¶</a></h3>
+<p>Przed użyciem modułu należy go zaimportować.</p>
+<p>Pierwszy sposób importu:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">fibo</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fibo</span><span class="o">.</span><span class="n">fib</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+<span class="go">1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 98</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fibo</span><span class="o">.</span><span class="n">__name__</span>
+<span class="go">&#39;fibo&#39;</span>
+</pre></div>
+</div>
+<p>Drugi sposób  importu:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fibo</span> <span class="kn">import</span> <span class="n">fib</span><span class="p">,</span> <span class="n">fib2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fib</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span>
+<span class="go">1 1 2 3 5 8 13 21 34 55 89 144 233 377</span>
+</pre></div>
+</div>
+<p>Trzeci sposób importu – ryzyko wystąpienia konfliktu nazw:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fibo</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fib2</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span>
+<span class="go">[1 1 2 3 5 8 13 21 34 55 89 144 233 377]</span>
+</pre></div>
+</div>
+<p>Ze względu na potencjalny konflikt nazw wywoływany przez składnię <tt class="docutils literal"><span class="pre">import</span> <span class="pre">*</span></tt> zaleca się stosowanie dwóch pierwszych sposobów importu.</p>
+</div>
+<div class="section" id="lokalizacja-modulow-pythonpath">
+<h3>Lokalizacja modułów – PYTHONPATH<a class="headerlink" href="#lokalizacja-modulow-pythonpath" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="index-11">
+<dt>Kiedy moduł o nazwie <tt class="docutils literal"><span class="pre">name</span></tt> jest importowany, interpreter przeszukuje:</dt>
+<dd><ul class="first last simple">
+<li>bieżący katalog</li>
+<li>listę katalogów znajdującą się w zmiennej systemowej <tt class="docutils literal"><span class="pre">PYTHONPATH</span></tt></li>
+<li>domyślną ścieżkę instalacji (np. <em>/usr/local/lib/python</em>)</li>
+</ul>
+</dd>
+<dt><tt class="docutils literal"><span class="pre">sys.path</span></tt></dt>
+<dd>lista katalogów przeglądanych przez interpreter w trakcie wykonywania instrukcji import.</dd>
+</dl>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sys</span><span class="o">.</span><span class="n">path</span>
+<span class="go">[&#39;&#39;,</span>
+<span class="go">&#39;/opt/python3.3/lib/python3.3&#39;,</span>
+<span class="go"> ...]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;/home/myuser/mypath/python&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="uruchamianie-modulow-jako-skrypt">
+<h3>Uruchamianie modułów jako skrypt<a class="headerlink" href="#uruchamianie-modulow-jako-skrypt" title="Permalink to this headline">¶</a></h3>
+<p>Gdy uruchamiany jest moduł Pythona poleceniem:</p>
+<div class="highlight-python"><div class="highlight"><pre>python fibo.py 100
+</pre></div>
+</div>
+<p>Kod w module jest wykonywany, tak jak przy imporcie, ale zmienna globalna modułu <tt class="docutils literal"><span class="pre">__name__</span></tt> jest ustawiana na <tt class="docutils literal"><span class="pre">&quot;__main__&quot;</span></tt>.</p>
+<p>Aby moduł działał jak skrypt należy umieścić na końcu modułu kod sprawdzający, czy <tt class="docutils literal"><span class="pre">__name__</span> <span class="pre">==</span> <span class="pre">&quot;__main__&quot;</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">sys</span>
+    <span class="n">fib</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>python fibo.py 50
+1 1 2 3 5 8 13 21 34
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../index.html">
+    <img class="logo" src="../_static/logo_small.png" alt="Logo"/>
+    
+  </a>
+</p>
+
+
+
+
+
+<p>
+<iframe src="http://ghbtns.com/github-btn.html?user=czterybity&repo=python_doc&type=watch&count=true&size=large"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="wprowadzenie.html">Wprowadzenie do programowania w języku Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="programowanie_funkcyjne.html">Elementy programowania funkcyjnego</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Funkcje, klasy, obiekty i moduły</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#obiekty-w-pythonie">Obiekty w Pythonie</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#funkcje">Funkcje</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#operator-lambda">Operator <tt class="docutils literal"><span class="pre">lambda</span></tt></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#klasy">Klasy</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#definicja-klasy">Definicja klasy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tworzenie-obiektow">Tworzenie obiektów</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#skladowe-prywatne-klasy">Składowe prywatne klasy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#skladowe-statyczne">Składowe statyczne</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wlasciwosci">Właściwości</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#specjalne-atrybuty">Specjalne atrybuty</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#metody-specjalne">Metody specjalne</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#dziedziczenie">Dziedziczenie</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#wielokrotne-dziedziczenie">Wielokrotne dziedziczenie</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#interfejsy-i-introspekcja">Interfejsy i introspekcja</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#moduly">Moduły</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#import-modulow">Import modułów</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#lokalizacja-modulow-pythonpath">Lokalizacja modułów – PYTHONPATH</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uruchamianie-modulow-jako-skrypt">Uruchamianie modułów jako skrypt</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="biblioteka_standardowa.html">Biblioteka standardowa</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lxml.html">Biblioteka lxml</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adv/funkcje.html">Funkcje w języku Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adv/klasy.html">Klasy i obiekty</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adv/dekoratory.html">Dekoratory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adv/metaklasy.html">Metaklasy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adv/TDD.html">Testowanie kodu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adv/watki.html">Programowanie wielowątkowe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adv/wzorce.html">Wzorce projektowe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adv/2vs3.html">Porównanie Pythona 2 i 3</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, Leszek Tarkowski.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.0</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

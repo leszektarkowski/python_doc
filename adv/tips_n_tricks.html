@@ -1,0 +1,543 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Python - tips and tricks &mdash; Zaawansowane programowanie w języku Python</title>
+    
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Zaawansowane programowanie w języku Python" href="../index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="../index.html">Zaawansowany Python</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="python-tips-and-tricks">
+<h1>Python - tips and tricks<a class="headerlink" href="#python-tips-and-tricks" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="iteracje">
+<h2>Iteracje<a class="headerlink" href="#iteracje" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="naduzywanie-funkcji-range">
+<h3>Nadużywanie funkcji <tt class="docutils literal"><span class="pre">range</span></tt><a class="headerlink" href="#naduzywanie-funkcji-range" title="Permalink to this headline">¶</a></h3>
+<p>Programiści o nawykach wywodzący się z języków C/C++ mają tendencje do stosowania pętli <tt class="docutils literal"><span class="pre">for</span></tt> z użyciem indeksowania:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">alist</span><span class="p">)):</span>
+    <span class="k">print</span> <span class="n">alist</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Python posługuje się <em>iteracją</em> po elementach, która zapewnia większą odporność na błędy, jak również jest bardziej czytelna. Poprawną konstrukcją jest</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">alist</span><span class="p">:</span>
+    <span class="k">print</span> <span class="n">item</span>
+</pre></div>
+</div>
+<p>Usprawiedliwieniem konstrukcji z <tt class="docutils literal"><span class="pre">range</span></tt> bywają następujące argumenty:</p>
+<ul>
+<li><p class="first">Potrzeba użycia wartości indeksu - poprawnym rozwiązaniem jest:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">alist</span><span class="p">):</span>
+    <span class="k">print</span> <span class="n">index</span><span class="p">,</span> <span class="n">value</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Iteracja po dwóch obiektach, pracując na tych samych indeksach:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">for</span> <span class="n">word</span><span class="p">,</span> <span class="n">number</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">numbers</span><span class="p">):</span>
+    <span class="k">print</span> <span class="n">word</span><span class="p">,</span> <span class="n">number</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Iteracja po fragmencie sekwencji - można użyć wycinków (<em>slices</em>):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span> <span class="c"># Exclude the first word</span>
+    <span class="k">print</span> <span class="n">word</span>
+</pre></div>
+</div>
+<p>Mogą pojawić się problemy z wydajnością. Wycinki list tworzą kopie.</p>
+</li>
+</ul>
+<p>Poprawne użycie funkcji <tt class="docutils literal"><span class="pre">range</span></tt> to głównie sytuacje gdy potrzebujemy liczb całkowitych - a nie indeksów.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># Print foo(x) for 0&lt;=x&lt;5</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="k">print</span> <span class="n">foo</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="wlasciwe-uzycie-wyrazen-listowych">
+<h3>Właściwe użycie wyrażeń listowych<a class="headerlink" href="#wlasciwe-uzycie-wyrazen-listowych" title="Permalink to this headline">¶</a></h3>
+<p>Pętle tworzące listy prawie zawsze można zastąpić wyrażeniami listowymi (albo jeszcze lepiej - generatorowymi)</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># Powolne i nieczytelne</span>
+<span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;her&#39;</span><span class="p">,</span> <span class="s">&#39;name&#39;</span><span class="p">,</span> <span class="s">&#39;is&#39;</span><span class="p">,</span> <span class="s">&#39;rio&#39;</span><span class="p">]</span>
+<span class="n">alist</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
+    <span class="n">alist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">foo</span><span class="p">(</span><span class="n">word</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Zamiast tego:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;her&#39;</span><span class="p">,</span> <span class="s">&#39;name&#39;</span><span class="p">,</span> <span class="s">&#39;is&#39;</span><span class="p">,</span> <span class="s">&#39;rio&#39;</span><span class="p">]</span>
+<span class="n">alist</span> <span class="o">=</span> <span class="p">[</span><span class="n">foo</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Kod staje się prostszy w utrzymaniu i bardziej czytelny. Dodatkowo - przeważnie jest też szybszy.</p>
+<p>Inne typowe przypadki</p>
+<ul>
+<li><p class="first">Podwójnie zagnieżdżona pętla <tt class="docutils literal"><span class="pre">for</span></tt></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;her&#39;</span><span class="p">,</span> <span class="s">&#39;name&#39;</span><span class="p">,</span> <span class="s">&#39;is&#39;</span><span class="p">,</span> <span class="s">&#39;rio&#39;</span><span class="p">]</span>
+<span class="n">letters</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">word</span><span class="p">:</span>
+        <span class="n">letters</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">letter</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>a można:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;her&#39;</span><span class="p">,</span> <span class="s">&#39;name&#39;</span><span class="p">,</span> <span class="s">&#39;is&#39;</span><span class="p">,</span> <span class="s">&#39;rio&#39;</span><span class="p">]</span>
+<span class="n">letters</span> <span class="o">=</span> <span class="p">[</span><span class="n">letter</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span>
+                  <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">word</span><span class="p">]</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Wewnątrz pęli for znajduje się warunek - można go też stosować w wyrażeniach listowych:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;her&#39;</span><span class="p">,</span> <span class="s">&#39;name&#39;</span><span class="p">,</span> <span class="s">&#39;is&#39;</span><span class="p">,</span> <span class="s">&#39;rio&#39;</span><span class="p">,</span> <span class="s">&#39;1&#39;</span><span class="p">,</span> <span class="s">&#39;2&#39;</span><span class="p">,</span> <span class="s">&#39;3&#39;</span><span class="p">]</span>
+<span class="n">alpha_words</span> <span class="o">=</span> <span class="p">[</span><span class="n">word</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span> <span class="k">if</span> <span class="n">isalpha</span><span class="p">(</span><span class="n">word</span><span class="p">)]</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>Niestety - w wyrażeniach listowych nie można wyłapywać wyjątków. Ale można wtedy stosować np. <em>funkcje generatorowe</em>.</p>
+</div>
+</div>
+<div class="section" id="wydajnosc">
+<h2>Wydajność<a class="headerlink" href="#wydajnosc" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="sprawdzanie-list-w-czasie-o-1">
+<h3>Sprawdzanie list w czasie O(1)<a class="headerlink" href="#sprawdzanie-list-w-czasie-o-1" title="Permalink to this headline">¶</a></h3>
+<p>Sprawdzanie czy element znajduje się w kontenerze (operator <tt class="docutils literal"><span class="pre">in</span></tt>) ma różną wydajność dla różnych typów danych:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">lyrics_list</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;her&#39;</span><span class="p">,</span> <span class="s">&#39;name&#39;</span><span class="p">,</span> <span class="s">&#39;is&#39;</span><span class="p">,</span> <span class="s">&#39;rio&#39;</span><span class="p">]</span>
+
+<span class="c"># Unikajmy</span>
+<span class="n">words</span> <span class="o">=</span> <span class="n">make_wordlist</span><span class="p">()</span> <span class="c"># Pretend this returns many words that we want to test</span>
+<span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">lyrics_list</span><span class="p">:</span> <span class="c"># Linear time</span>
+        <span class="k">print</span> <span class="n">word</span><span class="p">,</span> <span class="s">&quot;is in the lyrics&quot;</span>
+
+<span class="c"># Zbiory mają szybkie wyszukiwanie</span>
+<span class="n">lyrics_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">lyrics_list</span><span class="p">)</span> <span class="c"># Linear time set construction</span>
+<span class="n">words</span> <span class="o">=</span> <span class="n">make_wordlist</span><span class="p">()</span> <span class="c"># Pretend this returns many words that we want to test</span>
+<span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">lyrics_set</span><span class="p">:</span> <span class="c"># Constant time</span>
+        <span class="k">print</span> <span class="n">word</span><span class="p">,</span> <span class="s">&quot;is in the lyrics&quot;</span>
+</pre></div>
+</div>
+<div class="section" id="wbudowane-algorytmy-lista">
+<h4>Wbudowane algorytmy - lista<a class="headerlink" href="#wbudowane-algorytmy-lista" title="Permalink to this headline">¶</a></h4>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="31%" />
+<col width="44%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Operation</th>
+<th class="head">Average Case</th>
+<th class="head">Amortized Worst Case</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Copy</td>
+<td>O(n)</td>
+<td>O(n)</td>
+</tr>
+<tr class="row-odd"><td>Append[1]</td>
+<td>O(1)</td>
+<td>O(1)</td>
+</tr>
+<tr class="row-even"><td>Insert</td>
+<td>O(n)</td>
+<td>O(n)</td>
+</tr>
+<tr class="row-odd"><td>Get Item</td>
+<td>O(1)</td>
+<td>O(1)</td>
+</tr>
+<tr class="row-even"><td>Set Item</td>
+<td>O(1)</td>
+<td>O(1)</td>
+</tr>
+<tr class="row-odd"><td>Delete Item</td>
+<td>O(n)</td>
+<td>O(n)</td>
+</tr>
+<tr class="row-even"><td>Iteration</td>
+<td>O(n)</td>
+<td>O(n)</td>
+</tr>
+<tr class="row-odd"><td>Get Slice</td>
+<td>O(k)</td>
+<td>O(k)</td>
+</tr>
+<tr class="row-even"><td>Del Slice</td>
+<td>O(n)</td>
+<td>O(n)</td>
+</tr>
+<tr class="row-odd"><td>Set Slice</td>
+<td>O(k+n)</td>
+<td>O(k+n)</td>
+</tr>
+<tr class="row-even"><td>Extend[1]</td>
+<td>O(k)</td>
+<td>O(k)</td>
+</tr>
+<tr class="row-odd"><td>Sort</td>
+<td>O(n log n)</td>
+<td>O(n log n)</td>
+</tr>
+<tr class="row-even"><td>Multiply</td>
+<td>O(nk)</td>
+<td>O(nk)</td>
+</tr>
+<tr class="row-odd"><td>x in s</td>
+<td>O(n)</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>min(s), max(s)</td>
+<td>O(n)</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>Get Length</td>
+<td>O(1)</td>
+<td>O(1)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="wbudowane-algorytmy-slownik">
+<h4>Wbudowane algorytmy - słownik<a class="headerlink" href="#wbudowane-algorytmy-slownik" title="Permalink to this headline">¶</a></h4>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="31%" />
+<col width="44%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Operation</th>
+<th class="head">Average Case</th>
+<th class="head">Amortized Worst Case</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Copy[2]</td>
+<td>O(n)</td>
+<td>O(n)</td>
+</tr>
+<tr class="row-odd"><td>Get Item</td>
+<td>O(1)</td>
+<td>O(n)</td>
+</tr>
+<tr class="row-even"><td>Set Item[1]</td>
+<td>O(1)</td>
+<td>O(n)</td>
+</tr>
+<tr class="row-odd"><td>Delete Item</td>
+<td>O(1)</td>
+<td>O(n)</td>
+</tr>
+<tr class="row-even"><td>Iteration[2]</td>
+<td>O(n)</td>
+<td>O(n)</td>
+</tr>
+</tbody>
+</table>
+<p>Uwagi:</p>
+<p>[1] = Pojedyncza operacja może trwać długo, w zależności od poprzednich
+wartości słownika</p>
+<p>[2] = Dla tych operacji n oznacza największą pojemość jaką kiedykolwiek
+osiągnął słownik, a nie bieżącą.</p>
+</div>
+<div class="section" id="wbudowane-algorytmy-zbior">
+<h4>Wbudowane algorytmy - zbiór<a class="headerlink" href="#wbudowane-algorytmy-zbior" title="Permalink to this headline">¶</a></h4>
+<table border="1" class="docutils">
+<colgroup>
+<col width="36%" />
+<col width="34%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Operation</th>
+<th class="head">Average Cas    e</th>
+<th class="head">Amortized Worst Case</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>x in s</td>
+<td>O(1)</td>
+<td>O(n)</td>
+</tr>
+<tr class="row-odd"><td>Union s|t</td>
+<td>O(len(s)+len(t))</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>Intersection s&amp;t</td>
+<td>O(min(len(s), len(t))</td>
+<td>O(len(s) * len(t))</td>
+</tr>
+<tr class="row-odd"><td>Difference s-t</td>
+<td>O(len(s))</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>s.difference_update(t)</td>
+<td>O(len(t))</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="section" id="konkatenacja-ciagow">
+<h2>Konkatenacja ciągów<a class="headerlink" href="#konkatenacja-ciagow" title="Permalink to this headline">¶</a></h2>
+<p>Najlepszym rozwiązaniem od Pythona 2.6 jest:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">s</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+<span class="k">for</span> <span class="n">substring</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">:</span>
+    <span class="n">s</span> <span class="o">+=</span> <span class="n">substring</span>
+</pre></div>
+</div>
+<p>można również użyć:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">s</span> <span class="o">=</span> <span class="s">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Co jeśli generujemy elementy ciągu?:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">s</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">...</span><span class="p">):</span>
+    <span class="n">s</span> <span class="o">+=</span> <span class="n">some_function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>przeważnie lepiej użyć wyrażenia listowego:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">slist</span> <span class="o">=</span> <span class="p">[</span><span class="n">some_function</span><span class="p">(</span><span class="n">elt</span><span class="p">)</span> <span class="k">for</span> <span class="n">elt</span> <span class="ow">in</span> <span class="n">somelist</span><span class="p">]</span>
+<span class="n">s</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">slist</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>dobrze:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">head</span> <span class="o">=</span> <span class="s">&quot;www.site.pl&quot;</span>
+<span class="n">query</span> <span class="o">=</span> <span class="s">&quot;&amp;q=costam&quot;</span>
+<span class="n">tail</span> <span class="o">=</span> <span class="s">&quot;&amp;u=ktos&quot;</span>
+<span class="n">out</span> <span class="o">=</span> <span class="s">&quot;http://&quot;</span> <span class="o">+</span> <span class="n">head</span> <span class="o">+</span> <span class="n">query</span> <span class="o">+</span> <span class="n">tail</span> <span class="o">+</span> <span class="s">&quot;/&quot;</span>
+</pre></div>
+</div>
+<p>lepiej:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">out</span> <span class="o">=</span> <span class="s">&quot;http://{}{}{}/&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">head</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">tail</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>czytelniej:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">out</span> <span class="o">=</span> <span class="s">&quot;http://{head}{query}{tail}/&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="nb">locals</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="zakres-zmiennych">
+<h2>Zakres zmiennych<a class="headerlink" href="#zakres-zmiennych" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="petla-for">
+<h3>Pętla <tt class="docutils literal"><span class="pre">for</span></tt><a class="headerlink" href="#petla-for" title="Permalink to this headline">¶</a></h3>
+<p>W języku Python pętla <em>wypuszcza</em> zmienne poza swój zakres!.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">value</span> <span class="o">&gt;</span> <span class="n">max_value</span><span class="p">:</span>
+        <span class="k">break</span>
+
+<span class="n">processList</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">idx</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Powyższy kod zadziała, jeśli tylko <tt class="docutils literal"><span class="pre">y</span></tt> nie jest puste.</p>
+<p>Aby temu zaradzić wystarczy użyć:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">find_item</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">alist</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">other_item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">alist</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">other_item</span> <span class="o">==</span> <span class="n">item</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">idx</span>
+            <span class="k">break</span>
+
+    <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="zmienne-globalne">
+<h3>Zmienne globalne<a class="headerlink" href="#zmienne-globalne" title="Permalink to this headline">¶</a></h3>
+<p>Należy uważać z przykrywaniem się zmiennych z zakresu globlanego (outer scope).</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># Gdzie jest blad</span>
+<span class="k">def</span> <span class="nf">print_file</span><span class="p">(</span><span class="n">filenam</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Print every line of a file.&quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> <span class="k">as</span> <span class="n">input_file</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">input_file</span><span class="p">:</span>
+            <span class="k">print</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">print_file</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="lokalne-vs-globalne">
+<h4>Lokalne vs. globalne<a class="headerlink" href="#lokalne-vs-globalne" title="Permalink to this headline">¶</a></h4>
+<p>Czas dostępu do zmiennych lokalnych jest o wiele krótszy:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">func</span><span class="p">():</span>
+    <span class="n">upper</span> <span class="o">=</span> <span class="nb">str</span><span class="o">.</span><span class="n">upper</span>
+    <span class="n">newlist</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">append</span> <span class="o">=</span> <span class="n">newlist</span><span class="o">.</span><span class="n">append</span>
+    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">oldlist</span><span class="p">:</span>
+        <span class="n">append</span><span class="p">(</span><span class="n">upper</span><span class="p">(</span><span class="n">word</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">newlist</span>
+</pre></div>
+</div>
+<p>Ostrzeżenie - kod zaczyna być nieczytelny.</p>
+</div>
+</div>
+</div>
+<div class="section" id="sloty">
+<h2>Sloty<a class="headerlink" href="#sloty" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">__slots__</span></tt></dt>
+<dd>Każdy obiekt pythona posiada <tt class="docutils literal"><span class="pre">__dict__</span></tt> - słownik atrybutów.
+Jeśli nasza klasa nie będzie korzystała z dynamicznej natury takiego słownika,
+to można użyć metody <tt class="docutils literal"><span class="pre">__slots__</span></tt> do utworzenia struktury w stylu C.</dd>
+</dl>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Point</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="n">__slots__</span><span class="o">=</span><span class="p">[</span><span class="s">&quot;x&quot;</span><span class="p">,</span><span class="s">&quot;y&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">Point</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">z</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;pyshell#54&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">z</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="gr">AttributeError</span>: <span class="n">&#39;Point&#39; object has no attribute &#39;z&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="strategie">
+<h2>Strategie<a class="headerlink" href="#strategie" title="Permalink to this headline">¶</a></h2>
+<blockquote class="epigraph">
+<div><p>We should forget about small efficiencies, say about 97% of the time: premature optimization is the root of all evil</p>
+<p class="attribution">&mdash;Donald Knuth, 1974</p>
+</div></blockquote>
+<p>Co jeśli nasz kod jest powolny?</p>
+<p>Krok po kroku:</p>
+<ol class="arabic">
+<li><p class="first">Przeanalizować podejście (algorytm)</p>
+</li>
+<li><p class="first">Przeprowadzić analizę</p>
+</li>
+<li><p class="first">Poprawić kod</p>
+</li>
+<li><dl class="first docutils">
+<dt>Spróbować</dt>
+<dd><ul class="first last simple">
+<li><tt class="docutils literal"><span class="pre">Pypy</span></tt> (wbudowany JIT)</li>
+<li>przepisać krytyczny kod w C/C++</li>
+<li>podejście &#8220;równoległe&#8221;</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">http://lignos.org/py_antipatterns/</span></tt></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../index.html">
+    <img class="logo" src="../_static/logo_small.png" alt="Logo"/>
+    
+  </a>
+</p>
+
+
+
+
+
+<p>
+<iframe src="http://ghbtns.com/github-btn.html?user=czterybity&repo=python_doc&type=watch&count=true&size=large"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../basic/wprowadzenie.html">Wprowadzenie do programowania w języku Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basic/programowanie_funkcyjne.html">Elementy programowania funkcyjnego</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basic/programowanie_obiektowe.html">Funkcje, klasy, obiekty i moduły</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basic/biblioteka_standardowa.html">Biblioteka standardowa</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basic/lxml.html">Biblioteka lxml</a></li>
+<li class="toctree-l1"><a class="reference internal" href="funkcje.html">Funkcje w języku Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="klasy.html">Klasy i obiekty</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dekoratory.html">Dekoratory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metaklasy.html">Metaklasy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TDD.html">Testowanie kodu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="watki.html">Programowanie wielowątkowe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wzorce.html">Wzorce projektowe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2vs3.html">Porównanie Pythona 2 i 3</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, Leszek Tarkowski.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.0</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
