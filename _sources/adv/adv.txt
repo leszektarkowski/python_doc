@@ -4,6 +4,7 @@
     funkcje
     klasy
     dekoratory
+    context
     metaklasy
     TDD
     watki
