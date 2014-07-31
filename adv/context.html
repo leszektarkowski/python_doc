@@ -1,0 +1,304 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Menadżery kontekstu &mdash; Programowanie w języku Python</title>
+    
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Programowanie w języku Python" href="../index.html" />
+    <link rel="up" title="&lt;no title&gt;" href="adv.html" />
+    <link rel="next" title="Metaklasy" href="metaklasy.html" />
+    <link rel="prev" title="Dekoratory" href="dekoratory.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="metaklasy.html" title="Metaklasy"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="dekoratory.html" title="Dekoratory"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Python</a> &raquo;</li>
+          <li><a href="adv.html" accesskey="U">&lt;no title&gt;</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="menadzery-kontekstu">
+<h1>Menadżery kontekstu<a class="headerlink" href="#menadzery-kontekstu" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="wprowadzenie">
+<h2>Wprowadzenie<a class="headerlink" href="#wprowadzenie" title="Permalink to this headline">¶</a></h2>
+<p>Często spotykany w zarządzaniu zasobami jest następujący wzorzec:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">do_setup</span><span class="p">()</span>
+
+<span class="k">try</span> <span class="p">:</span>
+    <span class="n">do_task</span><span class="p">()</span>
+
+<span class="k">except</span> <span class="n">SomeError</span> <span class="p">:</span>
+    <span class="n">handle_the_error</span><span class="p">()</span>
+
+<span class="k">finally</span> <span class="p">:</span>
+    <span class="n">do_cleanup</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="wyrazenie-with">
+<h2>Wyrażenie <tt class="docutils literal"><span class="pre">with</span></tt><a class="headerlink" href="#wyrazenie-with" title="Permalink to this headline">¶</a></h2>
+<p>Aby uprościć i uodpornić się na błędy programisty, od Pythona 2.5 wzwyż
+dostępne jest wyrażenie <em>with</em></p>
+<dl class="docutils">
+<dt>Menedżer kontekstu (context manager)</dt>
+<dd>jest odpowiedzialny za zarządzanie zasobami wewnątrz bloku kodu.
+Najczęściej tworzy te zasoby na początku bloku, a zwalnia na końcu.
+Przykładowo - menadżer kontekstu dla plików upewnia się, że pliki
+zostały prawidłowo zamknięte po zakończenu bloku</dd>
+</dl>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;myfile.txt&#39;</span><span class="p">,</span> <span class="s">&#39;wt&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;foo bar&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="jak-dziala-with">
+<h3>Jak działa <tt class="docutils literal"><span class="pre">with</span></tt><a class="headerlink" href="#jak-dziala-with" title="Permalink to this headline">¶</a></h3>
+<p>Odpowiednikiem bloku:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">with</span> <span class="n">VAR</span> <span class="o">=</span> <span class="n">EXPR</span><span class="p">:</span>
+    <span class="n">BLOCK</span>
+</pre></div>
+</div>
+<p>może być zapis:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">VAR</span> <span class="o">=</span> <span class="n">EXPR</span>
+<span class="n">VAR</span><span class="o">.</span><span class="n">__enter__</span><span class="p">()</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">BLOCK</span>
+<span class="k">finally</span><span class="p">:</span>
+    <span class="n">VAR</span><span class="o">.</span><span class="n">__exit__</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="jak-napisac-menadzera-kontekstu">
+<h3>Jak napisać menadżera kontekstu?<a class="headerlink" href="#jak-napisac-menadzera-kontekstu" title="Permalink to this headline">¶</a></h3>
+<p>Menedżer kontekstu jest klasą posiadającą dwie metody specjalne:</p>
+<dl class="docutils">
+<dt>__enter__</dt>
+<dd>metoda ta jest wywoływana na samym początku bloku wewnątrz <em>with</em></dd>
+<dt>__exit__</dt>
+<dd>metoda ta jest odpowiednikiem <em>finally:</em>, wywoływana jest po zakończeniu
+bloku <em>with</em></dd>
+</dl>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Context</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s">&#39;__init__()&#39;</span>
+    <span class="k">def</span> <span class="nf">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s">&#39;__enter__()&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span>
+    <span class="k">def</span> <span class="nf">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_val</span><span class="p">,</span> <span class="n">exc_tb</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s">&#39;__exit__()&#39;</span>
+
+<span class="k">with</span> <span class="n">Context</span><span class="p">():</span>
+    <span class="k">print</span> <span class="s">&#39;Doing work in the context&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="kontekst">
+<h3>Kontekst<a class="headerlink" href="#kontekst" title="Permalink to this headline">¶</a></h3>
+<p>Wartością zwracaną przez menadżera kontekstu w funkcji <tt class="docutils literal"><span class="pre">__enter__</span></tt>
+może być obiekt, który zostanie przypisany do zmiennej występującej po <tt class="docutils literal"><span class="pre">as</span></tt></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">WithinContext</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">do_something</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s">&#39;do_something()&#39;</span>
+
+<span class="k">class</span> <span class="nc">Context</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s">&#39;Context.__enter__()&#39;</span>
+        <span class="k">return</span> <span class="n">WithinContext</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">Context</span><span class="p">()</span> <span class="k">as</span> <span class="n">c</span><span class="p">:</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">do_something</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="metoda-exit">
+<h3>metoda <tt class="docutils literal"><span class="pre">__exit__</span></tt><a class="headerlink" href="#metoda-exit" title="Permalink to this headline">¶</a></h3>
+<p>Do metody __exit__ trafia informacja o wyjątkach, jakie pojawiły się bloku
+<em>with</em>. Jeśli metoda __exit__ zwróci <em>true</em> to znaczy że wyjątek został
+obsłużony przez menadżera kontekstu. Jeśli zwrócona zostanie wartość <em>false</em>
+to oznacza to że wyjątek propaguje się dalej.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_val</span><span class="p">,</span> <span class="n">exc_tb</span><span class="p">):</span>
+    <span class="k">print</span> <span class="s">&quot;Exception type: &quot;</span><span class="p">,</span> <span class="n">exc_type</span>
+    <span class="k">print</span> <span class="s">&quot;Exception value: &quot;</span><span class="p">,</span> <span class="n">exc_val</span>
+    <span class="k">print</span> <span class="s">&quot;Traceback object: &quot;</span><span class="p">,</span> <span class="n">exc_tb</span>
+    <span class="k">return</span> <span class="n">true</span> <span class="c">#or false</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="contextlib">
+<h2><tt class="docutils literal"><span class="pre">contextlib</span></tt><a class="headerlink" href="#contextlib" title="Permalink to this headline">¶</a></h2>
+<p>W prostych przypadkach zamiast tworzyć klasę, możemy skorzystać z gotowego
+dekoratora zawartego w module <em>contextlib</em>, który konwertuje składnię funkcji
+do postaci menadżera kontekstu:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="nd">@contextlib.contextmanager</span>
+<span class="k">def</span> <span class="nf">make_context</span><span class="p">():</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">prepare_resource</span><span class="p">()</span>
+        <span class="k">yield</span> <span class="n">context_object</span>
+    <span class="k">except</span> <span class="ne">RuntimeError</span><span class="p">,</span> <span class="n">err</span><span class="p">:</span>
+        <span class="n">handle_exception_here</span><span class="p">()</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">do_clean_up</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="section" id="contextlib-contextmanager">
+<h3><tt class="docutils literal"><span class="pre">contextlib.contextmanager</span></tt><a class="headerlink" href="#contextlib-contextmanager" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nd">@contextmanager</span>
+<span class="gp">... </span><span class="k">def</span> <span class="nf">MyContext</span><span class="p">():</span>
+<span class="gp">... </span>  <span class="k">print</span><span class="p">(</span><span class="s">&#39;going in&#39;</span><span class="p">)</span>
+<span class="gp">... </span>  <span class="k">yield</span>
+<span class="gp">... </span>  <span class="k">print</span><span class="p">(</span><span class="s">&#39;coming out&#39;</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">MyContext</span><span class="p">():</span>
+<span class="gp">... </span>  <span class="k">print</span><span class="p">(</span><span class="s">&#39;inside&#39;</span><span class="p">)</span>
+<span class="go">going in</span>
+<span class="go">inside</span>
+<span class="go">coming out</span>
+</pre></div>
+</div>
+<p>Dodatkowo z obsługą wyjątków:</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nd">@contextmanager</span>
+<span class="gp">... </span><span class="k">def</span> <span class="nf">MyContext</span><span class="p">():</span>
+<span class="gp">... </span>  <span class="k">print</span><span class="p">(</span><span class="s">&#39;going in&#39;</span><span class="p">)</span>
+<span class="gp">... </span>  <span class="k">try</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">yield</span>
+<span class="gp">... </span>  <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="s">&#39;Error!&#39;</span><span class="p">)</span>
+<span class="gp">... </span>  <span class="k">else</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="s">&#39;coming out&#39;</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">MyContext</span><span class="p">():</span>
+<span class="gp">... </span>  <span class="k">print</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">going in</span>
+<span class="go">Error!</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../index.html">
+    <img class="logo" src="../_static/logo_small.png" alt="Logo"/>
+    
+  </a>
+</p>
+
+
+
+
+
+<p>
+<iframe src="http://ghbtns.com/github-btn.html?user=czterybity&repo=python_doc&type=watch&count=true&size=large"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../basic/wprowadzenie.html">Wprowadzenie do programowania w języku Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basic/programowanie_funkcyjne.html">Elementy programowania funkcyjnego</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basic/programowanie_obiektowe.html">Funkcje, klasy, obiekty i moduły</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basic/biblioteka_standardowa.html">Biblioteka standardowa</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basic/lxml.html">Biblioteka lxml</a></li>
+<li class="toctree-l1"><a class="reference internal" href="funkcje.html">Funkcje w języku Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="klasy.html">Klasy i obiekty</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dekoratory.html">Dekoratory</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Menadżery kontekstu</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#wprowadzenie">Wprowadzenie</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#wyrazenie-with">Wyrażenie <tt class="docutils literal"><span class="pre">with</span></tt></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#jak-dziala-with">Jak działa <tt class="docutils literal"><span class="pre">with</span></tt></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#jak-napisac-menadzera-kontekstu">Jak napisać menadżera kontekstu?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#kontekst">Kontekst</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#metoda-exit">metoda <tt class="docutils literal"><span class="pre">__exit__</span></tt></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#contextlib"><tt class="docutils literal"><span class="pre">contextlib</span></tt></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#contextlib-contextmanager"><tt class="docutils literal"><span class="pre">contextlib.contextmanager</span></tt></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="metaklasy.html">Metaklasy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TDD.html">Testowanie kodu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="watki.html">Programowanie wielowątkowe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wzorce.html">Wzorce projektowe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2vs3.html">Porównanie Pythona 2 i 3</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, Leszek Tarkowski.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.0</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
