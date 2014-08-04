@@ -6,7 +6,8 @@
     dekoratory
     context
     metaklasy
-    TDD
+    tdd
+    testing
     watki
     wzorce
     2vs3

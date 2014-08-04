@@ -37,15 +37,15 @@ Wystarczy zamieścić w *docstring* fragmenty z sesji interaktywnej
 
     def tested_fun(n=3):
         """creates n x n semi-matrix
-        
+
         >>> tested_fun(3)
         [[], [1], [1, 1]]
         """
-        
+
         a = []
         for i in range(n):
             a.append([1]*i)
-        return a   
+        return a
 
 Wystarczy teraz wywołać:
 
@@ -98,19 +98,19 @@ test runner
 
 .. code-block:: python
 
-    import unittest 
-    
+    import unittest
+
     def euler(n=10):
-        return sum(x for x in xrange(1,n) 
+        return sum(x for x in xrange(1,n)
                      if x % 5 == 0 or x % 3 == 0)
-     
-    class MatrixCase(unittest.TestCase): 
+
+    class MatrixCase(unittest.TestCase):
         def setUp(self):
             self.factor = 2
-        
+
         def testNumber(self):
             self.assertTrue(euler(10) == 23)
-    
+
     if __name__ == "__main__":
         unittest.main()
 
@@ -118,19 +118,23 @@ test runner
 
 .. code-block:: python
 
-    import unittest 
-    
+    import unittest
+
     def euler(n=10):
-        return sum(x for x in xrange(1,n) 
+        return sum(x for x in xrange(1,n)
                      if x % 5 == 0 or x % 3 == 0)
-     
-    class MatrixCase(unittest.TestCase): 
+
+    class MatrixCase(unittest.TestCase):
         def setUp(self):
             self.factor = 2
-            
-        def testInvalidType(self): 
-            self.assertRaises(TypeError, euler, 'ala') 
-    
+
+        def testInvalidType(self):
+            self.assertRaises(TypeError, euler, 'text')
+
+        def testInvalidTypeWithCM(self):
+            with self.assertRaises(TypeError):
+                euler('text')
+
     if __name__ == "__main__":
         unittest.main()
 
@@ -178,6 +182,23 @@ Klasa ``TestCase`` wspiera szereg metod służących do testowania, takich jak:
 | <TestCase.assertNotIsInstance>`         |                             |               |
 +-----------------------------------------+-----------------------------+---------------+
 
+linia poleceń
+^^^^^^^^^^^^^
+
+Biblioteka :mod:`unittest` może uruchamiać wybrane testy za pomocą linii poleceń:
+
+.. code-block:: bash
+
+    python -m unittest module_name1 module_name2
+    python -m unittest module_name.test_case
+    python -m unittest module_name.test_case.particular_test
+
+Można również wymusić dodatkowe informacje:
+
+.. code-block:: bash
+
+    python -m unittest -v
+
 
 ``pytest``
 ----------
@@ -205,11 +226,11 @@ Plik ``test.py``
 
     def func(x):
         return x+1
-        
+
     def test_answer():
         assert func(3) == 5
-        
-        
+
+
 Uruchommy testy:
 
 .. code-block:: bash
@@ -220,12 +241,12 @@ Uruchommy testy:
 
     =====================================
     _____________________________________
-    
+
         def test_answer():
     >       assert func(3) == 5
     E       assert 4 == 5
     E        +  where 4 = func(3)
-    
+
     test.py:5: AssertionError
 
 
@@ -238,21 +259,21 @@ Przykład ``pytest``
         l1 = [0,1,2,3,4,5,6,8,9,10]
         l2 = range(10)
         assert l1 == l2
-    
+
 
 Rezultat:
 
 .. code-block:: C
-    
+
     _________________________________________________
-    
+
         def test_listcmp():
             l1 = [0,1,2,3,4,5,6,8,9,10]
             l2 = range(10)
     >       assert l1 == l2
     E       assert [0, 1, 2, 3, 4, 5, ...] == [0, 1,
     E         At index 7 diff: 8 != 7
-    
+
     test.py:10: AssertionError
     =================================================
 
@@ -262,7 +283,7 @@ Parametryzacja testu
 .. code-block:: python
 
     import pytest
-    
+
     @pytest.mark.parametrize("num", range(10))
     def test_func(num):
         assert num < 9
@@ -270,14 +291,14 @@ Parametryzacja testu
 .. code-block:: C
 
     _________________________________________________
-    
+
     num = 9
-    
+
         @pytest.mark.parametrize("num", range(10))
         def test_func(num):
     >       assert num < 9
     E       assert 9 < 9
-    
+
     test.py:21: AssertionError
     =================================================
 

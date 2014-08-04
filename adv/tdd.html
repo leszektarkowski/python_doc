@@ -1,0 +1,230 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Test-Driven Development &mdash; Programowanie w języku Python</title>
+    
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Programowanie w języku Python" href="../index.html" />
+    <link rel="up" title="&lt;no title&gt;" href="adv.html" />
+    <link rel="next" title="Testowanie kodu" href="testing.html" />
+    <link rel="prev" title="Metaklasy" href="metaklasy.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="testing.html" title="Testowanie kodu"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="metaklasy.html" title="Metaklasy"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Python</a> &raquo;</li>
+          <li><a href="adv.html" accesskey="U">&lt;no title&gt;</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="test-driven-development">
+<h1>Test-Driven Development<a class="headerlink" href="#test-driven-development" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2>Test-Driven Development<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p><strong>Test-Driven Development (TDD)</strong> to technika tworzenia oprogramowania sterowana przez testy:</p>
+<ul class="simple">
+<li>Utrzymujemy kompletny zestaw testów programisty (Programmer Tests)</li>
+<li>Kod nie powinien trafić do produkcji, jeśli nie ma powiązanych testów</li>
+<li>Najpierw piszemy testy</li>
+<li>Testy określają, jaki kod powinniśmy napisać</li>
+</ul>
+</div>
+<div class="section" id="testy-programisty">
+<h2>Testy programisty<a class="headerlink" href="#testy-programisty" title="Permalink to this headline">¶</a></h2>
+<p>Testy programisty służą do sprawdzenia, czy klasa wykazuje prawidłowe zachowanie. Są tworzone przez programistę, który pisze kod do przetestowania.</p>
+<p>Podobne do testów jednostkowych, ale tworzone z innego powodu:</p>
+<ul class="simple">
+<li>Testy jednostkowe tworzone są w celu sprawdzenia, czy napisany już kod działa</li>
+<li>Testy programisty definiują, co to znaczy, że kod działa</li>
+</ul>
+<p>Testy programisty nazywane są w ten sposób również w celu odróżnienia od testów tworzonych przez klienta, których zadaniem jest sprawdzenie, czy system działa prawidłowo z punktu widzenia użytkownika.</p>
+<p>Używanie TDD oznacza teoretycznie, że dysponujemy kompletnym zestawem testów. Dzieje się tak, ponieważ nie może istnieć kod, jeśli nie istnieje test, który ten kod powinien przejść. Piszemy test, a potem (i nie wcześniej) piszemy kod, który jest testowany przez ten test. W systemie nie powinien istnieć kod, który nie został napisany w odpowiedzi na test.</p>
+<p>Jeśli mamy do zaimplementowania jakiś fragment funkcjonalności, to najpierw tworzymy kod, który sprawdzi, czy ta funkcjonalność działa zgodnie z wymaganiami, a dopiero potem implementujemy samą funkcjonalność. Tworzymy test, a następnie tylko tyle kodu, żeby test mógł przejść.</p>
+<p>Testy określają, jaki kod powinniśmy napisać. Pisząc tylko kod wymagany do przejścia testu ograniczamy ilość kodu do napisania. Do weryfikacji testu tworzymy najprostszy, działający kod.</p>
+</div>
+<div class="section" id="trzy-prawa-tdd">
+<h2>Trzy prawa TDD<a class="headerlink" href="#trzy-prawa-tdd" title="Permalink to this headline">¶</a></h2>
+<p>TDD zakłada pisanie testów jednostkowych na początku, przed napisanie kodu produkcyjnego.</p>
+<p>Możemy zdefiniować trzy podstawowe prawa TDD:</p>
+<ul class="simple">
+<li><strong>Pierwsze prawo.</strong> Nie można zacząć pisać kodu produkcyjnego przed zakończeniem pisania testu jednostkowego, który nie jest spełniony.</li>
+<li><strong>Drugie prawo.</strong> Kod testu jednostkowego powinien być tylko tak długi, aby wystarczył do niespełnienia testu, a błędna kompilacja jest jednocześnie nieudanym testem.</li>
+<li><strong>Trzecie prawo.</strong> Nie można pisać większej ilości kodu, niż jest wymagana do przejścia testu jednostkowego.</li>
+</ul>
+<p>Te trzy prawa zamykają się w cyklu, który trwa prawdopodobnie kilkadziesiąt sekund. Testy i kod produkcyjny są pisane razem, przy czym testy są pisane kilka sekund wcześniej niż kod produkcyjny.</p>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">Kod testów jest tak samo ważny, jak kod produkcyjny.</p>
+</div>
+</div>
+<div class="section" id="cykl-red-green-refactor">
+<h2>Cykl Red-Green-Refactor<a class="headerlink" href="#cykl-red-green-refactor" title="Permalink to this headline">¶</a></h2>
+<p>Aplikacja TDD jest rozwijana w mikro-cyklach:</p>
+<ul class="simple">
+<li>Napisz test</li>
+<li>Napisz tyle kodu, aby test został spełniony</li>
+<li>Zrefaktoryzuj kod do najprostszej implementacji funkcjonalności określonej przez test</li>
+</ul>
+<p>Ten cykl nazywa się cyklem <strong>Red-Green-Refactor</strong>.</p>
+<div align="center" class="align-center"><img src="../_images/red-green-refactor.svg" /></div>
+</div>
+<div class="section" id="algorytm-rozwoju-aplikacji-tdd">
+<h2>Algorytm rozwoju aplikacji TDD<a class="headerlink" href="#algorytm-rozwoju-aplikacji-tdd" title="Permalink to this headline">¶</a></h2>
+<img alt="../_images/tdd-algorithm.png" class="align-center" src="../_images/tdd-algorithm.png" />
+</div>
+<div class="section" id="zalety-tdd">
+<h2>Zalety TDD<a class="headerlink" href="#zalety-tdd" title="Permalink to this headline">¶</a></h2>
+<p>Stosując TDD mamy natychmiastowy feedback dotyczący jakości zarówno implementacji (&#8220;Czy to działa?&#8221;), jak i projektu (&#8220;Czy to jest dobrze zaprojektowane?&#8221;).</p>
+<p>Pisząc testy programisty:</p>
+<ul class="simple">
+<li>Definiujemy kryteria akceptacji dla następnego fragmentu kodu produkcyjnego, który będzie utworzony w odpowiedzi na test</li>
+<li>Programista staje się klientem własnego kodu</li>
+<li>Promujemy implementację nakierowaną na interfejsy. Korzystamy z luźno powiązanych komponentów (<em>loosly-coupled</em>), aby łatwiej testować obiekty w izolacji.</li>
+<li>Dodajemy wykonywalny opis, co tworzony kod robi. Tworzymy swoistą dokumentację funkcjonalności kodu.</li>
+<li>Tworzymy jednocześnie zestaw testów regresyjnych</li>
+</ul>
+<p>Wykonując testy:</p>
+<ul class="simple">
+<li>Wyłapujemy błędy, kiedy kontekst dla tworzonego kodu jest jeszcze świeży</li>
+<li>Dostajemy informację zwrotną, czy już zakończyliśmy tworzenie danej funkcjonalności - unikamy tym samym over-engineering&#8217;u aplikacji</li>
+</ul>
+</div>
+<div class="section" id="inside-out-development">
+<h2>Inside-Out Development<a class="headerlink" href="#inside-out-development" title="Permalink to this headline">¶</a></h2>
+<img alt="../_images/inside-out.png" class="align-center" src="../_images/inside-out.png" />
+<p>Taktyka rozwijania oprogramowania metodą <strong>Inside-Out</strong> polega na antycypowaniu potrzeb klas pochodzących z zewnętrznych warstw (modułów) systemu i
+pisaniu testów jednostkowych oraz kodu dla klas z warstw (modułów) wewnętrznych. Oznacza to, że testy klas warstw zewnętrznych
+nie są wykonywane w izolacji, ale korzystają z napisanych i przetestowanych klas warstw wewnętrznych.</p>
+</div>
+<div class="section" id="outside-in-development">
+<h2>Outside-In Development<a class="headerlink" href="#outside-in-development" title="Permalink to this headline">¶</a></h2>
+<img alt="../_images/outside-in.png" class="align-center" src="../_images/outside-in.png" />
+<p>Inne podejście do TDD, które polega na projektowaniu testów i kodu na sposób <strong>Outside-In</strong>. Ten sposób rozwijania
+oprogramowania zmusza do rozwiązania problemu zależności od klas, które jeszcze nie zostały zaimplementowane.
+W tym celu konieczne jest stosowanie obiektów pozorujących Stub oraz Mock.</p>
+<p>Zaletą podejścia <strong>outside-in</strong> jest fakt, iż pomaga ono zdefiniować jakie testy są potrzebne dla klas wewnętrznych warstw systemu.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../index.html">
+    <img class="logo" src="../_static/logo_small.png" alt="Logo"/>
+    
+  </a>
+</p>
+
+
+
+
+
+<p>
+<iframe src="http://ghbtns.com/github-btn.html?user=czterybity&repo=python_doc&type=watch&count=true&size=large"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../basic/wprowadzenie.html">Wprowadzenie do programowania w języku Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basic/programowanie_funkcyjne.html">Elementy programowania funkcyjnego</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basic/programowanie_obiektowe.html">Funkcje, klasy, obiekty i moduły</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basic/biblioteka_standardowa.html">Biblioteka standardowa</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basic/lxml.html">Biblioteka lxml</a></li>
+<li class="toctree-l1"><a class="reference internal" href="funkcje.html">Funkcje w języku Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="klasy.html">Klasy i obiekty</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dekoratory.html">Dekoratory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="context.html">Menadżery kontekstu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metaklasy.html">Metaklasy</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Test-Driven Development</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">Test-Driven Development</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#testy-programisty">Testy programisty</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#trzy-prawa-tdd">Trzy prawa TDD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cykl-red-green-refactor">Cykl Red-Green-Refactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#algorytm-rozwoju-aplikacji-tdd">Algorytm rozwoju aplikacji TDD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#zalety-tdd">Zalety TDD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#inside-out-development">Inside-Out Development</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#outside-in-development">Outside-In Development</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testowanie kodu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="watki.html">Programowanie wielowątkowe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wzorce.html">Wzorce projektowe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2vs3.html">Porównanie Pythona 2 i 3</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, Leszek Tarkowski.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.0</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
